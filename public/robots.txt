@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wamu1225.github.io/stats-app/sitemap.xml
