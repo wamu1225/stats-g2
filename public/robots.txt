@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wamu1225.github.io/stats-app/sitemap.xml
+Sitemap: https://study-apps.com/stats-g2/sitemap.xml
