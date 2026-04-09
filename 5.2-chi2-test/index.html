@@ -5,13 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>カイ二乗検定 | 統計検定 2級 学習リファレンス</title>
-    <meta name="description" content="統計検定2級の合格を目指す学習リファレンス。確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="description" content="適合度検定・独立性の検定の計算方法を習得します。" />
     <meta property="og:title" content="カイ二乗検定 | 統計検定 2級 学習リファレンス" />
-    <meta property="og:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説する2級対策サイト。" />
+    <meta property="og:description" content="適合度検定・独立性の検定の計算方法を習得します。" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://study-apps.com/stats-g2/5.2-chi2-test/" />
+    <link rel="canonical" href="https://study-apps.com/stats-g2/5.2-chi2-test/" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="統計検定 2級 学習リファレンス" />
-    <meta name="twitter:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="twitter:title" content="カイ二乗検定 | 統計検定 2級 学習リファレンス" />
+    <meta name="twitter:description" content="適合度検定・独立性の検定の計算方法を習得します。" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6K27V3P4S"></script>
     <script>
@@ -22,26 +24,39 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9102538151148380"
      crossorigin="anonymous"></script>
-    <script type="module" crossorigin src="../assets/index-D40sPhhk.js"></script>
-    <link rel="stylesheet" crossorigin href="../assets/index-DtCoQEbd.css">
+    <script>
+      // Restore URL after GitHub Pages 404 redirect (?/path/ → /stats-g2/path/)
+      (function () {
+        var s = window.location.search;
+        if (s[1] === '/') {
+          var decoded = s.slice(1).split('&').map(function (p) { return p.replace(/~and~/g, '&'); });
+          window.history.replaceState(
+            null, null,
+            '/stats-g2' + decoded[0] +
+            (decoded.slice(1).length ? '?' + decoded.slice(1).join('&') : '') +
+            window.location.hash
+          );
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="../assets/index-C_WOkRwD.js"></script>
+    <link rel="stylesheet" crossorigin href="../assets/index-suXKca_U.css">
   </head>
   <body>
     <noscript id="seo-data">
     <h1>カイ二乗検定</h1>
-    <p>💡 **このモジュールで学ぶこと**
+    <p>このモジュールで学ぶこと
 
-「サイコロは本当に1〜6が等しく出るのか？」「性別とコーヒーの好みに関係があるか？」——この2つは一見似ているようで、実は異なる問いです。前者は「ある分布に従うか」を検定する**適合度検定**、後者は「2つのカテゴリ変数が独立か」を検定する**独立性の検定**です。どちらも $\chi^2$（カイ二乗）統計量を使いますが、自由度の求め方と期待度数の計算が異なります。この違いを中心に学びましょう。
+「サイコロは本当に1〜6が等しく出るのか？」「性別とコーヒーの好みに関係があるか？」——この2つは一見似ているようで、実は異なる問いです。前者は「ある分布に従うか」を検定する適合度検定、後者は「2つのカテゴリ変数が独立か」を検定する独立性の検定です。どちらも （カイ二乗）統計量を使いますが、自由度の求め方と期待度数の計算が異なります。この違いを中心に学びましょう。
 
----
+カイ二乗統計量：「観測と期待のずれ」を測る
 
-### 1. カイ二乗統計量：「観測と期待のずれ」を測る
+サイコロを600回振って「1〜6が各100回ずつ出れば公正」が期待値です。実際に振ったら「1が85回、2が110回...」と多少のズレが生じました。このズレが「偶然の範囲内か、不公正の証拠か」を判断するのがカイ二乗検定です。
 
-サイコロを600回振って「1〜6が各100回ずつ出れば公正」が**期待値**です。実際に振ったら「1が85回、2が110回...」と多少のズレが生じました。このズレが「偶然の範囲内か、不公正の証拠か」を判断するのが**カイ二乗検定**です。
+観測度数 ：実際に観測された各カテゴリの件数。
+期待度数 ：帰無仮説が正しいと仮定したときに期待される件数。
 
-**観測度数 $O_i$**：実際に観測された各カテゴリの件数。
-**期待度数 $E_i$**：帰無仮説が正しいと仮定したときに期待される件数。
-
-\chi^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i}...</p>
+各カテゴリで  ...</p>
   </noscript>
     <div id="root"></div>
   </body>

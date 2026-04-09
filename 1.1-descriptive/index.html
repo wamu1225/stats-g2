@@ -5,13 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>データの整理と要約 | 統計検定 2級 学習リファレンス</title>
-    <meta name="description" content="統計検定2級の合格を目指す学習リファレンス。確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="description" content="データを数値でとらえる基本手法を学びます。" />
     <meta property="og:title" content="データの整理と要約 | 統計検定 2級 学習リファレンス" />
-    <meta property="og:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説する2級対策サイト。" />
+    <meta property="og:description" content="データを数値でとらえる基本手法を学びます。" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://study-apps.com/stats-g2/1.1-descriptive/" />
+    <link rel="canonical" href="https://study-apps.com/stats-g2/1.1-descriptive/" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="統計検定 2級 学習リファレンス" />
-    <meta name="twitter:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="twitter:title" content="データの整理と要約 | 統計検定 2級 学習リファレンス" />
+    <meta name="twitter:description" content="データを数値でとらえる基本手法を学びます。" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6K27V3P4S"></script>
     <script>
@@ -22,26 +24,38 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9102538151148380"
      crossorigin="anonymous"></script>
-    <script type="module" crossorigin src="../assets/index-D40sPhhk.js"></script>
-    <link rel="stylesheet" crossorigin href="../assets/index-DtCoQEbd.css">
+    <script>
+      // Restore URL after GitHub Pages 404 redirect (?/path/ → /stats-g2/path/)
+      (function () {
+        var s = window.location.search;
+        if (s[1] === '/') {
+          var decoded = s.slice(1).split('&').map(function (p) { return p.replace(/~and~/g, '&'); });
+          window.history.replaceState(
+            null, null,
+            '/stats-g2' + decoded[0] +
+            (decoded.slice(1).length ? '?' + decoded.slice(1).join('&') : '') +
+            window.location.hash
+          );
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="../assets/index-C_WOkRwD.js"></script>
+    <link rel="stylesheet" crossorigin href="../assets/index-suXKca_U.css">
   </head>
   <body>
     <noscript id="seo-data">
     <h1>データの整理と要約</h1>
-    <p>💡 **このモジュールで学ぶこと**
+    <p>このモジュールで学ぶこと
 
 「クラス30人の試験結果を集めました。何から読み取ればいいでしょうか？」——データが手元に揃ったとき、最初にするべきことは「整理して要約する」ことです。平均・中央値・分散などの基本統計量は、大量のデータを数個の数値に圧縮し、全体の特徴を素早く把握するための道具です。データ分析のあらゆる場面でこれらの統計量は登場するため、意味と計算方法をしっかり身につけましょう。
 
----
+代表値：平均・中央値・最頻値
 
-### 1. 代表値：平均・中央値・最頻値
-
-会社の年収データを例に考えてみましょう。10人の社員の年収が「300, 320, 340, 350, 360, 380, 390, 400, 420, 2000（万円）」だとします。最後の1人だけ突出して高い、いわゆる**外れ値**（他の値から極端に離れたデータ点）です。
+会社の年収データを例に考えてみましょう。10人の社員の年収が「300, 320, 340, 350, 360, 380, 390, 400, 420, 2000（万円）」だとします。最後の1人だけ突出して高い、いわゆる外れ値（他の値から極端に離れたデータ点）です。
 
 このデータの代表値を3種類で計算すると：
 
-- **平均（mean）**：全員の年収を足して人数で割る。外れ値2000万円に引っ張られ、平均は約426万円——実態より大幅に高くなります。
-- **中央値（median）**：大小順に並べたときの真ん中の値。1...</p>
+平均（mean）：全員の年収を足して人数で割る。外れ値200...</p>
   </noscript>
     <div id="root"></div>
   </body>

@@ -5,13 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>推定 | 統計検定 2級 学習リファレンス</title>
-    <meta name="description" content="統計検定2級の合格を目指す学習リファレンス。確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="description" content="点推定・区間推定の考え方と信頼区間の構築を学びます。" />
     <meta property="og:title" content="推定 | 統計検定 2級 学習リファレンス" />
-    <meta property="og:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説する2級対策サイト。" />
+    <meta property="og:description" content="点推定・区間推定の考え方と信頼区間の構築を学びます。" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://study-apps.com/stats-g2/4.1-estimation/" />
+    <link rel="canonical" href="https://study-apps.com/stats-g2/4.1-estimation/" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="統計検定 2級 学習リファレンス" />
-    <meta name="twitter:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="twitter:title" content="推定 | 統計検定 2級 学習リファレンス" />
+    <meta name="twitter:description" content="点推定・区間推定の考え方と信頼区間の構築を学びます。" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6K27V3P4S"></script>
     <script>
@@ -22,25 +24,38 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9102538151148380"
      crossorigin="anonymous"></script>
-    <script type="module" crossorigin src="../assets/index-D40sPhhk.js"></script>
-    <link rel="stylesheet" crossorigin href="../assets/index-DtCoQEbd.css">
+    <script>
+      // Restore URL after GitHub Pages 404 redirect (?/path/ → /stats-g2/path/)
+      (function () {
+        var s = window.location.search;
+        if (s[1] === '/') {
+          var decoded = s.slice(1).split('&').map(function (p) { return p.replace(/~and~/g, '&'); });
+          window.history.replaceState(
+            null, null,
+            '/stats-g2' + decoded[0] +
+            (decoded.slice(1).length ? '?' + decoded.slice(1).join('&') : '') +
+            window.location.hash
+          );
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="../assets/index-C_WOkRwD.js"></script>
+    <link rel="stylesheet" crossorigin href="../assets/index-suXKca_U.css">
   </head>
   <body>
     <noscript id="seo-data">
     <h1>推定</h1>
-    <p>💡 **このモジュールで学ぶこと**
+    <p>このモジュールで学ぶこと
 
-「スプーン1杯の味見で鍋全体の塩加減を当てる」——これが推定の本質です。鍋全体（母集団）を全部飲み干さなくても、1杯（標本）を味見するだけで全体の味を推測できます。統計的推定とは、標本から得られた情報を使って、観測できない母集団の特性（母平均 $\mu$ や母分散 $\sigma^2$）を推測することです。点推定・区間推定・信頼区間という3つの概念を、具体的な場面とともに理解しましょう。
+「スプーン1杯の味見で鍋全体の塩加減を当てる」——これが推定の本質です。鍋全体（母集団）を全部飲み干さなくても、1杯（標本）を味見するだけで全体の味を推測できます。統計的推定とは、標本から得られた情報を使って、観測できない母集団の特性（母平均  や母分散 ）を推測することです。点推定・区間推定・信頼区間という3つの概念を、具体的な場面とともに理解しましょう。
 
----
+点推定：1つの数値で母数を推測する
 
-### 1. 点推定：1つの数値で母数を推測する
+クラス30人の身長を測り、標本平均  cmを計算しました。これを「全国の高校男子の平均身長（母平均 ）の推定値は168cm」と報告するのが点推定です。1つの数値で母数を推測します。
 
-クラス30人の身長を測り、標本平均 $\bar{X} = 168$ cmを計算しました。これを「全国の高校男子の平均身長（母平均 $\mu$）の推定値は168cm」と報告するのが**点推定**です。1つの数値で母数を推測します。
+母平均  の推定量として最もよく使われるのが標本平均  です。母分散  の推定には不偏分散  を使います。
 
-母平均 $\mu$ の推定量として最もよく使われるのが**標本平均** $\bar{X}$ です。母分散 $\sigma^2$ の推定には**不偏分散** $s^2$ を使います。
-
-s^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar...</p>
+なぜ分母が  なのでしょうか。直感的に言うと「標本平均  を使って分散を計算...</p>
   </noscript>
     <div id="root"></div>
   </body>

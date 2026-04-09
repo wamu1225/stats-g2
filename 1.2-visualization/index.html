@@ -5,13 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>データの可視化 | 統計検定 2級 学習リファレンス</title>
-    <meta name="description" content="統計検定2級の合格を目指す学習リファレンス。確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="description" content="グラフでデータの分布・関係を視覚的に把握します。" />
     <meta property="og:title" content="データの可視化 | 統計検定 2級 学習リファレンス" />
-    <meta property="og:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説する2級対策サイト。" />
+    <meta property="og:description" content="グラフでデータの分布・関係を視覚的に把握します。" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://study-apps.com/stats-g2/1.2-visualization/" />
+    <link rel="canonical" href="https://study-apps.com/stats-g2/1.2-visualization/" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="統計検定 2級 学習リファレンス" />
-    <meta name="twitter:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="twitter:title" content="データの可視化 | 統計検定 2級 学習リファレンス" />
+    <meta name="twitter:description" content="グラフでデータの分布・関係を視覚的に把握します。" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6K27V3P4S"></script>
     <script>
@@ -22,27 +24,38 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9102538151148380"
      crossorigin="anonymous"></script>
-    <script type="module" crossorigin src="../assets/index-D40sPhhk.js"></script>
-    <link rel="stylesheet" crossorigin href="../assets/index-DtCoQEbd.css">
+    <script>
+      // Restore URL after GitHub Pages 404 redirect (?/path/ → /stats-g2/path/)
+      (function () {
+        var s = window.location.search;
+        if (s[1] === '/') {
+          var decoded = s.slice(1).split('&').map(function (p) { return p.replace(/~and~/g, '&'); });
+          window.history.replaceState(
+            null, null,
+            '/stats-g2' + decoded[0] +
+            (decoded.slice(1).length ? '?' + decoded.slice(1).join('&') : '') +
+            window.location.hash
+          );
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="../assets/index-C_WOkRwD.js"></script>
+    <link rel="stylesheet" crossorigin href="../assets/index-suXKca_U.css">
   </head>
   <body>
     <noscript id="seo-data">
     <h1>データの可視化</h1>
-    <p>💡 **このモジュールで学ぶこと**
+    <p>このモジュールで学ぶこと
 
 「数値の表を眺めているだけでは気づかなかったことが、グラフを描いた瞬間に見えてくる」——これがデータ可視化の醍醐味です。たとえば100人分の身長データが数字の羅列として並んでいても、分布の形・外れ値の存在・2つの変数の関係は一目ではわかりません。適切なグラフを選んで描くことで、データが「語りかけてくる」ようになります。どのグラフがどんな問いに答えるのかを、具体的な場面と合わせて学びましょう。
 
----
+ヒストグラム：分布の「形」を読む
 
-### 1. ヒストグラム：分布の「形」を読む
-
-50人のクラスのテスト点数を分析するとします。データを「0〜9点」「10〜19点」...「90〜100点」のような等幅の区間（**階級**または**ビン**）に分け、各階級に何人いるかを棒の高さで表したグラフが**ヒストグラム**です。
+50人のクラスのテスト点数を分析するとします。データを「0〜9点」「10〜19点」...「90〜100点」のような等幅の区間（階級またはビン）に分け、各階級に何人いるかを棒の高さで表したグラフがヒストグラムです。
 
 ヒストグラムを描くと、分布の「形状」が見えてきます。
 
-- **左右対称（山型）**：多くの人が平均点付近に集中している標準的な状態。
-- **右裾が長い（右歪み）**：ほとんどの人が低得点だが、少数の高得点者がいる状態。年収分布の典型例です。
-- **左裾が...</p>
+左右対称（山型）：多くの人が平均点付近に集中している標準的な状態。...</p>
   </noscript>
     <div id="root"></div>
   </body>

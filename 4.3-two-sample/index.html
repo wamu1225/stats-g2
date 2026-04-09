@@ -5,13 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2標本の検定 | 統計検定 2級 学習リファレンス</title>
-    <meta name="description" content="統計検定2級の合格を目指す学習リファレンス。確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="description" content="F検定（等分散の検定）と2標本t検定（Student・Welch）を学びます。" />
     <meta property="og:title" content="2標本の検定 | 統計検定 2級 学習リファレンス" />
-    <meta property="og:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説する2級対策サイト。" />
+    <meta property="og:description" content="F検定（等分散の検定）と2標本t検定（Student・Welch）を学びます。" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://study-apps.com/stats-g2/4.3-two-sample/" />
+    <link rel="canonical" href="https://study-apps.com/stats-g2/4.3-two-sample/" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="統計検定 2級 学習リファレンス" />
-    <meta name="twitter:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="twitter:title" content="2標本の検定 | 統計検定 2級 学習リファレンス" />
+    <meta name="twitter:description" content="F検定（等分散の検定）と2標本t検定（Student・Welch）を学びます。" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6K27V3P4S"></script>
     <script>
@@ -22,27 +24,40 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9102538151148380"
      crossorigin="anonymous"></script>
-    <script type="module" crossorigin src="../assets/index-D40sPhhk.js"></script>
-    <link rel="stylesheet" crossorigin href="../assets/index-DtCoQEbd.css">
+    <script>
+      // Restore URL after GitHub Pages 404 redirect (?/path/ → /stats-g2/path/)
+      (function () {
+        var s = window.location.search;
+        if (s[1] === '/') {
+          var decoded = s.slice(1).split('&').map(function (p) { return p.replace(/~and~/g, '&'); });
+          window.history.replaceState(
+            null, null,
+            '/stats-g2' + decoded[0] +
+            (decoded.slice(1).length ? '?' + decoded.slice(1).join('&') : '') +
+            window.location.hash
+          );
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="../assets/index-C_WOkRwD.js"></script>
+    <link rel="stylesheet" crossorigin href="../assets/index-suXKca_U.css">
   </head>
   <body>
     <noscript id="seo-data">
     <h1>2標本の検定</h1>
-    <p>💡 **このモジュールで学ぶこと**
+    <p>このモジュールで学ぶこと
 
-「新しい教授法を受けたクラスと従来の教授法のクラスで、テストの平均点に差があるか？」——2つのグループの平均を比較するとき、まず「2つのグループの分散（ばらつき）が等しいか」を確認する必要があります。これが**F検定**です。その結果によって使うべき**2標本t検定**の種類が変わります。2標本問題の全体像を、ステップごとに理解しましょう。
+「新しい教授法を受けたクラスと従来の教授法のクラスで、テストの平均点に差があるか？」——2つのグループの平均を比較するとき、まず「2つのグループの分散（ばらつき）が等しいか」を確認する必要があります。これがF検定です。その結果によって使うべき2標本t検定の種類が変わります。2標本問題の全体像を、ステップごとに理解しましょう。
 
----
+F検定：2つの母分散が等しいかを確認する
 
-### 1. F検定：2つの母分散が等しいかを確認する
+2つの独立した標本 （クラスA）と （クラスB）がそれぞれ正規分布 、 に従うとします。
 
-2つの独立した標本 $X_1, \ldots, X_{n_1}$（クラスA）と $Y_1, \ldots, Y_{n_2}$（クラスB）がそれぞれ正規分布 $N(\mu_1, \sigma_1^2)$、$N(\mu_2, \sigma_2^2)$ に従うとします。
+帰無仮説 （2つの母分散は等しい）を検定するために使う統計量がF統計量です：
 
-帰無仮説 $H_0: \sigma_1^2 = \sigma_2^2$（2つの母分散は等しい）を検定するために使う統計量が**F統計量**です：
+ と  はそれぞれの不偏分散（分母 ）です。 が正しければ  は1に近い値をとりますが、2つの分散が大きく異なれば  は1から大きく外れます。慣習として  となるよう大きい方を分子にします。
 
-F = \frac{s_1^2}{s_2^2} \sim F(n_1-1,\, n_2-1)
-
-$s_1^2$ と $s_2^2...</p>
+F分布は2つの自由度（分子の自由...</p>
   </noscript>
     <div id="root"></div>
   </body>

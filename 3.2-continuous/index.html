@@ -5,13 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>連続型確率分布 | 統計検定 2級 学習リファレンス</title>
-    <meta name="description" content="統計検定2級の合格を目指す学習リファレンス。確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="description" content="正規分布・指数分布など連続分布の性質を理解します。" />
     <meta property="og:title" content="連続型確率分布 | 統計検定 2級 学習リファレンス" />
-    <meta property="og:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説する2級対策サイト。" />
+    <meta property="og:description" content="正規分布・指数分布など連続分布の性質を理解します。" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://study-apps.com/stats-g2/3.2-continuous/" />
+    <link rel="canonical" href="https://study-apps.com/stats-g2/3.2-continuous/" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="統計検定 2級 学習リファレンス" />
-    <meta name="twitter:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="twitter:title" content="連続型確率分布 | 統計検定 2級 学習リファレンス" />
+    <meta name="twitter:description" content="正規分布・指数分布など連続分布の性質を理解します。" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6K27V3P4S"></script>
     <script>
@@ -22,25 +24,36 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9102538151148380"
      crossorigin="anonymous"></script>
-    <script type="module" crossorigin src="../assets/index-D40sPhhk.js"></script>
-    <link rel="stylesheet" crossorigin href="../assets/index-DtCoQEbd.css">
+    <script>
+      // Restore URL after GitHub Pages 404 redirect (?/path/ → /stats-g2/path/)
+      (function () {
+        var s = window.location.search;
+        if (s[1] === '/') {
+          var decoded = s.slice(1).split('&').map(function (p) { return p.replace(/~and~/g, '&'); });
+          window.history.replaceState(
+            null, null,
+            '/stats-g2' + decoded[0] +
+            (decoded.slice(1).length ? '?' + decoded.slice(1).join('&') : '') +
+            window.location.hash
+          );
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="../assets/index-C_WOkRwD.js"></script>
+    <link rel="stylesheet" crossorigin href="../assets/index-suXKca_U.css">
   </head>
   <body>
     <noscript id="seo-data">
     <h1>連続型確率分布</h1>
-    <p>💡 **このモジュールで学ぶこと**
+    <p>このモジュールで学ぶこと
 
 「サイコロの目は1〜6の整数しかとらないが、人間の身長は165.3cmや170.1cmなど小数点以下の値もとる」——この違いが離散型と連続型確率変数の本質的な差です。連続型では「ちょうど165.000...cmになる確率」は0であり、「165cm以上170cm以下の確率」というように区間で確率を考えます。身長・気温・待ち時間など連続データの確率計算に不可欠な正規分布と指数分布を、直感的なイメージとともに習得しましょう。
 
----
+確率密度関数（PDF）と累積分布関数（CDF）
 
-### 1. 確率密度関数（PDF）と累積分布関数（CDF）
+離散型確率変数では「 になる確率」  のように特定の値の確率が意味を持ちます。一方、連続型確率変数では「ちょうど165.000...cmになる確率」は0です。なぜなら実数の直線上で特定の1点は長さ0の区間だからです。
 
-離散型確率変数では「$X = 3$ になる確率」 $P(X=3)$ のように特定の値の確率が意味を持ちます。一方、連続型確率変数では「ちょうど165.000...cmになる確率」は0です。なぜなら実数の直線上で特定の1点は長さ0の区間だからです。
-
-そこで連続型では「ある区間に入る確率」を**確率密度関数（PDF: Probability Density Function）** $f(x)$ を使って積分で求めます。
-
-P(a \le X \le b) ...</p>
+そこで連続型では「ある区間に入る確率」を確率密度関数（PDF: Probab...</p>
   </noscript>
     <div id="root"></div>
   </body>

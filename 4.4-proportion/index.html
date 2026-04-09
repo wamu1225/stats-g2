@@ -5,13 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>母比率の推定・検定 | 統計検定 2級 学習リファレンス</title>
-    <meta name="description" content="統計検定2級の合格を目指す学習リファレンス。確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="description" content="母比率の信頼区間・z検定と2標本比率の差の検定を学びます。" />
     <meta property="og:title" content="母比率の推定・検定 | 統計検定 2級 学習リファレンス" />
-    <meta property="og:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説する2級対策サイト。" />
+    <meta property="og:description" content="母比率の信頼区間・z検定と2標本比率の差の検定を学びます。" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://study-apps.com/stats-g2/4.4-proportion/" />
+    <link rel="canonical" href="https://study-apps.com/stats-g2/4.4-proportion/" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="統計検定 2級 学習リファレンス" />
-    <meta name="twitter:description" content="確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />
+    <meta name="twitter:title" content="母比率の推定・検定 | 統計検定 2級 学習リファレンス" />
+    <meta name="twitter:description" content="母比率の信頼区間・z検定と2標本比率の差の検定を学びます。" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6K27V3P4S"></script>
     <script>
@@ -22,27 +24,46 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9102538151148380"
      crossorigin="anonymous"></script>
-    <script type="module" crossorigin src="../assets/index-D40sPhhk.js"></script>
-    <link rel="stylesheet" crossorigin href="../assets/index-DtCoQEbd.css">
+    <script>
+      // Restore URL after GitHub Pages 404 redirect (?/path/ → /stats-g2/path/)
+      (function () {
+        var s = window.location.search;
+        if (s[1] === '/') {
+          var decoded = s.slice(1).split('&').map(function (p) { return p.replace(/~and~/g, '&'); });
+          window.history.replaceState(
+            null, null,
+            '/stats-g2' + decoded[0] +
+            (decoded.slice(1).length ? '?' + decoded.slice(1).join('&') : '') +
+            window.location.hash
+          );
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="../assets/index-C_WOkRwD.js"></script>
+    <link rel="stylesheet" crossorigin href="../assets/index-suXKca_U.css">
   </head>
   <body>
     <noscript id="seo-data">
     <h1>母比率の推定・検定</h1>
-    <p>💡 **このモジュールで学ぶこと**
+    <p>このモジュールで学ぶこと
 
-「この薬の治癒率は本当に50%より高いか？」「A社とB社の商品の不良品率に差があるか？」——結果が「成功か失敗か（治癒した・しない、不良品・良品）」という2値データでは、関心のある母数は**母比率** $p$（母集団における成功の割合）です。母平均の推定・検定と同様の考え方で、母比率の信頼区間と仮説検定を構築できます。
+「この薬の治癒率は本当に50%より高いか？」「A社とB社の商品の不良品率に差があるか？」——結果が「成功か失敗か（治癒した・しない、不良品・良品）」という2値データでは、関心のある母数は母比率 （母集団における成功の割合）です。母平均の推定・検定と同様の考え方で、母比率の信頼区間と仮説検定を構築できます。
 
----
+母比率の点推定と区間推定
 
-### 1. 母比率の点推定と区間推定
+ 個の独立な試行で成功が  回だったとします。標本比率  は母比率  の不偏推定量です。
 
-$n$ 個の独立な試行で成功が $X$ 回だったとします。**標本比率** $\hat{p} = X/n$ は母比率 $p$ の不偏推定量です。
+（二項分布）なので 、 です。中心極限定理より  が大きいとき：
 
-$X \sim B(n, p)$（二項分布）なので $E[\hat{p}] = p$、$V[\hat{p}] = p(1-p)/n$ です。中心極限定理より $n$ が大きいとき：
+標準誤差  ですが  は未知なので  で代入します。母比率の近似  信頼区間は：
 
-\hat{p} \approx N\!\left(p,\; \frac{p(1-p)}{n}\right)
+例：、（治癒40%）の95%信頼区間。、、。
 
-標準誤差 $SE = \sqrt{p(1-p)/n}$ ですが $p$ は未知なので $\hat{p}$ で代入します。母比率の近似 $1-...</p>
+母比率の仮説検定（z検定）
+
+「治癒率が50%より高い（）か」を検定したいとき、帰無仮説  を立てます。
+
+ が正しいとすると  は近似的に ...</p>
   </noscript>
     <div id="root"></div>
   </body>
