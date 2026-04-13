@@ -43,6 +43,160 @@
     <link rel="stylesheet" crossorigin href="../assets/index-suXKca_U.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><article id="static-fallback" style="font-family:sans-serif;line-height:1.7;max-width:860px;margin:0 auto;padding:24px 16px">
+  <nav style="margin-bottom:16px"><a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a></nav>
+  <h1 style="font-size:1.6rem;font-weight:700;border-bottom:2px solid #2563eb;padding-bottom:8px;margin-bottom:20px">用語集</h1>
+  <p style="color:#555;margin-bottom:24px">統計検定2級の頻出用語を一覧で解説します。確率分布・推定・検定・回帰分析・多変量解析など試験に出る統計用語を網羅しています。</p>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">母集団 (Population)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#16a34a;padding:1px 6px;border-radius:4px;margin-left:8px">基礎</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">あなたが「本当に知りたい」対象の全容。例えば、スープの味見における「鍋全体のスープ」にあたります。全数調査が困難なため、一部（標本）からその性質（母数）を推測します。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">標本 (Sample)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#16a34a;padding:1px 6px;border-radius:4px;margin-left:8px">基礎</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">母集団から取り出された「手元にあるデータ」。スープの味見における「スプーン一杯」のこと。標本の平均などは、偶然の偏り（サンプリング誤差）を含むため、慎重に扱う必要があります。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">最尤推定法 (MLE)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#9333ea;padding:1px 6px;border-radius:4px;margin-left:8px">上級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「今のデータが観察されたのは、どんな真実（母数）があったからだと考えるのが一番納得がいくか？」を探る手法。「最も（最）尤もらしい」値を答えとして採用します。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">フィッシャー情報量</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#9333ea;padding:1px 6px;border-radius:4px;margin-left:8px">上級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">データが母数  に関してどれだけ「鋭い情報」を持っているかの指標。情報量が多いほど、推定のブレ（分散）を小さくできることが数理的に保証されます。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">P値 (P-value)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「差がない」という仮定の下で、今のデータ（またはそれ以上の差）が観測される確率。これが極めて小さい（通常 5% 未満）とき、「たまたまとは考えにくい＝意味のある差だ」と判断します。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">有意水準 / 第1種の過誤 ($\alpha$)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「本当は差がないのに、誤って差があると言ってしまう」間違いの許容ライン。裁判で例えると「無実の人を有罪にしてしまう」冤罪のリスク設定です。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">第2種の過誤 ($\beta$)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「本当は差があるのに、それを見逃してしまう」間違い。病気を見逃すリスクに相当します。これを小さく抑えることが、分析の「見逃し防止能力」を高めます。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">検出力 (Statistical Power)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「実際に差があるときに、正しく差があると言える能力（）」。この数値が高いほど、意味のある変化を鋭敏に捉えられる優れた調査と言えます。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">中心極限定理 (CLT)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「どんな分布でも、 が十分大きければ、平均値の分布は正規分布に近づく」という最強の定理。これがあるおかげで、元のデータがどんなに歪んでいても、標本平均については正規分布の公式で分析が可能になります。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">赤池情報量規準 (AIC)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#9333ea;padding:1px 6px;border-radius:4px;margin-left:8px">上級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「予測の正確さ」と「モデルのシンプルさ」のバランスを測る指標。低ければ低いほど「実用的な良いモデル」と判断され、AIのモデル選びなどで広く使われます。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">過学習 (Overfitting)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">手元のデータの「ノイズ」まで完璧に学習してしまい、新しいデータに対して予測が全く当たらなくなる現象。「過去問の答えを丸暗記して、本番の試験で応用が効かない生徒」のような状態です。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">ロジスティック回帰</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#9333ea;padding:1px 6px;border-radius:4px;margin-left:8px">上級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「合格・不合格」「クリックする・しない」といった、2択の確率を予測する手法。出力が必ず 0 から 1 の間に収まる数理的な工夫（シグモイド関数）が施されています。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">オッズ比 (Odds Ratio)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「ある事象が起こる確率」と「起こらない確率」の比。ギャンブルの配当設定の考え方に近く、ある要因がリスクを何倍高めるかを示す際によく用いられます。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">尤度 (Likelihood)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「ある仮説（母数 ）の下で、今あるデータが観察される確率（連続分布の場合は確率密度）」。これを最大にする仮説を選ぶのが最尤推定法です。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">交互作用 (Interaction)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「薬 A の効果が、薬 B を同時に飲むかどうかで変わる」といった、一方の因子の効果が他方の因子の水準に依存する現象。効果が増幅される場合も減衰される場合もある。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">マハラノビス距離</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#9333ea;padding:1px 6px;border-radius:4px;margin-left:8px">上級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「データのばらつき」を考慮した距離。単なる距離ではなく、集団の形状（楕円形など）に合わせて測るため、不自然なデータ（外れ値）を正確に見つけられます。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">多重共線性 (Multicollinearity)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">説明変数の中に「ほとんど同じ意味の変数」が混ざっている状態。計算が不安定になり、分析結果が壊れる原因となるため、不必要な変数を削る必要があります。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">交差妥当化 (Cross-Validation)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">データを「学習用」と「テスト用」に小分けにして入れ替えながら、何度もテストを繰り返す手法。モデルの「本番（未知のデータ）への強さ」を客観的に評価できます。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">ブートストラップ法</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#9333ea;padding:1px 6px;border-radius:4px;margin-left:8px">上級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「今あるデータから復元抽出（同じデータを何度でも選べる再抽出）を繰り返す」シミュレーション手法。高度な数学公式が使えない複雑な状況でも、数値的に信頼区間などを求められます。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">ヤコビアン (Jacobian)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#9333ea;padding:1px 6px;border-radius:4px;margin-left:8px">上級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">グラフを変形したときに「面積や体積がどれくらい伸び縮みしたか」を示す拡大率。複雑な変数変換を行う際、確率密度のつじつまを合わせるために必要です。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">定常性 (Stationarity)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#9333ea;padding:1px 6px;border-radius:4px;margin-left:8px">上級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">時間の経過によらず、データの「性質（平均やばらつき）」が変わらないこと。時系列予測を行うための「安定した土台」のような前提条件です。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">ARIMAモデル</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#9333ea;padding:1px 6px;border-radius:4px;margin-left:8px">上級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「過去の自分」と「最新のトレンド（誤差）」から未来を予測する時系列モデルの王道。株価や気温など、刻々と変化するデータの予測に使われます。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">打ち切り (Censoring)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">寿命調査などで、「まだ生きていて、いつ終わるかわからない」という不完全なデータ。この「終わっていない」という情報自体も捨てずに分析に活かします。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">固有値・固有ベクトル</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#9333ea;padding:1px 6px;border-radius:4px;margin-left:8px">上級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">データ行列の「背骨（最もばらついている方向）」とその「強度」を抽出するもの。主成分分析においては、これを使って情報の要約を行います。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">正則化 (Regularization)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#9333ea;padding:1px 6px;border-radius:4px;margin-left:8px">上級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">モデルが複雑になりすぎないよう、「お仕置き（ペナルティ）」を与える手法。いらない変数を切り捨てたり、係数が極端になるのを防ぎます。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">分散分析 (ANOVA)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「3つ以上のグループ」の間で平均に差があるかを一気に判定する手法。「グループ内のばらつき」と「グループ間のばらつき」を戦わせて判定します。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">交絡 (Confounding)</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">「コーヒーを飲む人はガンになりやすい？」という調査で、「コーヒー好きはタバコも吸う人が多い」という隠れた要因（タバコ）が結果を歪めてしまうような現象。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">因子分析</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#9333ea;padding:1px 6px;border-radius:4px;margin-left:8px">上級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">目に見えない「性格」や「価値観」などの共通因子を、アンケート回答などの目に見えるデータからあぶり出す手法。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">クラスター分析</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">異なる特徴を持つ集団を、似た者同士で「自動的にグループ分け」する手法。事前の正解がない「教師なし学習」の代表例です。</p>
+  </div>
+<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee">
+    <strong style="font-size:1rem;color:#1e3a5f">ノンパラメトリック手法</strong>
+    <span style="display:inline-block;font-size:0.75rem;color:#fff;background:#2563eb;padding:1px 6px;border-radius:4px;margin-left:8px">中級</span>
+    <p style="margin:6px 0 0;color:#444;line-height:1.6">データの「正確な値」ではなく「順位」を利用する手法。外れ値に非常に強く、データの分布が正規分布でなくても安心して使えます。</p>
+  </div>
+</article></div>
   </body>
 </html>

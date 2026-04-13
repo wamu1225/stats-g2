@@ -43,9 +43,11 @@
     <link rel="stylesheet" crossorigin href="../assets/index-suXKca_U.css">
   </head>
   <body>
-    <noscript id="seo-data">
-    <h1>2標本の検定</h1>
-    <p>このモジュールで学ぶこと
+    <div id="root"><article id="static-fallback" style="font-family:sans-serif;line-height:1.7;max-width:860px;margin:0 auto;padding:24px 16px">
+  <nav style="margin-bottom:16px"><a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← 学習リファレンス ホーム</a></nav>
+  <h1 style="font-size:1.6rem;font-weight:700;border-bottom:2px solid #2563eb;padding-bottom:8px;margin-bottom:12px">2標本の検定</h1>
+  <p style="color:#555;margin-bottom:20px;font-size:1.05rem">F検定（等分散の検定）と2標本t検定（Student・Welch）を学びます。</p>
+  <div style="white-space:pre-line;color:#333">このモジュールで学ぶこと
 
 「新しい教授法を受けたクラスと従来の教授法のクラスで、テストの平均点に差があるか？」——2つのグループの平均を比較するとき、まず「2つのグループの分散（ばらつき）が等しいか」を確認する必要があります。これがF検定です。その結果によって使うべき2標本t検定の種類が変わります。2標本問題の全体像を、ステップごとに理解しましょう。
 
@@ -57,8 +59,28 @@ F検定：2つの母分散が等しいかを確認する
 
  と  はそれぞれの不偏分散（分母 ）です。 が正しければ  は1に近い値をとりますが、2つの分散が大きく異なれば  は1から大きく外れます。慣習として  となるよう大きい方を分子にします。
 
-F分布は2つの自由度（分子の自由...</p>
-  </noscript>
-    <div id="root"></div>
+F分布は2つの自由度（分子の自由度 、分母の自由度 ）を持つ非対称な右裾分布で、正の値のみをとります。自由度が大きくなると正規分布に近づきます。
+
+等分散の2標本t検定（Student's t検定）
+
+F検定で「等分散（ を棄却しない）」と判断されたとき、プール分散を使って平均の差を検定します。
+
+（プール分散）は2グループの不偏分散を自由度で加重平均したものです。帰無仮説  の検定統計量は：
+
+具体例：クラスA（, , ）とクラスB（, , ）で 。 なので 。自由度  の  分布と比較します。
+
+Welchのt検定（不等分散の2標本t検定）
+
+F検定で「不等分散（ を棄却）」と判断されたとき、またはF検定を行わず安全側をとりたいときはWelchのt検定を使います。
+
+自由度はSatterthwaiteの近似式で求めます：
+
+自由度は整数でなくてもよく、等分散t検定より小さくなります。実務ではF検定の結果によらずWelchのt検定を使うことが多いですが、試験では等分散が与えられた場合に Student's t検定を使えるようにしましょう。
+
+ 試験ポイント： F検定（: 等分散）→ 等分散なら Student（自由度 ）、不等分散なら Welch（Satterthwaite自由度）。また「対応のある2標本（同一個体の前後比較）」は差  の1標本t検定を使います。</div>
+  <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
+    <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
+  </nav>
+</article></div>
   </body>
 </html>

@@ -43,9 +43,11 @@
     <link rel="stylesheet" crossorigin href="../assets/index-suXKca_U.css">
   </head>
   <body>
-    <noscript id="seo-data">
-    <h1>母比率の推定・検定</h1>
-    <p>このモジュールで学ぶこと
+    <div id="root"><article id="static-fallback" style="font-family:sans-serif;line-height:1.7;max-width:860px;margin:0 auto;padding:24px 16px">
+  <nav style="margin-bottom:16px"><a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← 学習リファレンス ホーム</a></nav>
+  <h1 style="font-size:1.6rem;font-weight:700;border-bottom:2px solid #2563eb;padding-bottom:8px;margin-bottom:12px">母比率の推定・検定</h1>
+  <p style="color:#555;margin-bottom:20px;font-size:1.05rem">母比率の信頼区間・z検定と2標本比率の差の検定を学びます。</p>
+  <div style="white-space:pre-line;color:#333">このモジュールで学ぶこと
 
 「この薬の治癒率は本当に50%より高いか？」「A社とB社の商品の不良品率に差があるか？」——結果が「成功か失敗か（治癒した・しない、不良品・良品）」という2値データでは、関心のある母数は母比率 （母集団における成功の割合）です。母平均の推定・検定と同様の考え方で、母比率の信頼区間と仮説検定を構築できます。
 
@@ -63,8 +65,24 @@
 
 「治癒率が50%より高い（）か」を検定したいとき、帰無仮説  を立てます。
 
- が正しいとすると  は近似的に ...</p>
-  </noscript>
-    <div id="root"></div>
+ が正しいとすると  は近似的に  に従うので、検定統計量は：
+
+信頼区間との  の違い： 信頼区間では  が未知なので  を代入しますが、検定では「 が正しい世界（）」の分布を使うので  を代入します。
+
+例：, ,  の片側検定。。有意水準5%の片側棄却域  に入らないので  を棄却できない。
+
+2標本の比率の差の検定
+
+「A社の不良品率  と B社の不良品率  に差があるか」のように2つの母比率を比較します。
+
+（共通の未知比率 ）を仮定し、プール比率  で  を推定します。検定統計量は：
+
+例：A社  中  個不良（）、B社  中  個不良（）。、、。 なので差は有意でない。
+
+ 試験ポイント： 母比率の検定では  に （帰無仮説の値）を使い、信頼区間では （標本比率）を使う。この使い分けを問う問題が頻出です。</div>
+  <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
+    <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
+  </nav>
+</article></div>
   </body>
 </html>
