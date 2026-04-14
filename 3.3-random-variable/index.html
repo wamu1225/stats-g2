@@ -4,17 +4,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>回帰分析 | 統計検定 2級 学習リファレンス</title>
-    <meta name="description" content="単回帰・最小二乗法・決定係数の基礎を学びます。" />
-    <meta property="og:title" content="回帰分析 | 統計検定 2級 学習リファレンス" />
-    <meta property="og:description" content="単回帰・最小二乗法・決定係数の基礎を学びます。" />
+    <title>確率変数の性質 | 統計検定 2級 学習リファレンス</title>
+    <meta name="description" content="期待値・分散・共分散・確率変数の線形結合を理解します。" />
+    <meta property="og:title" content="確率変数の性質 | 統計検定 2級 学習リファレンス" />
+    <meta property="og:description" content="期待値・分散・共分散・確率変数の線形結合を理解します。" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://study-apps.com/stats-g2/5.1-regression/" />
-    <link rel="canonical" href="https://study-apps.com/stats-g2/5.1-regression/" />
+    <meta property="og:url" content="https://study-apps.com/stats-g2/3.3-random-variable/" />
+    <link rel="canonical" href="https://study-apps.com/stats-g2/3.3-random-variable/" />
     <meta property="og:image" content="https://study-apps.com/stats-g2/ogp.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="回帰分析 | 統計検定 2級 学習リファレンス" />
-    <meta name="twitter:description" content="単回帰・最小二乗法・決定係数の基礎を学びます。" />
+    <meta name="twitter:title" content="確率変数の性質 | 統計検定 2級 学習リファレンス" />
+    <meta name="twitter:description" content="期待値・分散・共分散・確率変数の線形結合を理解します。" />
     <meta name="twitter:image" content="https://study-apps.com/stats-g2/ogp.png" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6K27V3P4S"></script>
@@ -43,30 +43,34 @@
     </script>
     <script type="module" crossorigin src="../assets/index-BrcFbt1d.js"></script>
     <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"回帰分析","description":"単回帰・最小二乗法・決定係数の基礎を学びます。","url":"https://study-apps.com/stats-g2/5.1-regression/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"確率変数の性質","description":"期待値・分散・共分散・確率変数の線形結合を理解します。","url":"https://study-apps.com/stats-g2/3.3-random-variable/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
   </head>
   <body>
     <div id="root"><article id="static-fallback" style="font-family:sans-serif;line-height:1.7;max-width:860px;margin:0 auto;padding:24px 16px">
   <nav style="margin-bottom:16px"><a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← 学習リファレンス ホーム</a></nav>
-  <h1 style="font-size:1.6rem;font-weight:700;border-bottom:2px solid #2563eb;padding-bottom:8px;margin-bottom:12px">回帰分析</h1>
-  <p style="color:#555;margin-bottom:20px;font-size:1.05rem">単回帰・最小二乗法・決定係数の基礎を学びます。</p>
+  <h1 style="font-size:1.6rem;font-weight:700;border-bottom:2px solid #2563eb;padding-bottom:8px;margin-bottom:12px">確率変数の性質</h1>
+  <p style="color:#555;margin-bottom:20px;font-size:1.05rem">期待値・分散・共分散・確率変数の線形結合を理解します。</p>
   <div style="white-space:pre-line;color:#333">このモジュールで学ぶこと
 
-「身長から体重をどれくらい予測できるか」——回帰分析は変数間の線形関係を定式化し、予測に活用する手法です。
+確率分布の「形」は前のモジュールで学びました。ここでは、確率変数を数式で操作する——変換したり足したり——ときの期待値・分散の計算ルールを体系的に学びます。
 
-単回帰モデル
+期待値と分散の基本性質
 
-：切片、：回帰係数（傾き）。
+確率変数  に定数  を使った変換  を考えます。
 
-最小二乗法（OLS）
+分散は定数の加算に影響されず、係数の2乗が掛かる点が重要です。
 
-残差二乗和  を最小化して係数を推定します。
+共分散と相関係数
 
-決定係数 
+2つの確率変数  の関係を表す指標です。
 
-モデルが Y の変動をどれだけ説明できるかを表す指標：
+ は  の値をとり、X と Y の線形関係の強さを表します。
 
-、1に近いほど当てはまりが良い。</div>
+確率変数の和
+
+ と  の和の期待値と分散：
+
+X と Y が独立であれば  となり、分散は単純に加算されます。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>
