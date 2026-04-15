@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-BGN633m4.js"></script>
+    <script type="module" crossorigin src="../assets/index-BZ5DzKQL.js"></script>
     <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"仮説検定","description":"帰無仮説・有意水準・p値・検定統計量の考え方を理解します。","url":"https://study-apps.com/stats-g2/4.2-testing/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
   </head>
@@ -56,10 +56,10 @@
 
 仮説検定の枠組み
 
-帰無仮説 ：「効果なし」など、棄却したい主張
-対立仮説 ：証明したい主張
-有意水準 （通常5%）：第1種の誤りの確率の上限
-検定統計量を計算し、棄却域に入れば  を棄却
+① 帰無仮説 ：「効果なし」など、棄却したい主張
+② 対立仮説 ：証明したい主張
+③ 有意水準 （通常5%）：第1種の誤りの確率の上限
+④ 検定統計量を計算し、棄却域に入れば  を棄却
 
 p値は「 のもとで今回以上に極端なデータが得られる確率」： なら  を棄却。
 
@@ -72,6 +72,11 @@ p値は「 のもとで今回以上に極端なデータが得られる確率」
 
 第1種・第2種の誤りと検出力
 
+を棄却 ×  が真 → 第1種の誤り（）偽陽性：「効果なしなのに効果ありと判定」
+を棄却 ×  が偽 → 正しい判断（検出）
+を棄却しない ×  が真 → 正しい判断（見送り）
+を棄却しない ×  が偽 → 第2種の誤り（）偽陰性：「効果ありなのに見逃す」
+
 検出力 ：「本当に効果があるとき正しく検出できる確率」。標本サイズを増やすと検出力が上がります。 を小さくすると  が大きくなるトレードオフがあります。
 
 母平均の t 検定
@@ -79,6 +84,8 @@ p値は「 のもとで今回以上に極端なデータが得られる確率」
 母分散未知のとき：
 
 両側検定： で棄却。片側検定： で棄却（右側の場合）。
+
+t分布の棄却域がどこに来るかをスライダーで確認しましょう。
 
 母比率の検定
 
