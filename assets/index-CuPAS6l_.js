@@ -172,14 +172,20 @@ $$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$$
 
 ---
 
-### 3. 条件付き確率と独立
+### 3. 条件付き確率・乗法定理・独立
 
 事象 B が起こったという条件のもとで A が起こる確率：
 
 $$P(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}$$
 
-$P(A \\mid B) = P(A)$ が成り立つとき、A と B は**独立**といいます。
-`,keyFormulas:[{label:`加法定理`,formula:`P(A\\cup B)=P(A)+P(B)-P(A\\cap B)`},{label:`条件付き確率`,formula:`P(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}`}],quiz:[{id:`2.1-q1`,question:`事象AとBが互いに排反（非両立）なとき、$P(A \\cup B)$はどれか。`,options:[`$P(A) \\times P(B)$`,`$P(A) + P(B) - P(A \\cap B)$`,`$P(A) + P(B)$`,`$P(A) / P(B)$`],correctAnswer:2,explanation:`排反事象とは $A \\cap B = \\emptyset$（同時に起こらない）の事象です。このとき $P(A \\cap B)=0$ なので $P(A \\cup B) = P(A) + P(B)$ となります。`},{id:`2.1-q2`,question:`事象AとBが独立のとき成り立つ式はどれか。`,options:[`$P(A \\cap B) = P(A) + P(B)$`,`$P(A \\mid B) = P(A)$`,`$P(A \\cup B) = 1$`,`$P(A) = P(B)$`],correctAnswer:1,explanation:`独立とは「Bの情報がAの確率に影響しない」ことです。$P(A \\mid B) = P(A)$ が独立の定義で、これが成立するとき $P(A \\cap B) = P(A)P(B)$ も成り立ちます。`},{id:`2.1-q3`,question:`サイコロを1回振るとき、「3以上の目」が出る確率はどれか。`,options:[`$1/6$`,`$1/3$`,`$1/2$`,`$2/3$`],correctAnswer:3,explanation:`3以上の目は {3, 4, 5, 6} の4通りです。全体は6通りなので確率 = 4/6 = 2/3 です。`},{id:`2.1-q4`,question:`$P(A) = 0.4$、$P(B) = 0.3$、$P(A \\cap B) = 0.1$ のとき、$P(A \\cup B)$はどれか。`,options:[`0.5`,`0.6`,`0.7`,`0.12`],correctAnswer:1,explanation:`加法定理：$P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = 0.4 + 0.3 - 0.1 = 0.6$。`},{id:`2.1-q5`,question:`条件付き確率 $P(A \\mid B)$ の定義として正しいのはどれか。`,options:[`$P(A) + P(B)$`,`$P(A \\cap B) / P(B)$`,`$P(A) \\times P(B)$`,`$P(A \\cup B) / P(B)$`],correctAnswer:1,explanation:`$P(A \\mid B) = P(A \\cap B) / P(B)$（ただし $P(B) > 0$）が条件付き確率の定義です。「Bが起きたという条件下でAが起きる確率」を表します。`},{id:`2.1-q6`,question:`$P(A) = 0.6$、$P(B \\mid A) = 0.5$ のとき、$P(A \\cap B)$はどれか。`,options:[`0.1`,`0.3`,`0.6`,`1.1`],correctAnswer:1,explanation:`乗法定理：$P(A \\cap B) = P(B \\mid A) \\times P(A) = 0.5 \\times 0.6 = 0.3$。`},{id:`2.1-q7`,question:`余事象の確率について、$P(A^c)$はどれか。`,options:[`$P(A) - 1$`,`$1 - P(A)$`,`$1 + P(A)$`,`$P(A)^2$`],correctAnswer:1,explanation:`確率の公理より $P(\\Omega) = 1$。AとA^c（Aの補集合）は排反で $P(A) + P(A^c) = 1$ ゆえ $P(A^c) = 1 - P(A)$。`},{id:`2.1-q8`,question:`「少なくとも1回成功する」確率を求めるのに最も計算が楽な方法はどれか。`,options:[`すべての成功パターンを列挙して足す`,`余事象（1回も成功しない確率）を1から引く`,`独立試行の確率をすべて掛け合わせる`,`二項定理を直接展開する`],correctAnswer:1,explanation:`「少なくとも1回成功」= 1 − P(1回も成功しない) と考える余事象の利用が最も効率的です。特に試行数が多い場合に有効です。`},{id:`2.1-q9`,question:`52枚のカードから1枚引くとき、スペードかつエース（スペードのエース）である確率はどれか。`,options:[`$1/52$`,`$1/13$`,`$4/52$`,`$13/52$`],correctAnswer:0,explanation:`スペードのエースは52枚中1枚なので確率 = 1/52 です。（スペード = 13枚、エース = 4枚だが、スペードかつエースは1枚）`},{id:`2.1-q10`,question:`「AまたはB」の確率が「A+Bの確率の和」に等しくなる条件はどれか。`,options:[`AとBが独立`,`AとBが排反（非両立）`,`AとBの確率が等しい`,`AがBの部分集合`],correctAnswer:1,explanation:`AとBが排反（$A \\cap B = \\emptyset$）なら $P(A \\cup B) = P(A) + P(B)$ が成立します。独立では $P(A \\cap B) = P(A)P(B) \\neq 0$（一般に）なので加法定理の減算が必要です。`}]},{id:`2.2-bayes`,title:`ベイズの定理`,chapter:2,description:`条件付き確率とベイズの定理の仕組みを理解します。`,content:`💡 **このモジュールで学ぶこと**
+式を変形すると**乗法定理**が得られます：
+
+$$P(A \\cap B) = P(A \\mid B)\\,P(B) = P(B \\mid A)\\,P(A)$$
+
+「AとBが同時に起こる確率」は、「どちらか一方が起こる確率」×「もう一方の条件付き確率」で計算できます。
+
+$P(A \\mid B) = P(A)$ が成り立つとき、A と B は**独立**といいます（B の情報が A の確率に影響しない状態）。独立のとき $P(A \\cap B) = P(A)\\,P(B)$ が成立します。
+`,keyFormulas:[{label:`加法定理`,formula:`P(A\\cup B)=P(A)+P(B)-P(A\\cap B)`},{label:`条件付き確率`,formula:`P(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}`},{label:`乗法定理`,formula:`P(A\\cap B)=P(A\\mid B)\\,P(B)`}],quiz:[{id:`2.1-q1`,question:`事象AとBが互いに排反（非両立）なとき、$P(A \\cup B)$はどれか。`,options:[`$P(A) \\times P(B)$`,`$P(A) + P(B) - P(A \\cap B)$`,`$P(A) + P(B)$`,`$P(A) / P(B)$`],correctAnswer:2,explanation:`排反事象とは $A \\cap B = \\emptyset$（同時に起こらない）の事象です。このとき $P(A \\cap B)=0$ なので $P(A \\cup B) = P(A) + P(B)$ となります。`},{id:`2.1-q2`,question:`事象AとBが独立のとき成り立つ式はどれか。`,options:[`$P(A \\cap B) = P(A) + P(B)$`,`$P(A \\mid B) = P(A)$`,`$P(A \\cup B) = 1$`,`$P(A) = P(B)$`],correctAnswer:1,explanation:`独立とは「Bの情報がAの確率に影響しない」ことです。$P(A \\mid B) = P(A)$ が独立の定義で、これが成立するとき $P(A \\cap B) = P(A)P(B)$ も成り立ちます。`},{id:`2.1-q3`,question:`サイコロを1回振るとき、「3以上の目」が出る確率はどれか。`,options:[`$1/6$`,`$1/3$`,`$1/2$`,`$2/3$`],correctAnswer:3,explanation:`3以上の目は {3, 4, 5, 6} の4通りです。全体は6通りなので確率 = 4/6 = 2/3 です。`},{id:`2.1-q4`,question:`$P(A) = 0.4$、$P(B) = 0.3$、$P(A \\cap B) = 0.1$ のとき、$P(A \\cup B)$はどれか。`,options:[`0.5`,`0.6`,`0.7`,`0.12`],correctAnswer:1,explanation:`加法定理：$P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = 0.4 + 0.3 - 0.1 = 0.6$。`},{id:`2.1-q5`,question:`条件付き確率 $P(A \\mid B)$ の定義として正しいのはどれか。`,options:[`$P(A) + P(B)$`,`$P(A \\cap B) / P(B)$`,`$P(A) \\times P(B)$`,`$P(A \\cup B) / P(B)$`],correctAnswer:1,explanation:`$P(A \\mid B) = P(A \\cap B) / P(B)$（ただし $P(B) > 0$）が条件付き確率の定義です。「Bが起きたという条件下でAが起きる確率」を表します。`},{id:`2.1-q6`,question:`$P(A) = 0.6$、$P(B \\mid A) = 0.5$ のとき、$P(A \\cap B)$はどれか。`,options:[`0.1`,`0.3`,`0.6`,`1.1`],correctAnswer:1,explanation:`乗法定理：$P(A \\cap B) = P(B \\mid A) \\times P(A) = 0.5 \\times 0.6 = 0.3$。`},{id:`2.1-q7`,question:`余事象の確率について、$P(A^c)$はどれか。`,options:[`$P(A) - 1$`,`$1 - P(A)$`,`$1 + P(A)$`,`$P(A)^2$`],correctAnswer:1,explanation:`確率の公理より $P(\\Omega) = 1$。AとA^c（Aの補集合）は排反で $P(A) + P(A^c) = 1$ ゆえ $P(A^c) = 1 - P(A)$。`},{id:`2.1-q8`,question:`「少なくとも1回成功する」確率を求めるのに最も計算が楽な方法はどれか。`,options:[`すべての成功パターンを列挙して足す`,`余事象（1回も成功しない確率）を1から引く`,`独立試行の確率をすべて掛け合わせる`,`二項定理を直接展開する`],correctAnswer:1,explanation:`「少なくとも1回成功」= 1 − P(1回も成功しない) と考える余事象の利用が最も効率的です。特に試行数が多い場合に有効です。`},{id:`2.1-q9`,question:`52枚のカードから1枚引くとき、スペードかつエース（スペードのエース）である確率はどれか。`,options:[`$1/52$`,`$1/13$`,`$4/52$`,`$13/52$`],correctAnswer:0,explanation:`スペードのエースは52枚中1枚なので確率 = 1/52 です。（スペード = 13枚、エース = 4枚だが、スペードかつエースは1枚）`},{id:`2.1-q10`,question:`「AまたはB」の確率が「A+Bの確率の和」に等しくなる条件はどれか。`,options:[`AとBが独立`,`AとBが排反（非両立）`,`AとBの確率が等しい`,`AがBの部分集合`],correctAnswer:1,explanation:`AとBが排反（$A \\cap B = \\emptyset$）なら $P(A \\cup B) = P(A) + P(B)$ が成立します。独立では $P(A \\cap B) = P(A)P(B) \\neq 0$（一般に）なので加法定理の減算が必要です。`}]},{id:`2.2-bayes`,title:`ベイズの定理`,chapter:2,description:`条件付き確率とベイズの定理の仕組みを理解します。`,content:`💡 **このモジュールで学ぶこと**
 
 「検査で陽性だったとき、本当に病気である確率は？」——これはベイズの定理を使って解く典型問題です。
 
@@ -349,6 +355,10 @@ $$P(|X - \\mu| \\ge k\\sigma) \\le \\frac{1}{k^2}$$
 ---
 
 ### 2. 大数の法則と中心極限定理
+
+**まず重要な概念：標本平均は確率変数**
+
+コインを100回投げて表が出た回数を記録したとします。もう1回100枚投げると、違う数になるはずです。標本 $X_1, \\ldots, X_n$ は毎回ランダムに変わり、その平均 $\\bar{X} = (X_1 + \\cdots + X_n)/n$ も毎回変わります。つまり**標本平均 $\\bar{X}$ 自体が確率変数**であり、「どのような分布に従うか」を問えます。
 
 独立同分布（i.i.d.）に従う $X_1, \\ldots, X_n$（平均 $\\mu$、分散 $\\sigma^2$）について：
 
