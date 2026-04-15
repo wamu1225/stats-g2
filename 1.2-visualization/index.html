@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-GIWbT8EY.js"></script>
+    <script type="module" crossorigin src="../assets/index-nj6pYIkV.js"></script>
     <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"データの可視化","description":"グラフでデータの分布・関係を視覚的に把握します。","url":"https://study-apps.com/stats-g2/1.2-visualization/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
   </head>
@@ -54,21 +54,38 @@
 
 数値だけでは見えにくいデータの形や関係を、グラフで可視化する方法を学びます。
 
-ヒストグラム
+質的変数のグラフ：棒グラフと円グラフ
 
-データを等幅の階級（ビン）に分けて頻度を棒グラフで表します。分布の形状（左右対称・右裾重い・左裾重いなど）を一目で把握できます。
+棒グラフ：カテゴリ間の量・頻度を比較するのに適す（血液型ごとの人数など）
+円グラフ：全体に占める各カテゴリの割合（構成比）を表すのに適す
 
-散布図と相関
+これらは質的変数（カテゴリカルデータ）の可視化に使います。
 
-2変数の関係を点で描いた図が散布図です。右上がりなら正の相関、右下がりなら負の相関があります。
+量的変数のグラフ：ヒストグラムと度数分布
 
-相関の強さを数値で表すピアソン相関係数は
+データを等幅の階級に分けて頻度を棒で表したものがヒストグラムです。棒と棒の間に隙間がないことに注意（棒グラフとの違い）。
 
- の範囲をとり、 が1に近いほど強い線形相関です。
+分布の形状を表す用語（重要）:
 
-茎葉図・度数分布表
+茎葉図は元のデータ値を保持しながら分布を表示できます。累積度数グラフは各階級までの累積割合を折れ線で示し、中央値（累積50%）や四分位数を読み取れます。
 
-茎葉図は元データを残しながら分布を表示できます。度数分布表は各階級の頻度・相対度数・累積度数をまとめた表です。</div>
+散布図と相関・共分散
+
+2変数の関係を点で描いた図が散布図です。
+
+共分散は2変数が同じ方向に変動する傾向を表します：
+
+共分散を標準化して単位をなくしたものがピアソン相関係数：
+
+、 が1に近いほど強い線形相関。 でも非線形の関係は存在しえます。
+
+相関の落とし穴：擬相関と偏相関
+
+擬相関（みかけの相関）：2変数に直接の関係がないのに、第3の変数（交絡変数）の影響で相関があるように見える現象。
+
+ 例：アイスクリームの売上と溺死事故数には正の相関がある → どちらも「気温」という第3変数に依存しているため。
+
+偏相関係数：交絡変数の影響を統計的に除いて求めた相関係数。みかけの相関かどうかの判断に使います。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

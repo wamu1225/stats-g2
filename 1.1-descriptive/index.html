@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-GIWbT8EY.js"></script>
+    <script type="module" crossorigin src="../assets/index-nj6pYIkV.js"></script>
     <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"データの整理と要約","description":"データを数値でとらえる基本手法を学びます。","url":"https://study-apps.com/stats-g2/1.1-descriptive/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
   </head>
@@ -64,11 +64,13 @@
 
 n 個のデータ  の平均は
 
-分散と標準偏差
+散らばりの指標
 
-データの「散らばり」を表す指標です。
+範囲（レンジ）：最大値 − 最小値（外れ値に非常に敏感）
+四分位範囲（IQR）：Q3 − Q1（外れ値に頑健）
+分散・標準偏差：偏差  の2乗を平均した値
 
-標準偏差は  で、単位がもとのデータと同じになるため解釈しやすい。
+ で割るのは 不偏分散（）にするためです。 が標準偏差。
 
 四分位数と箱ひげ図
 
@@ -78,7 +80,15 @@ Q1（第1四分位数）：下位25%の境界
 Q2（第2四分位数）：中央値
 Q3（第3四分位数）：上位25%の境界
 
-四分位範囲（IQR） = Q3 − Q1 は外れ値に頑健な散らばりの指標です。</div>
+箱ひげ図は Q1・Q2・Q3・最小値・最大値を1つの図にまとめます。IQR の 1.5 倍を超えた点を外れ値として識別します。
+
+分布の形状：歪度と尖度
+
+歪度（skewness）：分布の非対称性を表す。
+  - 正（右に裾が長い）→ 平均 ＞ 中央値 ＞ 最頻値
+  - 負（左に裾が長い）→ 平均 ＜ 中央値 ＜ 最頻値
+  - 0 → 左右対称（正規分布など）
+尖度（kurtosis）：裾の重さ（太さ）を表す。正規分布を基準に、裾が重いほど大きな値をとります。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-GIWbT8EY.js"></script>
+    <script type="module" crossorigin src="../assets/index-nj6pYIkV.js"></script>
     <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"回帰分析","description":"単回帰・最小二乗法・決定係数の基礎を学びます。","url":"https://study-apps.com/stats-g2/5.1-regression/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
   </head>
@@ -62,11 +62,24 @@
 
 残差二乗和  を最小化して係数を推定します。
 
-決定係数 
+決定係数  と自由度調整済み 
 
-モデルが Y の変動をどれだけ説明できるかを表す指標：
+ は説明変数を増やすと必ず増加するため、変数が多いモデルとの公平な比較に自由度調整済み決定係数を使います：
 
-、1に近いほど当てはまりが良い。</div>
+（：説明変数の数）。役に立たない変数を加えると  は下がることがあります。
+
+残差プロットとモデル診断
+
+残差（）を予測値に対してプロットします。
+
+無作為に散らばる → 仮定（線形性・等分散）が成立
+U字型・ファンネル型 → 線形性または等分散の仮定違反 → 変数変換（対数変換など）を検討
+
+重回帰モデル
+
+複数の説明変数  を用いた回帰：
+
+各  を偏回帰係数といいます。「他の変数を一定に保ったまま  が1単位増えたときの  の平均的変化量」を意味します。説明変数間に強い相関があると推定が不安定になる（多重共線性）問題が生じます。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

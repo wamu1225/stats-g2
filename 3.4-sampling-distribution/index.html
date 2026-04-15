@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-GIWbT8EY.js"></script>
+    <script type="module" crossorigin src="../assets/index-nj6pYIkV.js"></script>
     <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"標本分布と中心極限定理","description":"大数の法則・中心極限定理・t分布・χ²分布・F分布を理解します。","url":"https://study-apps.com/stats-g2/3.4-sampling-distribution/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
   </head>
@@ -54,20 +54,32 @@
 
 「標本平均はどのような分布に従うか？」——これが推定・検定の理論的土台です。どれだけ大きな標本でも、分布の形によらず標本平均が正規分布に近づく「中心極限定理」は統計学最大の定理のひとつです。
 
+チェビシェフの不等式
+
+どんな分布でも成り立つ普遍的な不等式：
+
+例： なら「平均から2標準偏差以上離れる確率は高々25%」。正規分布なら実際は約4.6%ですが、分布の形を問わずこの上限が保証されます。
+
 大数の法則と中心極限定理
 
-独立同分布（i.i.d.）に従う （平均 、分散 ）の標本平均  については：
+独立同分布（i.i.d.）に従う （平均 、分散 ）について：
 
-大数の法則： のとき （標本平均が真の平均に収束）
+大数の法則： のとき （標本平均が母平均に確率収束）
 中心極限定理： が大きいとき 
+
+二項分布の正規近似
+
+ のとき、 が大きければ中心極限定理により：
+
+目安： かつ  で精度が良い。より正確には連続修正（continuity correction）として  を使います。
 
 t 分布・カイ二乗分布・F 分布
 
 正規母集団から標本を取るとき、以下の分布が自然に現れます。
 
-t 分布：母分散未知のとき、
+t 分布：母分散未知のとき （自由度小→裾が重い）
 カイ二乗分布：（分散の推定・検定に使用）
-F 分布：2つの分散の比 （等分散検定・分散分析に使用）
+F 分布：（等分散検定・分散分析に使用）
 
 標準誤差の意味
 

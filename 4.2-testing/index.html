@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-GIWbT8EY.js"></script>
+    <script type="module" crossorigin src="../assets/index-nj6pYIkV.js"></script>
     <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"仮説検定","description":"帰無仮説・有意水準・p値・検定統計量の考え方を理解します。","url":"https://study-apps.com/stats-g2/4.2-testing/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
   </head>
@@ -56,20 +56,39 @@
 
 仮説検定の枠組み
 
-帰無仮説 ：「効果なし」など、棄却したい主張。
-対立仮説 ：証明したい主張。
-有意水準 （通常5%）：第1種の誤りの確率の上限。
-検定統計量を計算し、棄却域に入れば  を棄却。
+帰無仮説 ：「効果なし」など、棄却したい主張
+対立仮説 ：証明したい主張
+有意水準 （通常5%）：第1種の誤りの確率の上限
+検定統計量を計算し、棄却域に入れば  を棄却
 
-p値
+p値は「 のもとで今回以上に極端なデータが得られる確率」： なら  を棄却。
 
-p値は「帰無仮説が正しいとした場合に、今回と同等以上に極端なデータが得られる確率」です。
+両側検定と片側検定
+
+両側検定：。方向を問わず差があるか検定。棄却域が両裾に分かれる。
+片側検定：（または ）。方向を特定して検定。同じ  で棄却域が広い分、一方向の効果を検出しやすい。
+
+ 方向に理論的根拠がある場合のみ片側検定を使います（恣意的な使用は禁物）。
+
+第1種・第2種の誤りと検出力
+
+検出力 ：「本当に効果があるとき正しく検出できる確率」。標本サイズを増やすと検出力が上がります。 を小さくすると  が大きくなるトレードオフがあります。
 
 母平均の t 検定
 
-母分散未知、標本  個のとき：
+母分散未知のとき：
 
-両側検定では  のとき棄却します。</div>
+両側検定： で棄却。片側検定： で棄却（右側の場合）。
+
+母比率の検定
+
+ が十分大きいとき、標本比率  を用いて：
+
+母分散の検定
+
+母分散が  に等しいかを検定：
+
+カイ二乗分布は非対称（右裾が長い）なため、両側検定では上側・下側の臨界値を別々に使います。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>
