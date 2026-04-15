@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CUFOiseM.js"></script>
+    <script type="module" crossorigin src="../assets/index-Bo90S72C.js"></script>
     <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"離散型確率分布","description":"二項分布・ポアソン分布など離散分布の特徴を学びます。","url":"https://study-apps.com/stats-g2/3.1-discrete/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
   </head>
@@ -94,7 +94,25 @@
 
 幾何分布の重要な性質が無記憶性——「すでに3回外れても、これから初めて当たるまでの回数の分布は最初から引き始める場合と全く同じ」です。これは各試行が独立であることの帰結で、「外れが続いているから次は当たりやすい」という誤解（ギャンブラーの誤謬）が成立しないことを示しています。
 
- 幾何分布の平均 = 。無記憶性と「前の失敗は次の確率に影響しない」の関係を理解しておく。</div>
+ 幾何分布の平均 = 。無記憶性と「前の失敗は次の確率に影響しない」の関係を理解しておく。
+
+超幾何分布：非復元抽出のモデル
+
+二項分布は「毎回元に戻して引く（復元抽出）」を前提にしていました。では、引いたものを戻さない非復元抽出のときはどうなるでしょうか？
+
+例えば工場で100個の製品（うち10個が不良品）から5個を検査する場合、1個引いて不良品だとわかれば残り99個中9個が不良品になり——確率が変わります。この状況を表すのが超幾何分布です。
+
+ 個の集合のうち  個が「当たり」、そこから  個を非復元抽出したとき、当たりの個数  となる確率は：
+
+「当たり  個の選び方 × 外れ  個の選び方 ÷ 全部の選び方」という組み合わせの発想です。平均は ——「 個取り出したうち、母集合の当たり率  の分だけ当たりが出る」という直感通りです。
+
+ 超幾何分布は「非復元抽出」のモデル。二項分布（復元）との違いは分散：超幾何分布の分散には有限母集団修正が入り、二項分布の分散より小さくなります。
+
+負の二項分布：「r回成功するまでの試行回数」
+
+幾何分布は「1回成功するまでの試行回数」でした。これを一般化した負の二項分布は「 回成功するまでに必要な試行回数 」の分布です。幾何分布は  の特殊ケースです。
+
+ 回目の試行でちょうど  回目の成功が起きるとは、</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>
