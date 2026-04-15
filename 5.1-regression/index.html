@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-Dzm4aRIM.js"></script>
+    <script type="module" crossorigin src="../assets/index-pK5qhGii.js"></script>
     <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"回帰分析","description":"単回帰・最小二乗法・決定係数の基礎を学びます。","url":"https://study-apps.com/stats-g2/5.1-regression/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
   </head>
@@ -86,7 +86,11 @@ OLS直線は必ずデータの重心  を通るという性質があります。
 
 各  を偏回帰係数といいます。「他のすべての変数を一定に保ったまま  だけが1単位増えたときの  の平均的変化量」という意味です——単回帰の係数とは異なる値になることに注意が必要です。
 
-説明変数間に強い相関がある場合、推定が不安定になる多重共線性の問題が生じます。係数の標準誤差が膨らみ「どの変数がどれだけ効いているか」が判断しにくくなります。残差プロットでU字型やファンネル型のパターンが見られる場合は線形性・等分散の仮定が疑われます。</div>
+説明変数間に強い相関がある場合、推定が不安定になる多重共線性の問題が生じます。係数の標準誤差が膨らみ「どの変数がどれだけ効いているか」が判断しにくくなります。残差プロットでU字型やファンネル型のパターンが見られる場合は線形性・等分散の仮定が疑われます。
+
+回帰モデルの予測には重要な制約があります。観測データの範囲内での予測（内挿）は比較的信頼できますが、観測範囲の外側へ予測を伸ばす外挿（extrapolation）は信頼性が低いです。「身長150〜180cmのデータで作ったモデルで身長120cmの人の体重を予測する」場合、その範囲では線形関係が成立しない可能性があり、予測は非常に不確かになります。
+
+ 外挿（観測範囲外への予測）は信頼性が低い。内挿（範囲内）は比較的安全。外挿は実務では避けるか、慎重に扱う必要があります。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

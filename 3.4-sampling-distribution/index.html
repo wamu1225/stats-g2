@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-Dzm4aRIM.js"></script>
+    <script type="module" crossorigin src="../assets/index-pK5qhGii.js"></script>
     <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"標本分布と中心極限定理","description":"大数の法則・中心極限定理・t分布・χ²分布・F分布を理解します。","url":"https://study-apps.com/stats-g2/3.4-sampling-distribution/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
   </head>
@@ -90,7 +90,15 @@ t 分布・カイ二乗分布・F 分布：現実の検定で使う分布
 
 分散の推定・検定にはカイ二乗分布（）が使われます：。2グループの分散を比較する等分散検定や分散分析にはF 分布が使われます：。
 
- 母分散未知のとき → t 分布（自由度 ）。t 分布は自由度  で正規分布に収束。</div>
+ 母分散未知のとき → t 分布（自由度 ）。t 分布は自由度  で正規分布に収束。
+
+二項分布の正規近似：離散分布を連続分布で近似する
+
+中心極限定理の応用として、二項分布を正規分布で近似する方法があります。 回のベルヌーイ試行で成功確率  のとき、成功回数  の平均は 、分散は  です。 が十分大きければ中心極限定理により：
+
+つまり  は近似的に  に従います。「十分大きい」の目安は  かつ  です。例えば  では 、 なので  で近似できます——平均30・分散  です。
+
+ 二項分布の正規近似： かつ  のとき 。平均と分散を正確に計算することが重要です。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>
