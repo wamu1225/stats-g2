@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2母集団の推定・検定 | 統計検定 2級 学習リファレンス</title>
+    <meta name="description" content="2つの母集団の平均差・比率差・分散比を推定・検定する手法を学びます。" />
+    <meta property="og:title" content="2母集団の推定・検定 | 統計検定 2級 学習リファレンス" />
+    <meta property="og:description" content="2つの母集団の平均差・比率差・分散比を推定・検定する手法を学びます。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://study-apps.com/stats-g2/4.4-two-sample/" />
+    <link rel="canonical" href="https://study-apps.com/stats-g2/4.4-two-sample/" />
+    <meta property="og:image" content="https://study-apps.com/stats-g2/ogp.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="2母集団の推定・検定 | 統計検定 2級 学習リファレンス" />
+    <meta name="twitter:description" content="2つの母集団の平均差・比率差・分散比を推定・検定する手法を学びます。" />
+    <meta name="twitter:image" content="https://study-apps.com/stats-g2/ogp.png" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6K27V3P4S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G6K27V3P4S');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9102538151148380"
+     crossorigin="anonymous"></script>
+    <script>
+      // Restore URL after GitHub Pages 404 redirect (?/path/ → /stats-g2/path/)
+      (function () {
+        var s = window.location.search;
+        if (s[1] === '/') {
+          var decoded = s.slice(1).split('&').map(function (p) { return p.replace(/~and~/g, '&'); });
+          window.history.replaceState(
+            null, null,
+            '/stats-g2' + decoded[0] +
+            (decoded.slice(1).length ? '?' + decoded.slice(1).join('&') : '') +
+            window.location.hash
+          );
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="../assets/index-CWU0p5o-.js"></script>
+    <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"2母集団の推定・検定","description":"2つの母集団の平均差・比率差・分散比を推定・検定する手法を学びます。","url":"https://study-apps.com/stats-g2/4.4-two-sample/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
+  </head>
+  <body>
+    <div id="root"><article id="static-fallback" style="font-family:sans-serif;line-height:1.7;max-width:860px;margin:0 auto;padding:24px 16px">
+  <nav style="margin-bottom:16px"><a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← 学習リファレンス ホーム</a></nav>
+  <h1 style="font-size:1.6rem;font-weight:700;border-bottom:2px solid #2563eb;padding-bottom:8px;margin-bottom:12px">2母集団の推定・検定</h1>
+  <p style="color:#555;margin-bottom:20px;font-size:1.05rem">2つの母集団の平均差・比率差・分散比を推定・検定する手法を学びます。</p>
+  <div style="white-space:pre-line;color:#333">このモジュールで学ぶこと
+
+「新薬を投与したグループとプラセボ（偽薬）グループで血圧の平均に差があるか？」「女性と男性の支持率に違いがあるか？」——2つの集団を比較する問いは現実のデータ分析の中心です。これまでは1つの母集団の平均や比率を推定・検定してきました。このモジュールでは「2つの集団の差」を扱う手法を体系的に学びます。試験頻出の最重要テーマです。
+
+2母平均の差の検定：母分散既知の場合
+
+2グループAとBの血圧の平均を比べたいとします。AとBからそれぞれ独立に標本を取り、 と  を計算します。「差  がゼロかどうか」を検定するのが2標本z検定です。
+
+母分散 ・ が既知のとき、 の分散は （独立なら分散を足せる）です。帰無仮説  のもとの検定統計量は：
+
+母平均の差  の95%信頼区間は：
+
+分母が「2つの標準誤差を合成したもの」であることを理解すると、式を覚えやすいです。
+
+ 2標本z検定の分母 = （独立なら分散は加算）。
+
+2母平均の差の検定：母分散未知の場合
+
+現実には母分散が既知なことは稀です。この場合、不偏分散 ・ を使いますが、等分散を仮定するかどうかで手法が異なります。
+
+等分散を仮定する場合：2グループの分散が等しい（）と考え、プールされた分散で推定します：
+
+検定統計量は自由度  のt分布に従います：
+
+等分散を仮定しない場合（ウェルチのt検定）：分散が異なる可能性があるとき、より安全な手法としてウェルチ（Welch）のt検定を使います。統計量は  を分母にし、自由度はウェルチ-サタースウェイト近似で計算します（計算が複雑なため試験では与えられることが多い）。
+
+ 等分散なら自由度 。不等分散ならウェルチ検定。まず等分散の検定（F検定）を行ってから方法を選ぶのが正式な手順です。
+
+対応のある2標本：ペアデータの扱い方
+
+「同一の患者に投薬前後の血圧を測る」「双子の兄弟に異なる教育法を適用する」——このように同じ個体（またはペア）から2回測定したデータは「対応のある（paired）」データといいます。2回の測定は独立ではないため、2標本t検定をそのまま使うと誤りです。
+
+対応のあるデータでは、各ペアの差  を計算してから1標本t検定を適用します：
+
+（差の平均）と （差の標準偏差）を使い、自由度はペア数  より 。対応を無視して2標本t検定を使うと、個体間のばらつきが検定力を下げます——ペアの相関を活かすことで検定力が上がります。
+
+ 対応あり → 差をとって1標本t検定（自由度 ）。ペアデータに2標本t検定を使うのは誤り。
+
+2母比率の差の検定
+
+「新製品への支持率：A地域で60/100人、B地域で45/100人——差は有意か？」のような問いが2母比率の差の検定です。各標本比率 、 を計算し、帰無仮説  のもとでは母比率が等しいと仮定してプールされた比率を使います：
+
+検定統計量は標準正規分布に従います（大標本のとき）：
+
+分母で  を使う（各グループの 、 でなく合算したプール比率）のは、帰無仮説「母比率が等しい」という前提のもとで最も効率的な推定量を使うためです。
+
+ 2母比率検定：分母にプールされた  を使う。信頼区間の場合は帰無仮説なしで各グループの 、 をそのまま使います。
+
+2母分散の比の検定（F検定）
+
+「2グループの分散（ばらつき）が等しいか」を検定するのがF検定です。等分散t検定の前提確認にも使います。帰無仮説  のもとで：
+
+F分布は非対称（右裾が長い）で、値が1から大きく外れるほど分散が異なることを示します。慣例として大きい方の不偏分散を分子に置き（F≥1にする）、右側の棄却域のみを使うことが多いです。F分布の自由度は（分子の自由度 , 分母の自由度 ）のペアで指定されることに注意が必要です。
+
+ F検定：。大きい分散を分子にすると F ≥ 1 となり右側の棄却域だけ使える。</div>
+  <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
+    <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
+  </nav>
+  <p style="font-size:0.8rem;color:#888;margin-top:20px;border-top:1px solid #eee;padding-top:12px">※本サイトは個人による学習支援サイトであり、統計質保証推進協会・日本統計学会の公式サイトではありません。</p>
+</article></div>
+  </body>
+</html>
