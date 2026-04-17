@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CH1yK9RK.js"></script>
+    <script type="module" crossorigin src="../assets/index-BM2tTfr6.js"></script>
     <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"データの整理と要約","description":"データを数値でとらえる基本手法を学びます。","url":"https://study-apps.com/stats-g2/1.1-descriptive/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
   </head>
@@ -76,7 +76,7 @@
 
 各データが平均からどれだけ離れているかを偏差  と呼びます。偏差の合計は必ず0になる（正負が打ち消し合う）ため、2乗して合計するのが分散の発想です：
 
- で割るのは不偏分散にするためです。標本の偏差は必ず標本平均に引き寄せられ、母集団の散らばりより実際より小さめに出る性質があります。その過小評価を補正するために  ではなく  で割ります。
+ で割るのは不偏分散にするためです。 個のデータから標本平均  を1つ推定した後、残差  が独立に変動できる個数は  個だけです（最後の1個は、他の  個の残差と「総和が0」という制約から自動的に決まります）。この  を自由度といいます。 で割ることで母分散の過小評価が補正され、（不偏性）が成立します。
 
 標準偏差  は分散の平方根なので元のデータと同じ単位（cm、点など）を持ち、直感的に解釈しやすいです。
 
@@ -108,9 +108,7 @@ Q3（第3四分位数）：75番目付近の値——下から75%の境界
 
  歪度・尖度は試験で「方向感覚」を問われることが多い。具体的な数値計算よりも「正の歪度なら平均 ＞ 中央値 ＞ 最頻値」という方向性の理解が重要です。
 
-格差の指標：ローレンツ曲線とジニ係数
-
-分布の「散らばり」の特殊な形として、所得や資産の格差（不平等）を測る指標があります。「上位</div>
+格差の指標：ロ</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

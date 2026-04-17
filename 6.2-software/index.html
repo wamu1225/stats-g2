@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CH1yK9RK.js"></script>
+    <script type="module" crossorigin src="../assets/index-BM2tTfr6.js"></script>
     <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"統計ソフトウェアの活用","description":"R・Python・Excelを使った統計分析の進め方と出力の読み方を学びます。","url":"https://study-apps.com/stats-g2/6.2-software/","inLanguage":"ja","learningResourceType":"Article","provider":{"@type":"Organization","name":"study-apps.com","url":"https://study-apps.com"}}</script>
   </head>
@@ -70,7 +70,13 @@
 
 p値が小さいことは「統計的有意」を意味しますが、効果量（係数の大きさ）と合わせて判断することが重要です。大標本では些細な差でもp<0.05になり得ます。逆に小標本では実用的に重要な効果でも有意にならないことがあります。現代の統計報告の標準では、p値に加えて効果量（Cohenのd・など）と信頼区間を必ず報告します。
 
- 統計的有意（p値が小さい）≠ 実用的に重要（効果量が大きい）。この区別が現代統計学の重要なポイントです。</div>
+ 統計的有意（p値が小さい）≠ 実用的に重要（効果量が大きい）。この区別が現代統計学の重要なポイントです。
+
+モデル比較：AIC
+
+複数のモデルを比較する際によく使われる指標がAIC（赤池情報量規準）です：
+
+（対数尤度の  倍）はモデルの「当てはまりの悪さ」を表し、小さいほど良いあてはまりです。（：推定したパラメータ数）は「複雑さへのペナルティ」で、変数を増やしすぎる過学習を抑制します。AICが小さいモデルほど「適切な複雑さでデータをよく説明できる」と評価されます。重回帰で変数を増やすとあてはまりは上がりますが、ペナルティ項も増えるため、AICは無意味な変数の追加を自動的に抑えます。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>
