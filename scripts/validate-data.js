@@ -43,17 +43,24 @@ function checkFile(filePath) {
 
   // 3. Quiz count check
   if (filePath.includes('modules.ts')) {
-    const moduleMatches = raw.match(/\{\s*id:[\s\S]*?quiz:\s*\[([\s\S]*?)\]\s*\}/g);
-    if (moduleMatches) {
-      moduleMatches.forEach((moduleBlock, i) => {
-        const questionCount = (moduleBlock.match(/\bquestion:\s*'/g) || []).length;
+    // Split on module-level id fields only (not quiz question ids).
+    // Module IDs appear at object top level: "  id: '1.1-foo'" with chapter/content nearby.
+    // Quiz question IDs like "{ id: '1.1-q1', question:" are nested inside quiz arrays.
+    // Strategy: split on id fields that are followed by a chapter field within the next 300 chars.
+    const moduleChunks = raw.split(/\{\s*\n\s*id:\s*['"`]/).slice(1);
+    moduleChunks.forEach((chunk, i) => {
+      const idMatch = chunk.match(/^([^'"`]+)/);
+      const id = idMatch ? idMatch[1] : `Module ${i+1}`;
+      // Skip quiz question chunks (they don't have a 'chapter:' field)
+      if (!chunk.includes('chapter:')) return;
+      if (!chunk.includes('placeholder10')) {
+        // Count quiz question entries by counting { id: 'xxx-qN' patterns
+        const questionCount = (chunk.match(/\{\s*id:\s*['"`][^'"`]+-q\d+['"`]/g) || []).length;
         if (questionCount !== 10) {
-          const moduleIdMatch = moduleBlock.match(/id:\s*'([^']+)'/);
-          const id = moduleIdMatch ? moduleIdMatch[1] : `Module ${i+1}`;
           errors.push(`[Error] ${id} has ${questionCount} questions (Required: 10).`);
         }
-      });
-    }
+      }
+    });
   }
 
   const lines = raw.split('\n');
@@ -151,7 +158,35 @@ function checkFile(filePath) {
   });
 }
 
+// ── Deployed ID removal check ──────────────────────
+// Once a module ID is deployed and indexed by Google, removing it creates a 404.
+// This check prevents accidental removal by comparing against the committed record.
+function checkDeployedIds() {
+  const deployedIdsPath = path.join(__dirname, 'deployed-ids.json');
+  if (!fs.existsSync(deployedIdsPath)) return; // first deploy: no record yet
+
+  const { ids: deployedIds } = JSON.parse(fs.readFileSync(deployedIdsPath, 'utf8'));
+  const raw = fs.readFileSync(path.join(root, 'src/data/modules.ts'), 'utf8');
+
+  // Extract module IDs (not quiz IDs like 1.1-q1)
+  const currentIds = new Set(
+    [...raw.matchAll(/\{id:`([0-9]+\.[0-9]+[a-z]?-(?!q\d)[^`]+)`/g)].map(m => m[1])
+  );
+
+  for (const id of deployedIds) {
+    if (!currentIds.has(id)) {
+      errors.push(
+        `[Critical] Module ID "${id}" was in deployed-ids.json but is now missing from modules.ts.\n` +
+        `  → Removing a deployed ID creates a 404 for Google-indexed pages.\n` +
+        `  → If this rename is intentional: add a legacyRedirects entry in prerender.ts,\n` +
+        `    then remove "${id}" from scripts/deployed-ids.json.`
+      );
+    }
+  }
+}
+
 console.log('--- Data Integrity Validation ---');
+checkDeployedIds();
 filesToWatch.forEach(checkFile);
 
 if (errors.length > 0) {
