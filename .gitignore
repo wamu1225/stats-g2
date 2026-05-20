@@ -36,6 +36,12 @@ docs/research-strategy.md
 docs/research-report.md
 docs/research-report-international.md
 
+# Internal site documentation (kept locally only)
+CONTENT_GUIDE.md
+docs/CONTENT_GUIDE.md
+docs/syllabus.md
+docs/exam-scope.md
+
 # One-time migration scripts
 scripts/extract_*
 scripts/fix_*
