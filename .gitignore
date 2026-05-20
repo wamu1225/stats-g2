@@ -42,9 +42,41 @@ docs/CONTENT_GUIDE.md
 docs/syllabus.md
 docs/exam-scope.md
 
-# One-time migration scripts
+# One-time migration / debug / analysis scripts and artifacts
+scripts/analyze-*
+scripts/audit_*
+scripts/check_*
+scripts/debug-*
 scripts/extract_*
+scripts/extracted_*
+scripts/find_*
 scripts/fix_*
 scripts/inject_*
+scripts/measure-*
+scripts/patch_*
+scripts/quality_*
+scripts/read_*
+scripts/rebuild_*
 scripts/reconstruct_*
+scripts/renumber-*
+scripts/reorder-*
+scripts/show_*
+scripts/sort-*
+scripts/split-*
+scripts/chunk*.txt
+scripts/modules_*.txt
+scripts/modules_array.txt
 scripts/modules_raw.txt
+scripts/kurtosis_check.txt
+scripts/module*_check.md
+
+# Backup files
+*.bak
+
+# Test/scratch files in data
+src/data/test.ts
+src/data/*_rebuilt.ts
+
+# Vite template default assets (replace with site logo if needed)
+src/assets/react.svg
+src/assets/vite.svg
