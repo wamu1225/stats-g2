@@ -22,3 +22,23 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Logs / debug output
+lint_out.json
+
+# Test outputs
+test-results/
+playwright-report/
+
+# Internal research notes (kept locally only)
+docs/gemini-research.md
+docs/research-strategy.md
+docs/research-report.md
+docs/research-report-international.md
+
+# One-time migration scripts
+scripts/extract_*
+scripts/fix_*
+scripts/inject_*
+scripts/reconstruct_*
+scripts/modules_raw.txt
