@@ -222,6 +222,11 @@ ${glossaryTermsHtml}
   </section>
 
   <section style="margin-bottom:28px">
+    <h2 style="font-size:1.2rem;font-weight:700;margin-bottom:10px">編集・制作方針</h2>
+    <p style="color:#444">本サイトのコンテンツは、統計検定の公式の出題範囲や一般に流通している統計学の教科書・参考書を参照しつつ、運営者が内容を一から再構成し、初学者がつまずきやすい点を補う形で独自に解説しています。他サイトの文章をそのまま転載することはありません。図解・確認クイズはすべて本サイト向けに独自に制作したものです。内容の誤りや古くなった情報に気づいた場合は、お問い合わせを受けて随時見直し・修正します。</p>
+  </section>
+
+  <section style="margin-bottom:28px">
     <h2 style="font-size:1.2rem;font-weight:700;margin-bottom:10px">運営者について</h2>
     <p style="color:#444">本サイトは、統計学の学習を個人的に進める中で、同じように学んでいる方の助けになればと思い作成・公開しています。広告収入（Google AdSense）はサイトの維持運営費用に充てています。</p>
   </section>
