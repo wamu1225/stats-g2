@@ -34,8 +34,10 @@ const flow: Record<string, Question> = {
     id: 'infer',
     text: '推測統計のどのテーマですか？',
     options: [
-      { label: '点推定・信頼区間を学びたい', nextId: null, result: '4.1-estimation' },
-      { label: '仮説検定・p値・t検定', nextId: null, result: '4.2-testing' },
+      { label: '点推定・信頼区間（母平均・母分散）', nextId: null, result: '4.1-estimation' },
+      { label: '仮説検定・p値・一標本t検定', nextId: null, result: '4.2-testing' },
+      { label: '2標本の比較（F検定・2標本t検定）', nextId: null, result: '4.3-two-sample' },
+      { label: '母比率の推定・検定', nextId: null, result: '4.4-proportion' },
     ]
   },
   model: {

@@ -299,6 +299,16 @@
   line-height: 1.7;
 }
 
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.25rem;
+}
+
+.content-body {
+  overflow-x: auto;
+}
+
 .content-table-wrap {
   overflow-x: auto;
   margin: 1rem 0;

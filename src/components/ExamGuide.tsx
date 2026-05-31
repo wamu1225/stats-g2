@@ -16,11 +16,14 @@ const Row: React.FC<{ label: string; value: string }> = ({ label, value }) => (
   </div>
 );
 
-const PhaseCard: React.FC<{ phase: string; title: string; body: string }> = ({ phase, title, body }) => (
+const PhaseCard: React.FC<{ phase: string; title: string; period: string; body: string }> = ({ phase, title, period, body }) => (
   <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
     <div style={{ flexShrink: 0, width: 36, height: 36, borderRadius: '50%', background: 'var(--primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: 700 }}>{phase}</div>
     <div>
-      <div style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.25rem' }}>{title}</div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
+        <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{title}</div>
+        <span style={{ fontSize: '0.68rem', background: '#ecfdf5', color: 'var(--primary)', padding: '1px 6px', borderRadius: 6, fontWeight: 700 }}>{period}</span>
+      </div>
       <div style={{ fontSize: '0.82rem', color: '#475569', lineHeight: 1.6 }}>{body}</div>
     </div>
   </div>
@@ -30,7 +33,7 @@ const BookItem: React.FC<{ title: string; stars: number; tag: string; desc: stri
   <div style={{ padding: '0.6rem 0', borderBottom: '1px solid #f1f5f9' }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
       <span style={{ fontSize: '0.85rem', fontWeight: 700 }}>{title}</span>
-      <span className="stat-badge" style={{ background: stars === 5 ? '#ef4444' : '#3b82f6', color: 'white', fontSize: '0.65rem' }}>{tag}</span>
+      <span className="stat-badge" style={{ background: stars === 5 ? '#ef4444' : stars === 4 ? '#3b82f6' : '#6b7280', color: 'white', fontSize: '0.65rem' }}>{tag}</span>
     </div>
     <div style={{ fontSize: '0.78rem', color: '#64748b' }}>{'★'.repeat(stars) + '☆'.repeat(5 - stars)}　{desc}</div>
   </div>
@@ -73,14 +76,15 @@ export const ExamGuide: React.FC = () => (
 
     {/* 試験の概要 */}
     <Section title="試験の概要">
-      <Row label="実施方式" value="CBT（Computer Based Testing）— 通年受験可" />
-      <Row label="出題形式" value="5肢選択 ＋ 数値入力" />
-      <Row label="問題数 / 試験時間" value="35問 / 90分（1問あたり約2.5分）" />
+      <Row label="実施方式" value="CBT（Computer Based Testing）— 全国のテストセンターで通年受験可" />
+      <Row label="出題形式" value="4〜5肢選択 ＋ 数値入力（半角数字のみ）" />
+      <Row label="問題数 / 試験時間" value="約35問 / 90分（1問あたり約2.5分）" />
       <Row label="合格基準" value="100点満点中 60点以上" />
+      <Row label="合格率の目安" value="30〜60%台で変動（年度・難易度により差あり）" />
       <Row label="受験料" value="一般 7,000円 / 学割 5,000円（税込）" />
-      <Row label="電卓" value="持ち込み可（四則演算・ルート・メモリのみ）" />
-      <Row label="再受験" value="前回受験終了から7日以上経過後に可" />
-      <div style={{ marginTop: '0.75rem', padding: '0.6rem 0.8rem', background: '#fef9c3', borderRadius: 8, fontSize: '0.8rem', color: '#92400e' }}>
+      <Row label="電卓" value="持ち込み可（四則演算・ルート・メモリ機能のある一般電卓）" />
+      <Row label="再受験" value="前回受験終了から最短1週間後に可" />
+      <div style={{ marginTop: '0.75rem', padding: '0.6rem 0.8rem', background: '#f0fdf4', borderRadius: 8, fontSize: '0.8rem', color: '#166534' }}>
         <Lightbulb size={13} style={{ marginRight: 4, verticalAlign: 'middle' }} />
         2級は「統計的な考え方を使いこなせる」レベルを問う試験。公式・計算手順を丸暗記するより、<strong>なぜその式が成り立つのかを理解</strong>することが合格への近道です。
       </div>
@@ -93,8 +97,8 @@ export const ExamGuide: React.FC = () => (
     <Section title="必要な学習時間の目安">
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '0.75rem' }}>
         {[
-          { bg: '#fef2f2', border: '#fecaca', label: '統計学が初めて', time: '100〜200時間', period: '3〜6ヶ月', note: '高校数学の知識から出発' },
-          { bg: '#eff6ff', border: '#bfdbfe', label: '高校数学が得意', time: '50〜100時間', period: '1〜3ヶ月', note: '数学ⅡBの確率・統計を学習済み' },
+          { bg: '#fef2f2', border: '#fecaca', label: '統計学が初めて（文系）', time: '80〜150時間', period: '2〜5ヶ月', note: '高校数学の基礎から出発。シグマ記号・確率の復習も含む' },
+          { bg: '#f0fdf4', border: '#bbf7d0', label: '数学・理系の素養あり', time: '30〜60時間', period: '2週間〜1ヶ月', note: '微積分・確率の基礎があれば統計特有の理論習得に集中できる' },
         ].map(c => (
           <div key={c.label} style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 10, padding: '0.75rem' }}>
             <div style={{ fontSize: '0.72rem', color: '#64748b', marginBottom: '0.25rem' }}>{c.note}</div>
@@ -109,58 +113,69 @@ export const ExamGuide: React.FC = () => (
       </div>
     </Section>
 
-    {/* 3段階学習フェーズ */}
-    <Section title="3段階の学習フェーズ">
+    {/* 4段階学習フェーズ */}
+    <Section title="4段階の学習フェーズ">
       <PhaseCard
         phase="1"
-        title="インプット・概観フェーズ"
-        body="教科書を一通り読み、データの記述・確率・推測・回帰の全体像を把握する。数式の細部より「なぜこの手法を使うのか」という目的を先に理解することが重要。"
+        title="概念の浸透フェーズ"
+        period="1〜2週目"
+        body="入門書や動画で「標準偏差・正規分布・仮説検定が何の役に立つのか」というイメージを形成する。この段階では厳密な証明は後回しにし、全体の流れを掴むことに注力。"
       />
       <PhaseCard
         phase="2"
-        title="問題演習・定着フェーズ"
-        body="過去問や章末問題を繰り返し解く。計算ミスのパターンを記録し、特に正規分布の標準化・信頼区間・t検定の手順を反射的に解けるようにする。"
+        title="理論の体系化フェーズ"
+        period="3〜5週目"
+        body="「統計WEB」などで2級の全範囲を精読する。特に「標本分布」と「推定・検定」は2級の核心。数式を理解しながら読み進め、重要公式をノートに整理する。"
       />
       <PhaseCard
         phase="3"
-        title="仕上げ・弱点補強フェーズ"
-        body="模擬試験形式で時間を計って解く。間違えた問題の「なぜ間違えたか」を言語化し、本番前2週間で集中的に補強する。"
+        title="過去問演習・弱点抽出フェーズ"
+        period="6〜8週目"
+        body="公式問題集を時間を計って解く。間違えた問題は「なぜその公式を使うのか・なぜ他の選択肢は誤りなのか」を説明できるまで復習する。"
+      />
+      <PhaseCard
+        phase="4"
+        title="CBT特化対策・総仕上げフェーズ"
+        period="直前2週間"
+        body="数値入力問題の端数処理（小数第〇位まで）や電卓のメモリ機能の操作を練習。チートシートで公式を最終確認し、CBTの画面操作（見直しフラグ機能など）に慣れる。"
       />
     </Section>
 
     {/* 推奨書籍 */}
     <Section title="推奨書籍">
-      <BookItem title="統計学入門（東京大学出版会）" stars={5} tag="必須" desc="通称「赤本」。2級の試験範囲をほぼ網羅。丁寧な導出で理解が深まる定番テキスト。" />
-      <BookItem title="統計検定2級 公式問題集" stars={5} tag="必須" desc="過去問を解いて出題パターンを把握。解説が簡素な問題はテキストで補完。" />
-      <BookItem title="マンガでわかる統計学" stars={4} tag="入門" desc="初学者向け。概念の直感的理解に最適。テキストの前に読むと効果的。" />
-      <BookItem title="統計学が最強の学問である" stars={3} tag="参考" desc="統計学の全体像・活用事例を知るための読み物。モチベーション維持に。" />
+      <BookItem title="統計学入門（東京大学出版会）" stars={5} tag="必須" desc="通称「赤本」。2級の試験範囲をほぼ網羅。丁寧な導出で理解が深まる定番テキスト。辞書的に使うのも◎。" />
+      <BookItem title="統計検定2級 公式問題集（CBT対応版）" stars={5} tag="必須" desc="過去問を解いて出題パターンを把握。直近3〜5年分を3周が目安。解説が簡素な問題はテキストで補完。" />
+      <BookItem title="完全独習 統計学入門" stars={4} tag="入門" desc="統計学の直感的理解に優れた入門書。数学への抵抗感がある初学者が赤本に入る前の足がかりに最適。" />
+      <BookItem title="マンガでわかる統計学" stars={4} tag="入門" desc="概念の視覚的理解に最適。図解中心で確率・検定の全体像を素早く掴みたいときに有効。" />
+      <BookItem title="統計学が最強の学問である" stars={3} tag="参考" desc="統計学の全体像・活用事例を知るための読み物。モチベーション維持や背景知識の補強に。" />
     </Section>
 
     {/* オンラインリソース */}
     <Section title="おすすめ無料リソース">
-      <ResourceItem name="統計WEB（BC Learning）" type="ウェブ" desc="2級の全範囲を無料で解説。図解が豊富でわかりやすく、受験生の定番サイト。" />
-      <ResourceItem name="高校数学の美しい物語" type="ウェブ" desc="確率・数列・微分など数学の基礎をわかりやすく解説。2級前の数学復習に。" />
-      <ResourceItem name="とある男が授業をしてみた" type="YouTube" desc="高校数学の確率・統計分野を無料で学べる授業動画。初学者の数学補強に。" />
+      <ResourceItem name="統計WEB（BC Learning）" type="ウェブ" desc="2級の全範囲を無料で解説。Step1（基礎編）は必読。図解が豊富でわかりやすく、受験生の定番サイト。" />
+      <ResourceItem name="とけたろうチャンネル" type="YouTube" desc="統計検定2級に特化した解説動画。計算手順を丁寧に説明しており、紙と電卓を手元に置いて一緒に解くのが効果的。" />
+      <ResourceItem name="予備校のノリで学ぶ「大学の数学・物理」（ヨビノリ）" type="YouTube" desc="推定・検定の直感的理解に最適な大学数学解説チャンネル。数式の意味を丁寧に教えてくれる。" />
+      <ResourceItem name="高校数学の美しい物語" type="ウェブ" desc="確率・数列・微分など数学の基礎をわかりやすく解説。2級前の数学復習に役立つ。" />
       <ResourceItem name="生成AI（ChatGPT / Claude）" type="AI" desc="わからない数式・概念をその場でステップバイステップで解説してもらえる。24時間使える個別指導として活用。" />
     </Section>
 
     {/* 重要出題分野 */}
     <Section title="重要出題分野">
-      <FieldItem priority="最重要" title="正規分布・標準化・信頼区間" detail="z変換・t分布・信頼区間の計算が頻出。標準正規分布表の読み方も必須。" />
-      <FieldItem priority="最重要" title="仮説検定" detail="t検定・カイ二乗検定の手順。p値・有意水準・第1種/第2種の誤りの意味。" />
-      <FieldItem priority="重要" title="確率分布" detail="二項分布・ポアソン分布・正規分布の期待値・分散・形状の特徴。" />
-      <FieldItem priority="重要" title="回帰分析" detail="最小二乗法・決定係数・回帰係数の解釈。残差の意味も問われる。" />
-      <FieldItem priority="重要" title="記述統計" detail="平均・分散・標準偏差・四分位数・相関係数の計算と解釈。" />
-      <FieldItem priority="標準" title="確率の基礎・ベイズの定理" detail="加法定理・乗法定理・条件付き確率。ベイズの定理の計算は計算量が多い。" />
+      <FieldItem priority="最重要" title="正規分布・標準化・信頼区間" detail="z変換・t分布・信頼区間の計算が頻出。標準正規分布表の読み方も必須。配点が高い山場。" />
+      <FieldItem priority="最重要" title="仮説検定" detail="t検定・カイ二乗検定の手順。p値・有意水準・第1種/第2種の誤りの意味。2択に絞れる問題も多い。" />
+      <FieldItem priority="重要" title="確率分布" detail="二項分布・ポアソン分布・正規分布・t分布・カイ二乗分布・F分布の期待値・分散・形状の特徴。" />
+      <FieldItem priority="重要" title="回帰分析・分散分析" detail="最小二乗法・決定係数・回帰係数の解釈。F値の構成（郡内変動・郡間変動への分解）も出題される。" />
+      <FieldItem priority="重要" title="記述統計" detail="平均・分散・標準偏差・四分位数・相関係数の計算と解釈。歪度・尖度・ジニ係数も出題範囲。" />
+      <FieldItem priority="標準" title="確率の基礎・ベイズの定理" detail="加法定理・乗法定理・条件付き確率。ベイズの定理は感度・特異度の計算問題として出題されることが多い。" />
     </Section>
 
     {/* 実践的アドバイス */}
     <Section title="本番に向けた実践アドバイス">
       {[
-        { icon: '⏱', title: '時間感覚を身につける', body: '1問あたり平均2.5分が目安。確実に解ける問題から先に解き、計算に詰まったら後回しにする。' },
-        { icon: '🔢', title: '電卓操作に習熟する', body: 'ルート計算やメモリ機能を使った計算に慣れておく。標準化の計算など繰り返しが多い問題で時間を節約できる。' },
-        { icon: '📊', title: '正規分布表の読み方を練習する', body: '試験では正規分布表が配布される。z = 1.96 で95%、z = 2.58 で99%など基本値は暗記しておく。' },
-        { icon: '📐', title: '数学の基礎を確認する', body: '微分・積分・シグマ記号・組合せの扱いに慣れておくと計算がスムーズ。' },
+        { icon: '⏱', title: '1問あたり2.5分を意識する', body: '90分・約35問で1問平均2.5分。確実に解ける問題から先に解き、計算に詰まったら見直しフラグを付けて次へ進む。' },
+        { icon: '🔢', title: '電卓のメモリ機能を練習する', body: 'M+でメモリ加算、M-でメモリ減算、MRで呼び出し。分散や標準偏差の計算で各項を計算してメモリに足していくと大幅な時間節約になる。' },
+        { icon: '📊', title: '正規分布表の読み方を練習する', body: 'z = 1.96 で95%、z = 2.58 で99%など基本値は暗記。CBTでは別ウィンドウで表が開くため、画面上での視線移動に慣れておく。' },
+        { icon: '💻', title: '数値入力の注意点', body: '数値入力問題は半角数字のみ有効。カンマ（,）を入力すると不正解となる場合があるため要注意。小数点と負符号も半角で入力する。' },
       ].map(a => (
         <div key={a.title} style={{ display: 'flex', gap: '0.75rem', padding: '0.5rem 0', borderBottom: '1px solid #f1f5f9' }}>
           <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>{a.icon}</span>

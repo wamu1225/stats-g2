@@ -34,8 +34,7 @@ export const Quiz: React.FC<Props> = ({ questions, onComplete, renderContent, sh
       setSelected(null);
       setIsCorrect(null);
     } else {
-      const finalScore = correctCount + (isCorrect ? 1 : 0);
-      onComplete(finalScore, questions.length);
+      onComplete(correctCount, questions.length);
     }
   };
 

@@ -324,6 +324,7 @@ fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXml);
 // ── Legacy URL redirects (renamed modules) ────────
 const legacyRedirects: { oldId: string; newId: string }[] = [
   { oldId: '4.4-proportion', newId: '4.4-two-sample' },
+  { oldId: '4.3-two-sample', newId: '4.4-two-sample' },
 ];
 for (const { oldId, newId } of legacyRedirects) {
   const legacyDir = path.join(DIST_DIR, oldId);

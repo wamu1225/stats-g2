@@ -1,7 +1,8 @@
 // stats-app/src/App.tsx
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import './App.css';
-import { modules } from './data/modules';
+import { modules, chapterNames } from './data/modules';
+import { comprehensiveQuizQuestions } from './data/comprehensiveQuiz';
 import { glossary } from './data/glossary';
 import { InteractiveGraph } from './components/InteractiveGraph';
 import { MathDisplay } from './components/MathDisplay';
@@ -12,15 +13,9 @@ import { ExamGuide } from './components/ExamGuide';
 import { ChevronLeft, Book, LayoutDashboard, ArrowRight, Search as SearchIcon, X, Lightbulb, Target, ArrowDown, Dumbbell, Trash2, FileText, Shuffle, CheckCircle2, XCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const chapterNames: Record<number, string> = {
-  1: 'データの記述',
-  2: '確率の基礎',
-  3: '確率分布',
-  4: '統計的推測',
-  5: '応用手法',
-};
 
-const PROGRESS_KEY = 'stats-app-progress';
+const PROGRESS_KEY = 'stats-g2-progress';
+const COMPREHENSIVE_KEY = '__comprehensive__';
 
 interface ProgressEntry { score: number; total: number; completedAt: string; }
 type Progress = Record<string, ProgressEntry>;
@@ -56,10 +51,10 @@ function App() {
   const [rqDone, setRqDone] = useState(false);
 
   const startRandomQuiz = useCallback(() => {
-    // Draw 2 questions per module (20 total from 10 modules)
-    const qs = modules.flatMap(m =>
-      sampleN(m.quiz, 2).map(q => ({ q, moduleTitle: m.title, moduleId: m.id }))
-    ).sort(() => Math.random() - 0.5);
+    // Use the dedicated comprehensive quiz question bank (shuffled)
+    const qs = [...comprehensiveQuizQuestions]
+      .sort(() => Math.random() - 0.5)
+      .map(({ moduleId, moduleTitle, ...q }) => ({ q, moduleTitle, moduleId }));
     setRqQuestions(qs);
     setRqIdx(0);
     setRqSelected(null);
@@ -90,14 +85,24 @@ function App() {
     } else {
       setRqResults(newResults);
       setRqDone(true);
+      const entry: ProgressEntry = { score: newResults.filter(r => r.correct).length, total: newResults.length, completedAt: new Date().toLocaleDateString('ja-JP') };
+      const next = { ...loadProgress(), [COMPREHENSIVE_KEY]: entry };
+      saveProgress(next);
+      setProgress(next);
       window.scrollTo(0, 0);
     }
   };
 
   const updateModuleId = useCallback((id: string | null) => {
-    window.location.hash = id || '';
+    const basePath = window.location.pathname.startsWith('/stats-g2/') ? '/stats-g2' : '';
+    const newPath = id ? `${basePath}/${id}/` : `${basePath}/`;
+    window.history.pushState(null, '', newPath);
+    
     if (!id) {
       setActiveModuleId(null);
+      setView('dashboard');
+    } else {
+      setActiveModuleId(id);
       setView('dashboard');
     }
     setQuizCompleted(false);
@@ -107,7 +112,9 @@ function App() {
   const switchView = useCallback((newView: View) => {
     setActiveModuleId(null);
     setView(newView);
-    window.location.hash = newView === 'glossary' ? 'glossary' : newView === 'cheatsheet' ? 'cheatsheet' : newView === 'privacy' ? 'privacy' : newView === 'about' ? 'about' : newView === 'guide' ? 'guide' : '';
+    const basePath = window.location.pathname.startsWith('/stats-g2/') ? '/stats-g2' : '';
+    const newPath = newView === 'dashboard' ? `${basePath}/` : `${basePath}/${newView}/`;
+    window.history.pushState(null, '', newPath);
     window.scrollTo(0, 0);
   }, []);
 
@@ -120,27 +127,27 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const handleHash = () => {
-      const hash = window.location.hash.replace('#', '');
-      if (hash === 'glossary') {
-        setView('glossary'); setActiveModuleId(null);
-      } else if (hash === 'cheatsheet') {
-        setView('cheatsheet'); setActiveModuleId(null);
-      } else if (hash === 'privacy') {
-        setView('privacy'); setActiveModuleId(null);
-        document.title = 'プライバシーポリシー | 統計検定 2級 学習リファレンス';
-      } else if (hash === 'about') {
-        setView('about'); setActiveModuleId(null);
-        document.title = 'サイトについて | 統計検定 2級 学習リファレンス';
-      } else if (hash === 'guide') {
-        setView('guide'); setActiveModuleId(null);
-        document.title = '試験ガイド | 統計検定 2級 学習リファレンス';
-      } else if (hash) {
-        const found = modules.find(m => m.id === hash);
+    const handlePath = () => {
+      const segments = window.location.pathname.split('/').filter(Boolean);
+      const lastSegment = segments[segments.length - 1];
+      
+      const isCustomView = ['glossary', 'cheatsheet', 'privacy', 'about', 'guide'].includes(lastSegment || '');
+      
+      if (isCustomView) {
+        setView(lastSegment as View);
+        setActiveModuleId(null);
+        if (lastSegment === 'privacy') document.title = 'プライバシーポリシー | 統計検定 2級 学習リファレンス';
+        else if (lastSegment === 'about') document.title = 'サイトについて | 統計検定 2級 学習リファレンス';
+        else if (lastSegment === 'guide') document.title = '試験ガイド | 統計検定 2級 学習リファレンス';
+      } else if (lastSegment && lastSegment !== 'stats-g2') {
+        const found = modules.find(m => m.id === lastSegment);
         if (found) {
           setActiveModuleId(found.id);
           setView('dashboard');
           document.title = `${found.title} | 統計検定 2級`;
+        } else {
+          setActiveModuleId(null);
+          setView('dashboard');
         }
       } else {
         setActiveModuleId(null);
@@ -148,9 +155,9 @@ function App() {
         document.title = '統計検定 2級 学習リファレンス';
       }
     };
-    handleHash();
-    window.addEventListener('hashchange', handleHash);
-    return () => window.removeEventListener('hashchange', handleHash);
+    handlePath();
+    window.addEventListener('popstate', handlePath);
+    return () => window.removeEventListener('popstate', handlePath);
   }, []);
 
   const parseInlineContent = useCallback((text: string): React.ReactNode => {
@@ -286,11 +293,11 @@ function App() {
   }, [activeModuleId]);
   const findModulesByTerm = useCallback((termId: string) => modules.filter(m => m.content.includes(`[[term:${termId}]]`)), []);
 
-  const completedCount = Object.keys(progress).length;
+  const completedCount = modules.filter(m => progress[m.id]).length;
   const totalModules = modules.length;
 
   return (
-    <div className="container" style={{ maxWidth: activeModuleId ? '600px' : view === 'glossary' ? '1000px' : '600px' }}>
+    <div className="container" style={{ maxWidth: activeModuleId ? '800px' : view === 'glossary' ? '1000px' : '800px' }}>
       <header className="header">
         <h1 className="title" onClick={() => updateModuleId(null)} style={{ cursor: 'pointer' }}>統計検定 2級</h1>
         <p className="subtitle">学習リファレンス</p>
@@ -534,6 +541,26 @@ function App() {
                   );
                   return acc;
                 }, [])}
+                {!searchQuery && (
+                  <>
+                    <div className="chapter-header">
+                      <span className="badge-chapter" style={{ fontSize: '0.7rem' }}>全範囲</span>
+                      <h3 className="content-h3" style={{ margin: '0.25rem 0 0' }}>まとめ</h3>
+                    </div>
+                    <div className="card-module" style={{ cursor: 'pointer' }} onClick={startRandomQuiz}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span className="badge-chapter" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Shuffle size={12} /> 全範囲</span>
+                        {progress[COMPREHENSIVE_KEY] && (
+                          <span className={`progress-badge ${progress[COMPREHENSIVE_KEY].score === progress[COMPREHENSIVE_KEY].total ? 'perfect' : ''}`}>
+                            {progress[COMPREHENSIVE_KEY].score === progress[COMPREHENSIVE_KEY].total ? '✓ ' : ''}{progress[COMPREHENSIVE_KEY].score}/{progress[COMPREHENSIVE_KEY].total}点
+                          </span>
+                        )}
+                      </div>
+                      <h4>全範囲クイズ</h4>
+                      <div className="module-desc">全モジュールからランダム出題</div>
+                    </div>
+                  </>
+                )}
               </div>
             </motion.div>
           ) : view === 'about' ? (
@@ -689,11 +716,11 @@ function App() {
 
       <footer className="site-footer">
         <p className="footer-disclaimer">
-          本サイトは統計質保証推進協会・日本統計学会の公式サイトではありません。
+          本サイトは個人による学習支援サイトであり、統計質保証推進協会および日本統計学会の公式サイトではありません。掲載内容は個人の見解に基づくものであり、公式の情報を保証するものではありません。
         </p>
         <div className="footer-links">
-          <button className="footer-link" onClick={() => { window.location.hash = 'about'; }}>サイトについて</button>
-          <button className="footer-link" onClick={() => { window.location.hash = 'privacy'; }}>プライバシーポリシー</button>
+          <button className="footer-link" onClick={() => switchView('about')}>サイトについて</button>
+          <button className="footer-link" onClick={() => switchView('privacy')}>プライバシーポリシー</button>
           <a className="footer-link" href="https://forms.gle/ccMv7oKwz6ysDHBe6" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
         </div>
         <p className="footer-copy">© {new Date().getFullYear()} 統計検定 2級 学習リファレンス</p>
