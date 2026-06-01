@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>検定・分布の使い分けガイド | 統計検定 2級 学習リファレンス</title>
+    <meta name="description" content="統計検定2級の範囲で、どんなデータ・問いにどの確率分布／推定・検定／回帰・分散分析を使うかを状況から逆引きできる早見表。二項・正規分布、t検定・カイ二乗検定・ANOVA・回帰の選び方を整理。" />
+    <meta property="og:title" content="検定・分布の使い分けガイド | 統計検定 2級 学習リファレンス" />
+    <meta property="og:description" content="統計検定2級の範囲で、どんなデータ・問いにどの確率分布／推定・検定／回帰・分散分析を使うかを状況から逆引きできる早見表。二項・正規分布、t検定・カイ二乗検定・ANOVA・回帰の選び方を整理。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://study-apps.com/stats-g2/usecase/" />
+    <link rel="canonical" href="https://study-apps.com/stats-g2/usecase/" />
+    <meta property="og:image" content="https://study-apps.com/stats-g2/ogp.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="検定・分布の使い分けガイド | 統計検定 2級 学習リファレンス" />
+    <meta name="twitter:description" content="統計検定2級の範囲で、どんなデータ・問いにどの確率分布／推定・検定／回帰・分散分析を使うかを状況から逆引きできる早見表。二項・正規分布、t検定・カイ二乗検定・ANOVA・回帰の選び方を整理。" />
+    <meta name="twitter:image" content="https://study-apps.com/stats-g2/ogp.png" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6K27V3P4S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G6K27V3P4S');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9102538151148380"
+     crossorigin="anonymous"></script>
+    <script>
+      // Restore URL after GitHub Pages 404 redirect (?/path/ → /stats-g2/path/)
+      (function () {
+        var s = window.location.search;
+        if (s[1] === '/') {
+          var decoded = s.slice(1).split('&').map(function (p) { return p.replace(/~and~/g, '&'); });
+          window.history.replaceState(
+            null, null,
+            '/stats-g2' + decoded[0] +
+            (decoded.slice(1).length ? '?' + decoded.slice(1).join('&') : '') +
+            window.location.hash
+          );
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="../assets/index-mpEuXY5J.js"></script>
+    <link rel="stylesheet" crossorigin href="../assets/index-DKr98dQJ.css">
+  </head>
+  <body>
+    <div id="root"><div style="background:#eff6ff;border-bottom:1px solid #bfdbfe;padding:10px 16px;font-size:0.88rem;text-align:center;margin-bottom:16px;border-radius:6px;max-width:860px;margin-left:auto;margin-right:auto"><a href="https://study-apps.com/" style="color:#1e3a8a;text-decoration:none;font-weight:600">← study-apps.com 学習サイト集トップへ</a></div><article id="static-fallback" style="font-family:sans-serif;line-height:1.7;max-width:860px;margin:0 auto;padding:24px 16px">
+  <nav style="margin-bottom:16px"><a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a></nav>
+  <h1 style="font-size:1.6rem;font-weight:700;border-bottom:2px solid #2563eb;padding-bottom:8px;margin-bottom:20px">検定・分布の使い分けガイド</h1>
+  <p style="color:#555;margin-bottom:24px">統計検定2級の範囲で「このデータ・この問いには、どの分布／どの検定／どの手法を使うか」を状況から逆引きできる早見表です。各行は本サイトの対応モジュールにリンクしています。個別の解説はリンク先で、ここでは<strong>全体を見渡して手法を選ぶ視点</strong>を整理します。</p>
+
+  <h2 style="font-size:1.2rem;font-weight:700;margin:20px 0 8px">1. 確率分布の選び方</h2>
+  <p style="color:#444;margin-bottom:4px">「どんな現象か」から、当てはめる確率分布を選びます。</p>
+  <div style="overflow-x:auto;margin:8px 0 20px"><table style="border-collapse:collapse;width:100%;min-width:520px"><thead><tr><th style="text-align:left;padding:8px 10px;background:#eff6ff;border:1px solid #bfdbfe;font-size:0.9rem;white-space:nowrap">状況・知りたいこと</th><th style="text-align:left;padding:8px 10px;background:#eff6ff;border:1px solid #bfdbfe;font-size:0.9rem;white-space:nowrap">使う分布</th><th style="text-align:left;padding:8px 10px;background:#eff6ff;border:1px solid #bfdbfe;font-size:0.9rem;white-space:nowrap">参照</th></tr></thead><tbody>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">n回の独立試行での成功回数</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">二項分布</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/3.1-discrete/" style="color:#2563eb;text-decoration:none">3.1</a></td></tr>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">一定の時間・面積あたりに起きる稀な事象の件数</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">ポアソン分布</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/3.1-discrete/" style="color:#2563eb;text-decoration:none">3.1</a></td></tr>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">連続量で左右対称・釣鐘型に分布する量</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">正規分布</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/3.2-continuous/" style="color:#2563eb;text-decoration:none">3.2</a></td></tr>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">標本平均がしたがう分布（大標本）</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">正規分布（中心極限定理）</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/3.4-sampling-distribution/" style="color:#2563eb;text-decoration:none">3.4</a></td></tr>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">母分散が未知のときの平均の推測</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">t分布</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/3.4-sampling-distribution/" style="color:#2563eb;text-decoration:none">3.4</a></td></tr>
+  </tbody></table></div>
+
+  <h2 style="font-size:1.2rem;font-weight:700;margin:20px 0 8px">2. 推定・検定の選び方（目的別）</h2>
+  <p style="color:#444;margin-bottom:4px">「何を確かめたいか」から手法を選びます。</p>
+  <div style="overflow-x:auto;margin:8px 0 20px"><table style="border-collapse:collapse;width:100%;min-width:520px"><thead><tr><th style="text-align:left;padding:8px 10px;background:#eff6ff;border:1px solid #bfdbfe;font-size:0.9rem;white-space:nowrap">知りたいこと</th><th style="text-align:left;padding:8px 10px;background:#eff6ff;border:1px solid #bfdbfe;font-size:0.9rem;white-space:nowrap">使う手法</th><th style="text-align:left;padding:8px 10px;background:#eff6ff;border:1px solid #bfdbfe;font-size:0.9rem;white-space:nowrap">参照</th></tr></thead><tbody>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">母平均・母比率を区間で見積もりたい</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">区間推定</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/4.1-estimation/" style="color:#2563eb;text-decoration:none">4.1</a></td></tr>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">1群の平均が基準値と異なるか</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">1標本の仮説検定</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/4.2-testing/" style="color:#2563eb;text-decoration:none">4.2</a></td></tr>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">2群の平均・比率に差があるか</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">2標本の推定・検定</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/4.4-two-sample/" style="color:#2563eb;text-decoration:none">4.4</a></td></tr>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">3群以上の平均に差があるか</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">分散分析（ANOVA）</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/5.4-anova/" style="color:#2563eb;text-decoration:none">5.4</a></td></tr>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">カテゴリ間の関連・適合度を調べる</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">カイ二乗検定</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/5.2-chi2-test/" style="color:#2563eb;text-decoration:none">5.2</a></td></tr>
+  </tbody></table></div>
+
+  <h2 style="font-size:1.2rem;font-weight:700;margin:20px 0 8px">3. 関係・変化を調べる手法</h2>
+  <p style="color:#444;margin-bottom:4px">変数どうしの関係や時間変化を分析します。</p>
+  <div style="overflow-x:auto;margin:8px 0 20px"><table style="border-collapse:collapse;width:100%;min-width:520px"><thead><tr><th style="text-align:left;padding:8px 10px;background:#eff6ff;border:1px solid #bfdbfe;font-size:0.9rem;white-space:nowrap">目的</th><th style="text-align:left;padding:8px 10px;background:#eff6ff;border:1px solid #bfdbfe;font-size:0.9rem;white-space:nowrap">使う手法</th><th style="text-align:left;padding:8px 10px;background:#eff6ff;border:1px solid #bfdbfe;font-size:0.9rem;white-space:nowrap">参照</th></tr></thead><tbody>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">2変数の関係の強さ・向きを見る</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">相関・散布図</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/1.3-standardization/" style="color:#2563eb;text-decoration:none">1.3</a></td></tr>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">ある変数から別の変数を予測する</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">回帰分析</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/5.1-regression/" style="color:#2563eb;text-decoration:none">5.1</a></td></tr>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">時間にそった変化の傾向をつかむ</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">時系列データの処理</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/5.3-timeseries/" style="color:#2563eb;text-decoration:none">5.3</a></td></tr>
+  <tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">事前の情報を加えて確率を更新する</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444">ベイズの定理</td><td style="padding:8px 10px;border:1px solid #e5e7eb;font-size:0.9rem;color:#444"><a href="/stats-g2/2.2-bayes/" style="color:#2563eb;text-decoration:none">2.2</a></td></tr>
+  </tbody></table></div>
+
+  <p style="margin-top:8px;font-size:0.85rem;color:#888">※ 早見表は典型的な対応を示すものです。前提条件（独立性・等分散・正規性・標本の大きさなど）の確認が必要な場合があります。詳細は各モジュールをご確認ください。</p>
+  <p style="margin-top:16px"><a href="/stats-g2/" style="color:#2563eb">← ホームへ戻る</a></p>
+</article></div>
+  </body>
+</html>
