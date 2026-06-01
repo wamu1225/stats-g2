@@ -3,6 +3,7 @@ import * as path from 'path';
 import sharp from 'sharp';
 import { modules } from '../src/data/modules';
 import { glossary } from '../src/data/glossary';
+import { buildUsecaseHtml } from '../src/data/usecaseGuide';
 
 const DIST_DIR = path.resolve(process.cwd(), 'dist');
 const INDEX_HTML_PATH = path.join(DIST_DIR, 'index.html');
@@ -52,6 +53,7 @@ ${moduleListHtml}
     <a href="/stats-g2/glossary/" style="color:#2563eb">用語集</a>
     <a href="/stats-g2/cheatsheet/" style="color:#2563eb">公式集</a>
     <a href="/stats-g2/guide/" style="color:#2563eb">試験ガイド</a>
+    <a href="/stats-g2/usecase/" style="color:#2563eb">検定・分布の使い分けガイド</a>
     <a href="/stats-g2/about/" style="color:#2563eb">サイトについて</a>
     <a href="/stats-g2/privacy/" style="color:#2563eb;font-size:0.85rem">プライバシーポリシー</a>
   </nav>
@@ -191,6 +193,11 @@ ${glossaryTermsHtml}
   <p style="margin-top:16px"><a href="/stats-g2/" style="color:#2563eb">← ホームへ戻る</a></p>
 </article>`
   },
+  usecase: {
+    title: '検定・分布の使い分けガイド',
+    description: '統計検定2級の範囲で、どんなデータ・問いにどの確率分布／推定・検定／回帰・分散分析を使うかを状況から逆引きできる早見表。二項・正規分布、t検定・カイ二乗検定・ANOVA・回帰の選び方を整理。',
+    bodyHtml: buildUsecaseHtml('/stats-g2')
+  },
   about: {
     title: 'サイトについて',
     description: '統計検定2級 学習リファレンスについて。サイトの目的・コンテンツ構成・利用方法を説明します。',
@@ -308,7 +315,7 @@ const moduleUrls = modules.map(m =>
   `  <url>\n    <loc>${BASE_URL}/${m.id}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`
 ).join('\n');
 
-const staticUrls = ['glossary', 'cheatsheet', 'guide', 'about', 'privacy'].map(p =>
+const staticUrls = ['glossary', 'cheatsheet', 'guide', 'usecase', 'about', 'privacy'].map(p =>
   `  <url>\n    <loc>${BASE_URL}/${p}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>`
 ).join('\n');
 

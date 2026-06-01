@@ -10,6 +10,7 @@ import { Quiz } from './components/Quiz';
 import { TermText } from './components/TermGlossary';
 import { DistributionSelector } from './components/DistributionSelector';
 import { ExamGuide } from './components/ExamGuide';
+import { buildUsecaseHtml } from './data/usecaseGuide';
 import { ChevronLeft, Book, LayoutDashboard, ArrowRight, Search as SearchIcon, X, Lightbulb, Target, ArrowDown, Dumbbell, Trash2, FileText, Shuffle, CheckCircle2, XCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -33,7 +34,7 @@ function sampleN<T>(arr: T[], n: number): T[] {
   return shuffled.slice(0, n);
 }
 
-type View = 'dashboard' | 'glossary' | 'cheatsheet' | 'randomquiz' | 'privacy' | 'about' | 'guide';
+type View = 'dashboard' | 'glossary' | 'cheatsheet' | 'randomquiz' | 'privacy' | 'about' | 'guide' | 'usecase';
 
 function App() {
   const [activeModuleId, setActiveModuleId] = useState<string | null>(null);
@@ -131,7 +132,7 @@ function App() {
       const segments = window.location.pathname.split('/').filter(Boolean);
       const lastSegment = segments[segments.length - 1];
       
-      const isCustomView = ['glossary', 'cheatsheet', 'privacy', 'about', 'guide'].includes(lastSegment || '');
+      const isCustomView = ['glossary', 'cheatsheet', 'privacy', 'about', 'guide', 'usecase'].includes(lastSegment || '');
       
       if (isCustomView) {
         setView(lastSegment as View);
@@ -139,6 +140,7 @@ function App() {
         if (lastSegment === 'privacy') document.title = 'プライバシーポリシー | 統計検定 2級 学習リファレンス';
         else if (lastSegment === 'about') document.title = 'サイトについて | 統計検定 2級 学習リファレンス';
         else if (lastSegment === 'guide') document.title = '試験ガイド | 統計検定 2級 学習リファレンス';
+        else if (lastSegment === 'usecase') document.title = '検定・分布の使い分けガイド | 統計検定 2級 学習リファレンス';
       } else if (lastSegment && lastSegment !== 'stats-g2') {
         const found = modules.find(m => m.id === lastSegment);
         if (found) {
@@ -320,6 +322,9 @@ function App() {
           </button>
           <button onClick={() => switchView('guide')} className={`nav-tab ${view === 'guide' ? 'active' : ''}`}>
             <Target size={18} /> 試験ガイド
+          </button>
+          <button onClick={() => switchView('usecase')} className={`nav-tab ${view === 'usecase' ? 'active' : ''}`}>
+            <Lightbulb size={18} /> 使い分けガイド
           </button>
         </nav>
       )}
@@ -606,6 +611,10 @@ function App() {
           ) : view === 'guide' ? (
             <motion.div key="guide" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
               <ExamGuide />
+            </motion.div>
+          ) : view === 'usecase' ? (
+            <motion.div key="usecase" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
+              <div dangerouslySetInnerHTML={{ __html: buildUsecaseHtml(window.location.pathname.startsWith('/stats-g2/') ? '/stats-g2' : '') }} />
             </motion.div>
           ) : view === 'privacy' ? (
             <motion.div key="privacy" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
