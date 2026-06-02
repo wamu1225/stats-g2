@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CrEKDoBA.js"></script>
+    <script type="module" crossorigin src="../assets/index-DJYitWnH.js"></script>
     <link rel="modulepreload" crossorigin href="../assets/rolldown-runtime-COnpUsM8.js">
     <link rel="modulepreload" crossorigin href="../assets/motion-Ml2aNURp.js">
     <link rel="modulepreload" crossorigin href="../assets/react-DL9wba-t.js">
@@ -96,7 +96,19 @@
 
  が母比率の標準誤差です。 が大きいとき中心極限定理より  が正規分布に近づくことが根拠です。
 
- 信頼区間の幅 。幅を半分にするには標本サイズを4倍にする必要がある。</div>
+ 信頼区間の幅 。幅を半分にするには標本サイズを4倍にする必要がある。
+
+ よくある誤解・つまずき
+
+「95%信頼区間」は「真の母平均がこの区間に95%の確率で入る」ではありません。 正しくは「同じ方法で何度も区間を作れば約95%が真の値を含む」という手続きの性質です（頻出）。
+点推定だけでは「どれくらい信頼できるか」が伝わりません。 区間推定が必要。
+母分散既知なら正規分布（）、未知なら t分布（自由度 ）。取り違えに注意。
+
+ ここまでのまとめ
+
+点推定（1つの値）と区間推定（幅＋信頼度）。
+不偏分散は  で割る。
+信頼区間 。 を4倍で幅は半分。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

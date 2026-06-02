@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CrEKDoBA.js"></script>
+    <script type="module" crossorigin src="../assets/index-DJYitWnH.js"></script>
     <link rel="modulepreload" crossorigin href="../assets/rolldown-runtime-COnpUsM8.js">
     <link rel="modulepreload" crossorigin href="../assets/motion-Ml2aNURp.js">
     <link rel="modulepreload" crossorigin href="../assets/react-DL9wba-t.js">
@@ -95,7 +95,19 @@
 
 感度90%・特異度95%でも有病率1%の集団では PPV ≈ 15%——陽性の85%は偽陽性です。有病率が低いと分母の偽陽性項が大きくなり、PPVは低下します。感度・特異度が高くても有病率次第でPPVが大きく変わることを「基本率の誤謬」と呼びます。
 
- 「検査で陽性 = 病気確定」ではない。PPVは感度・特異度だけでなく有病率にも大きく依存します。</div>
+ 「検査で陽性 = 病気確定」ではない。PPVは感度・特異度だけでなく有病率にも大きく依存します。
+
+ よくある誤解・つまずき
+
+感度が高くても、有病率が低いと陽性的中率(PPV)は低くなります。 「陽性なら病気」と早合点しないこと。
+事前確率（有病率）を無視しない。 ベイズの肝は「事前の情報＋検査結果」で更新することです。
+と  は別物（逆確率の誤り）。「陽性のとき病気」と「病気のとき陽性」を取り違えない。
+
+ ここまでのまとめ
+
+ベイズの定理 ：事前確率を事後確率に更新する。
+検査の陽性的中率(PPV)は有病率に強く依存する。
+直感に反する結果（低い有病率では偽陽性が多い）が出やすい分野。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

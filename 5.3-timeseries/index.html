@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CrEKDoBA.js"></script>
+    <script type="module" crossorigin src="../assets/index-DJYitWnH.js"></script>
     <link rel="modulepreload" crossorigin href="../assets/rolldown-runtime-COnpUsM8.js">
     <link rel="modulepreload" crossorigin href="../assets/motion-Ml2aNURp.js">
     <link rel="modulepreload" crossorigin href="../assets/react-DL9wba-t.js">
@@ -82,7 +82,19 @@
 
 これは「現在の値  と  期前の値  の相関」です。この  を各ラグ  に対してプロットした図がコレログラム（ACFプロット：自己相関関数プロット）です。コレログラムを見ると、季節性（例：毎年12月に  が高い）やトレンドの有無（全ラグで  がゆっくり減衰）などのパターンが視覚的に把握できます。自己相関がある時系列データにそのまま通常の回帰分析を適用すると、誤差の独立性の仮定が崩れ、推定の効率性が失われます。
 
- コレログラムは横軸にラグ 、縦軸に （自己相関係数）をプロットしたグラフ。季節性・トレンドの検出に使う。</div>
+ コレログラムは横軸にラグ 、縦軸に （自己相関係数）をプロットしたグラフ。季節性・トレンドの検出に使う。
+
+ よくある誤解・つまずき
+
+単純な前期比の増減だけで判断しない。 季節変動を考慮しないと誤読します。
+移動平均は両端の数点が計算できません（前後のデータが揃わない）。
+時系列は隣接データが関連します（自己相関）。 独立データ前提の手法をそのまま当てはめない。
+
+ ここまでのまとめ
+
+4つの変動成分：トレンド・季節・循環・不規則。
+移動平均でノイズを平滑化（項数を周期に合わせて季節成分を除去）。
+自己相関・コレログラムで季節性やトレンドを検出。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

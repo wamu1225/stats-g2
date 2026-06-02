@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CrEKDoBA.js"></script>
+    <script type="module" crossorigin src="../assets/index-DJYitWnH.js"></script>
     <link rel="modulepreload" crossorigin href="../assets/rolldown-runtime-COnpUsM8.js">
     <link rel="modulepreload" crossorigin href="../assets/motion-Ml2aNURp.js">
     <link rel="modulepreload" crossorigin href="../assets/react-DL9wba-t.js">
@@ -104,7 +104,19 @@ t 分布・カイ二乗分布・F 分布：現実の検定で使う分布
 
 つまり  は近似的に  に従います。「十分大きい」の目安は  かつ  です。例えば  では 、 なので  で近似できます——平均30・分散  です。
 
- 二項分布の正規近似： かつ  のとき 。平均と分散を正確に計算することが重要です。</div>
+ 二項分布の正規近似： かつ  のとき 。平均と分散を正確に計算することが重要です。
+
+ よくある誤解・つまずき
+
+CLT の  は「1つの標本のデータ数（標本サイズ）」。標本を取った回数ではありません。
+母集団は正規分布でなくてよい。 どんな形でも、 が大きければ標本平均が正規分布に近づきます。
+標準誤差  は「標本平均のばらつき」。母集団の標準偏差  とは別物。
+
+ ここまでのまとめ
+
+中心極限定理： が大きければ 。
+標準誤差 。精度2倍には  を4倍。
+二項分布の正規近似： かつ  で 。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

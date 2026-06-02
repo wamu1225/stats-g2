@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CrEKDoBA.js"></script>
+    <script type="module" crossorigin src="../assets/index-DJYitWnH.js"></script>
     <link rel="modulepreload" crossorigin href="../assets/rolldown-runtime-COnpUsM8.js">
     <link rel="modulepreload" crossorigin href="../assets/motion-Ml2aNURp.js">
     <link rel="modulepreload" crossorigin href="../assets/react-DL9wba-t.js">
@@ -110,7 +110,19 @@
 
 F分布は非対称（右裾が長い）で、値が1から大きく外れるほど分散が異なることを示します。慣例として大きい方の不偏分散を分子に置き（F≥1にする）、右側の棄却域のみを使うことが多いです。F分布の自由度は（分子の自由度 , 分母の自由度 ）のペアで指定されることに注意が必要です。
 
- F検定：。大きい分散を分子にすると F ≥ 1 となり右側の棄却域だけ使える。</div>
+ F検定：。大きい分散を分子にすると F ≥ 1 となり右側の棄却域だけ使える。
+
+ よくある誤解・つまずき
+
+「対応あり」と「対応なし」で検定が変わります。 同一対象の前後比較は対応のあるt検定、別々の2群は2標本t検定。
+2標本t検定は等分散かどうかで式が変わります（等分散を仮定するか、ウェルチの検定か）。
+平均の比較と分散の比較は別。 分散の比較は F検定（分散比）。
+
+ ここまでのまとめ
+
+2標本問題：2群の平均差・比率差を推定・検定する。
+対応の有無で手法を選ぶ（対応あり＝差のデータで1標本扱い）。
+F検定： で2群の分散を比較。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

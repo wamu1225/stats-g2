@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CrEKDoBA.js"></script>
+    <script type="module" crossorigin src="../assets/index-DJYitWnH.js"></script>
     <link rel="modulepreload" crossorigin href="../assets/rolldown-runtime-COnpUsM8.js">
     <link rel="modulepreload" crossorigin href="../assets/motion-Ml2aNURp.js">
     <link rel="modulepreload" crossorigin href="../assets/react-DL9wba-t.js">
@@ -88,7 +88,19 @@
 
 もう一点重要なのは、カイ二乗検定は「関連の有無」しか教えてくれないことです。「性別と購買行動に関連あり」という結論は出せても、「どちらの性別がより多く購入しているか」「関連の強さはどの程度か」はカイ二乗検定からは分かりません。関連の強さを表すには、 分割表ではオッズ比、一般の分割表ではクラメールの連関係数  などを別途計算します。
 
- クラメールの連関係数：。0〜1の値をとり、1に近いほど関連が強いです。カイ二乗検定が有意でも  が小さければ「統計的には有意だが実用的な関連は弱い」と解釈します。</div>
+ クラメールの連関係数：。0〜1の値をとり、1に近いほど関連が強いです。カイ二乗検定が有意でも  が小さければ「統計的には有意だが実用的な関連は弱い」と解釈します。
+
+ よくある誤解・つまずき
+
+期待度数が小さい（目安5未満）とカイ二乗近似が崩れます。 セルを統合するか正確検定を検討。
+有意＝関連が強い、ではありません。  が大きいと小さな差でも有意になります。効果量（クラメールの ）で実用的な強さを確認。
+適合度検定と独立性検定で自由度の数え方が違います。
+
+ ここまでのまとめ
+
+カイ二乗検定＝観測度数と期待度数の「ずれ」を評価。
+用途：適合度検定（理論分布との一致）と独立性検定（2変数の関連）。
+有意 ≠ 実用的関連：効果量  で関連の強さを別途見る。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CrEKDoBA.js"></script>
+    <script type="module" crossorigin src="../assets/index-DJYitWnH.js"></script>
     <link rel="modulepreload" crossorigin href="../assets/rolldown-runtime-COnpUsM8.js">
     <link rel="modulepreload" crossorigin href="../assets/motion-Ml2aNURp.js">
     <link rel="modulepreload" crossorigin href="../assets/react-DL9wba-t.js">
@@ -96,7 +96,19 @@ OLS直線は必ずデータの重心  を通るという性質があります。
 
 回帰モデルの予測には重要な制約があります。観測データの範囲内での予測（内挿）は比較的信頼できますが、観測範囲の外側へ予測を伸ばす外挿（extrapolation）は信頼性が低いです。「身長150〜180cmのデータで作ったモデルで身長120cmの人の体重を予測する」場合、その範囲では線形関係が成立しない可能性があり、予測は非常に不確かになります。
 
- 外挿（観測範囲外への予測）は信頼性が低い。内挿（範囲内）は比較的安全。外挿は実務では避けるか、慎重に扱う必要があります。</div>
+ 外挿（観測範囲外への予測）は信頼性が低い。内挿（範囲内）は比較的安全。外挿は実務では避けるか、慎重に扱う必要があります。
+
+ よくある誤解・つまずき
+
+回帰は因果関係を保証しません。 「 で  を予測できる」と「 を変えれば  が変わる」は別。
+観測範囲外の予測（外挿）は危険。 範囲内（内挿）が比較的安全。
+が高い＝正しいモデル・因果がある、ではありません。
+
+ ここまでのまとめ
+
+単回帰 。 は「 が1増えたときの  の期待変化量」。
+最小二乗法：残差二乗和を最小化。回帰直線は平均点  を通る。
+決定係数 ： の変動のうちモデルが説明する割合。単回帰では 。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

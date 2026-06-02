@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CrEKDoBA.js"></script>
+    <script type="module" crossorigin src="../assets/index-DJYitWnH.js"></script>
     <link rel="modulepreload" crossorigin href="../assets/rolldown-runtime-COnpUsM8.js">
     <link rel="modulepreload" crossorigin href="../assets/motion-Ml2aNURp.js">
     <link rel="modulepreload" crossorigin href="../assets/react-DL9wba-t.js">
@@ -88,7 +88,19 @@ F検定：群間 vs 群内のばらつきの比
 ：A×Bの交互作用効果
 ：残差（誤差）
 
-交互作用が重要な概念です。例えば「肥料Aは水やり1回では効果なしだが、2回与えると劇的に効果が出る」というように、Aの効果がBの水準によって変わる場合に交互作用が有意になります。交互作用が有意なとき、「Aは効果あり」「Bは効果なし」のような主効果だけの解釈では不十分で、AとBを組み合わせた効果を検討する必要があります。</div>
+交互作用が重要な概念です。例えば「肥料Aは水やり1回では効果なしだが、2回与えると劇的に効果が出る」というように、Aの効果がBの水準によって変わる場合に交互作用が有意になります。交互作用が有意なとき、「Aは効果あり」「Bは効果なし」のような主効果だけの解釈では不十分で、AとBを組み合わせた効果を検討する必要があります。
+
+ よくある誤解・つまずき
+
+3群以上の平均比較に t検定を繰り返すのはNG。 検定を繰り返すと第1種の誤りが膨らみます。だから分散分析（ANOVA）を使います。
+ANOVAは「どこかに差がある」までしか言いません。 どの群間に差があるかは多重比較（事後検定）で調べます。
+交互作用を見落とさない。 主効果だけで解釈すると誤ることがあります。
+
+ ここまでのまとめ
+
+分散分析＝群間の分散と群内の分散の比（F値）で平均差を検定。
+有意なら多重比較で個別の群間差を特定。
+交互作用＝一方の要因の効果が他方の水準によって変わること。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

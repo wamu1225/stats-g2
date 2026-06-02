@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CrEKDoBA.js"></script>
+    <script type="module" crossorigin src="../assets/index-DJYitWnH.js"></script>
     <link rel="modulepreload" crossorigin href="../assets/rolldown-runtime-COnpUsM8.js">
     <link rel="modulepreload" crossorigin href="../assets/motion-Ml2aNURp.js">
     <link rel="modulepreload" crossorigin href="../assets/react-DL9wba-t.js">
@@ -92,7 +92,19 @@
 
 一方、 が成り立つ場合——つまり「Bが起きた」という情報がAの確率を変えない場合——AとBは独立といいます。独立なら  が成立し、「同時に起こる確率は各確率の掛け算」になります。
 
- 条件付き確率 。独立なら 。排反と独立は別概念——排反なら同時に起こらず、独立なら情報が影響しない。</div>
+ 条件付き確率 。独立なら 。排反と独立は別概念——排反なら同時に起こらず、独立なら情報が影響しない。
+
+ よくある誤解・つまずき
+
+加法定理で  の引き忘れに注意。 「または」の確率は重複を一度引きます（排反のときだけ0）。
+「少なくとも1回」は余事象で計算すると速い（1から「1回も起きない」を引く）。
+「排反」と「独立」は別概念（上の試験ポイント参照）。同時には成り立ちません。
+
+ ここまでのまとめ
+
+標本空間・事象・排反。確率はコルモゴロフの3公理で定義。
+加法定理 、余事象 。
+条件付き確率 、独立 。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CrEKDoBA.js"></script>
+    <script type="module" crossorigin src="../assets/index-DJYitWnH.js"></script>
     <link rel="modulepreload" crossorigin href="../assets/rolldown-runtime-COnpUsM8.js">
     <link rel="modulepreload" crossorigin href="../assets/motion-Ml2aNURp.js">
     <link rel="modulepreload" crossorigin href="../assets/react-DL9wba-t.js">
@@ -92,7 +92,19 @@
 
  と  が独立な場合は  となり、分散は単純に足し算できます。直感的には「互いに無関係なばらつきを合算すると、それぞれのばらつきが積み上がる」という意味です。差の分散  は共分散項の符号が逆になり  となります。
 
- 独立な確率変数の和の分散：。差  の分散でも符号に注意して同様に計算。</div>
+ 独立な確率変数の和の分散：。差  の分散でも符号に注意して同様に計算。
+
+ よくある誤解・つまずき
+
+和（差）の分散を足せるのは「独立」のときだけ。 独立でなければ共分散の項が加わります。
+差でも分散は足します。 独立なら （引き算ではない）。
+定数倍と定数加算の効き方が違う。 ——定数  は分散に影響しません。
+
+ ここまでのまとめ
+
+期待値の線形性：。
+分散：（定数加算は分散に効かない）。
+独立なら和・差の分散は （共分散0）。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>

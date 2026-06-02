@@ -41,7 +41,7 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="../assets/index-CrEKDoBA.js"></script>
+    <script type="module" crossorigin src="../assets/index-DJYitWnH.js"></script>
     <link rel="modulepreload" crossorigin href="../assets/rolldown-runtime-COnpUsM8.js">
     <link rel="modulepreload" crossorigin href="../assets/motion-Ml2aNURp.js">
     <link rel="modulepreload" crossorigin href="../assets/react-DL9wba-t.js">
@@ -97,7 +97,19 @@
 
 平均待ち時間は （2分に1件なら平均2分）、分散は  です。指数分布も幾何分布と同じ無記憶性を持ちます——「すでに2分待っていても、これからさらに1分以上待つ確率は最初から待つ場合と同じ」という性質です。
 
- 指数分布の平均 = 。ポアソン分布（件数）と指数分布（間隔）はセットで理解する。</div>
+ 指数分布の平均 = 。ポアソン分布（件数）と指数分布（間隔）はセットで理解する。
+
+ よくある誤解・つまずき
+
+連続型では「ちょうどある1点の値になる確率」は0。 区間で確率を考えます。
+確率密度  は確率そのものではありません（1を超えることもある）。確率は曲線の下の面積（積分）。
+正規分布の確率は標準化してから表を引く。  は「1−表の値」、区間は差。
+
+ ここまでのまとめ
+
+連続型は面積（積分）で確率。PDF 、CDF 。
+正規分布と標準化  で標準正規分布表に集約。
+指数分布（事象の間隔、）はポアソン分布（件数）と対で理解。</div>
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>
