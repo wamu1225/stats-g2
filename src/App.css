@@ -462,6 +462,17 @@ input[type="range"] {
 
 /* ── Darts Visualization ─────────────────────────── */
 
+/* 概念図（本文埋め込みの静的SVG：箱ひげ図など） */
+.g2-figure { margin: 1.25rem 0; padding: 0.25rem 0; text-align: center; }
+.g2-fig-svg { width: 100%; max-width: 420px; height: auto; display: block; margin: 0 auto; }
+.g2-fig-cap {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0.5rem auto 0;
+  max-width: 480px;
+}
+
 .darts-container {
   display: flex;
   gap: 1rem;

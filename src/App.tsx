@@ -164,7 +164,7 @@ function App() {
 
   const parseInlineContent = useCallback((text: string): React.ReactNode => {
     function parseInline(t: string): React.ReactNode {
-      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
+      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
       const parts = t.split(regex);
       return (
         <>
@@ -207,6 +207,38 @@ function App() {
                   <div className="shell shell-mid"><span className="shell-label">個人の差 (クラス)</span><div className="shell shell-inner">データ</div></div>
                 </div>
               </div>
+            );
+            if (part === '[[boxplot]]') return (
+              <figure key={key} className="g2-figure">
+                <svg viewBox="0 0 360 112" role="img" aria-label="箱ひげ図：最小値・Q1・中央値・Q3・最大値と外れ値。箱の長さがIQR" className="g2-fig-svg">
+                  <line x1={60} y1={60} x2={110} y2={60} stroke="#475569" strokeWidth={1.5} />
+                  <line x1={200} y1={60} x2={250} y2={60} stroke="#475569" strokeWidth={1.5} />
+                  <line x1={60} y1={47} x2={60} y2={73} stroke="#475569" strokeWidth={1.5} />
+                  <line x1={250} y1={47} x2={250} y2={73} stroke="#475569" strokeWidth={1.5} />
+                  <rect x={110} y={40} width={90} height={40} fill="#3b82f6" fillOpacity={0.15} stroke="#2563eb" strokeWidth={1.6} />
+                  <line x1={150} y1={40} x2={150} y2={80} stroke="#1d4ed8" strokeWidth={2.6} />
+                  <circle cx={300} cy={60} r={4} fill="none" stroke="#dc2626" strokeWidth={1.6} />
+                  <line x1={110} y1={30} x2={200} y2={30} stroke="#94a3b8" strokeWidth={1} />
+                  <line x1={110} y1={30} x2={110} y2={36} stroke="#94a3b8" strokeWidth={1} />
+                  <line x1={200} y1={30} x2={200} y2={36} stroke="#94a3b8" strokeWidth={1} />
+                  <text x={155} y={23} textAnchor="middle" fontSize={11} fontWeight={700} fill="#334155">IQR = Q₃ − Q₁</text>
+                  <line x1={60} y1={75} x2={60} y2={90} stroke="#cbd5e1" strokeWidth={1} />
+                  <line x1={110} y1={82} x2={110} y2={90} stroke="#cbd5e1" strokeWidth={1} />
+                  <line x1={150} y1={82} x2={150} y2={90} stroke="#cbd5e1" strokeWidth={1} />
+                  <line x1={200} y1={82} x2={200} y2={90} stroke="#cbd5e1" strokeWidth={1} />
+                  <line x1={250} y1={75} x2={250} y2={90} stroke="#cbd5e1" strokeWidth={1} />
+                  <line x1={300} y1={66} x2={300} y2={90} stroke="#cbd5e1" strokeWidth={1} />
+                  <text x={60} y={101} textAnchor="middle" fontSize={10} fill="#64748b">最小値</text>
+                  <text x={110} y={101} textAnchor="middle" fontSize={11} fontWeight={700} fill="#1d4ed8">Q₁</text>
+                  <text x={150} y={101} textAnchor="middle" fontSize={10} fontWeight={700} fill="#1d4ed8">中央値</text>
+                  <text x={200} y={101} textAnchor="middle" fontSize={11} fontWeight={700} fill="#1d4ed8">Q₃</text>
+                  <text x={250} y={101} textAnchor="middle" fontSize={10} fill="#64748b">最大値</text>
+                  <text x={300} y={101} textAnchor="middle" fontSize={10} fill="#b91c1c">外れ値</text>
+                </svg>
+                <figcaption className="g2-fig-cap">
+                  箱ひげ図の読み方。箱の左端が Q₁、右端が Q₃ で、箱の長さが四分位範囲 IQR ＝ Q₃−Q₁（中央50%の散らばり）。箱の中の線が中央値。ひげは Q₁−1.5×IQR ／ Q₃+1.5×IQR のフェンス内にある最小値・最大値まで伸び、その外側の点（赤）が外れ値候補として識別される。
+                </figcaption>
+              </figure>
             );
             if (part.startsWith('[[interactive:')) {
               const typeMatch = part.match(/\[\[interactive:(.*?)\]\]/);

@@ -41,6 +41,7 @@ CONTENT_GUIDE.md
 docs/CONTENT_GUIDE.md
 docs/syllabus.md
 docs/exam-scope.md
+docs/ROADMAP.md
 
 # One-time migration / debug / analysis scripts and artifacts
 scripts/analyze-*
