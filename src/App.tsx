@@ -164,7 +164,7 @@ function App() {
 
   const parseInlineContent = useCallback((text: string): React.ReactNode => {
     function parseInline(t: string): React.ReactNode {
-      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
+      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
       const parts = t.split(regex);
       return (
         <>
@@ -240,6 +240,35 @@ function App() {
                 </figcaption>
               </figure>
             );
+            if (part === '[[lorenz]]') {
+              const x0 = 44, x1 = 272, yBot = 228, yTop = 22;
+              const px = (p: number) => x0 + p * (x1 - x0);
+              const py = (v: number) => yBot - v * (yBot - yTop);
+              const L = (p: number) => Math.pow(p, 2.2);
+              let area = `${px(0)},${py(0)} ${px(1)},${py(1)}`;
+              for (let p = 1; p >= -0.0001; p -= 0.0625) { const q = Math.max(0, p); area += ` ${px(q).toFixed(1)},${py(L(q)).toFixed(1)}`; }
+              let curve = '';
+              for (let p = 0; p <= 1.0001; p += 0.0625) { const q = Math.min(1, p); curve += `${px(q).toFixed(1)},${py(L(q)).toFixed(1)} `; }
+              return (
+                <figure key={key} className="g2-figure">
+                  <svg viewBox="0 0 300 262" role="img" aria-label="ローレンツ曲線とジニ係数：完全平等線と曲線の間の面積が格差" className="g2-fig-svg">
+                    <text x={44} y={14} textAnchor="start" fontSize={10} fill="#615d59">所得（累積 %）</text>
+                    <line x1={44} y1={22} x2={44} y2={228} stroke="#9ca3af" strokeWidth={1} />
+                    <line x1={44} y1={228} x2={272} y2={228} stroke="#9ca3af" strokeWidth={1} />
+                    <polygon points={area} fill="#0f766e" fillOpacity={0.14} />
+                    <line x1={44} y1={228} x2={272} y2={22} stroke="#9ca3af" strokeWidth={1.2} strokeDasharray="4 3" />
+                    <polyline points={curve.trim()} fill="none" stroke="#0f766e" strokeWidth={2.4} />
+                    <text x={198} y={44} textAnchor="middle" fontSize={10} fill="#615d59">完全平等線</text>
+                    <text x={152} y={164} textAnchor="middle" fontSize={13} fontWeight={700} fill="#0f766e">S</text>
+                    <text x={210} y={190} textAnchor="middle" fontSize={10} fontWeight={700} fill="#0f766e">ローレンツ曲線</text>
+                    <text x={158} y={252} textAnchor="middle" fontSize={10} fill="#615d59">人口（累積 %）</text>
+                  </svg>
+                  <figcaption className="g2-fig-cap">
+                    ローレンツ曲線は「累積人口比率（横）」に対する「累積所得比率（縦）」を描く。全員が同じ所得なら対角線（完全平等線）と一致し、格差があるほど曲線は下へ垂れ下がる。ジニ係数はこのすき間の面積 S の2倍（G ＝ 2S）で、0 に近いほど平等・1 に近いほど不平等を表す。
+                  </figcaption>
+                </figure>
+              );
+            }
             if (part.startsWith('[[interactive:')) {
               const typeMatch = part.match(/\[\[interactive:(.*?)\]\]/);
               if (typeMatch) {
