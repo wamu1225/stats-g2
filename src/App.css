@@ -32,6 +32,32 @@
   margin-top: 0.25rem;
 }
 
+/* ホームのヒーロー（価値訴求＋一目チップ） */
+.hero-lead {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-text);
+  margin: 0.75rem auto 0;
+  max-width: 30rem;
+  line-height: 1.6;
+}
+.hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+.hero-chip {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--primary-text);
+  background: var(--primary-light);
+  border: 1px solid rgba(15, 118, 110, 0.18);
+  border-radius: var(--radius-pill);
+  padding: 0.2rem 0.7rem;
+}
+
 /* ── Navigation Tabs ─────────────────────────────── */
 
 .nav-tab {

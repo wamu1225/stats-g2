@@ -364,6 +364,17 @@ function App() {
       <header className="header">
         <h1 className="title" onClick={() => updateModuleId(null)} style={{ cursor: 'pointer' }}>統計検定 2級</h1>
         <p className="subtitle">学習リファレンス</p>
+        {!activeModuleId && view === 'dashboard' && (
+          <>
+            <p className="hero-lead">図解と逆引き診断で、2級の全範囲をやさしく攻略。</p>
+            <div className="hero-chips">
+              <span className="hero-chip">6章 19分野</span>
+              <span className="hero-chip">図解つき</span>
+              <span className="hero-chip">逆引き診断</span>
+              <span className="hero-chip">全範囲クイズ</span>
+            </div>
+          </>
+        )}
       </header>
 
       {!activeModuleId && (
