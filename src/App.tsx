@@ -164,7 +164,7 @@ function App() {
 
   const parseInlineContent = useCallback((text: string): React.ReactNode => {
     function parseInline(t: string): React.ReactNode {
-      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
+      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[correlation\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
       const parts = t.split(regex);
       return (
         <>
@@ -215,8 +215,8 @@ function App() {
                   <line x1={200} y1={60} x2={250} y2={60} stroke="#475569" strokeWidth={1.5} />
                   <line x1={60} y1={47} x2={60} y2={73} stroke="#475569" strokeWidth={1.5} />
                   <line x1={250} y1={47} x2={250} y2={73} stroke="#475569" strokeWidth={1.5} />
-                  <rect x={110} y={40} width={90} height={40} fill="#3b82f6" fillOpacity={0.15} stroke="#2563eb" strokeWidth={1.6} />
-                  <line x1={150} y1={40} x2={150} y2={80} stroke="#1d4ed8" strokeWidth={2.6} />
+                  <rect x={110} y={40} width={90} height={40} fill="#0f766e" fillOpacity={0.14} stroke="#0f766e" strokeWidth={1.6} />
+                  <line x1={150} y1={40} x2={150} y2={80} stroke="#0b5a54" strokeWidth={2.6} />
                   <circle cx={300} cy={60} r={4} fill="none" stroke="#dc2626" strokeWidth={1.6} />
                   <line x1={110} y1={30} x2={200} y2={30} stroke="#94a3b8" strokeWidth={1} />
                   <line x1={110} y1={30} x2={110} y2={36} stroke="#94a3b8" strokeWidth={1} />
@@ -229,9 +229,9 @@ function App() {
                   <line x1={250} y1={75} x2={250} y2={90} stroke="#cbd5e1" strokeWidth={1} />
                   <line x1={300} y1={66} x2={300} y2={90} stroke="#cbd5e1" strokeWidth={1} />
                   <text x={60} y={101} textAnchor="middle" fontSize={10} fill="#64748b">最小値</text>
-                  <text x={110} y={101} textAnchor="middle" fontSize={11} fontWeight={700} fill="#1d4ed8">Q₁</text>
-                  <text x={150} y={101} textAnchor="middle" fontSize={10} fontWeight={700} fill="#1d4ed8">中央値</text>
-                  <text x={200} y={101} textAnchor="middle" fontSize={11} fontWeight={700} fill="#1d4ed8">Q₃</text>
+                  <text x={110} y={101} textAnchor="middle" fontSize={11} fontWeight={700} fill="#0b5a54">Q₁</text>
+                  <text x={150} y={101} textAnchor="middle" fontSize={10} fontWeight={700} fill="#0b5a54">中央値</text>
+                  <text x={200} y={101} textAnchor="middle" fontSize={11} fontWeight={700} fill="#0b5a54">Q₃</text>
                   <text x={250} y={101} textAnchor="middle" fontSize={10} fill="#64748b">最大値</text>
                   <text x={300} y={101} textAnchor="middle" fontSize={10} fill="#b91c1c">外れ値</text>
                 </svg>
@@ -265,6 +265,50 @@ function App() {
                   </svg>
                   <figcaption className="g2-fig-cap">
                     ローレンツ曲線は「累積人口比率（横）」に対する「累積所得比率（縦）」を描く。全員が同じ所得なら対角線（完全平等線）と一致し、格差があるほど曲線は下へ垂れ下がる。ジニ係数はこのすき間の面積 S の2倍（G ＝ 2S）で、0 に近いほど平等・1 に近いほど不平等を表す。
+                  </figcaption>
+                </figure>
+              );
+            }
+            if (part === '[[correlation]]') {
+              const panels = [
+                { cx: 30, cy: 30, label: '強い正の相関', r: 'r ≈ +0.9', kind: 'pos' as const },
+                { cx: 198, cy: 30, label: '相関なし', r: 'r ≈ 0', kind: 'zero' as const },
+                { cx: 30, cy: 132, label: '強い負の相関', r: 'r ≈ −0.9', kind: 'neg' as const },
+                { cx: 198, cy: 132, label: '非線形（U字）', r: 'r ≈ 0', kind: 'nonlin' as const },
+              ];
+              const W = 116, H = 58;
+              let seed = 7;
+              const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+              const nodes: React.ReactNode[] = [];
+              panels.forEach((p) => {
+                nodes.push(
+                  <text key={`${p.kind}-t`} x={p.cx + W / 2} y={p.cy - 8} textAnchor="middle" fontSize={11} fontWeight={700} fill="#33302c">{p.label}</text>,
+                  <text key={`${p.kind}-r`} x={p.cx + W - 2} y={p.cy + 12} textAnchor="end" fontSize={10} fontWeight={700} fill="#0f766e">{p.r}</text>,
+                  <line key={`${p.kind}-vy`} x1={p.cx} y1={p.cy} x2={p.cx} y2={p.cy + H} stroke="#c9c3ba" strokeWidth={1} />,
+                  <line key={`${p.kind}-vx`} x1={p.cx} y1={p.cy + H} x2={p.cx + W} y2={p.cy + H} stroke="#c9c3ba" strokeWidth={1} />,
+                );
+                const n = 15;
+                for (let i = 0; i < n; i++) {
+                  const t = i / (n - 1);
+                  let x = t, y = 0;
+                  if (p.kind === 'pos') { y = t + (rnd() - 0.5) * 0.3; }
+                  else if (p.kind === 'neg') { y = 1 - t + (rnd() - 0.5) * 0.3; }
+                  else if (p.kind === 'zero') { x = rnd(); y = rnd(); }
+                  else { y = 4 * (t - 0.5) * (t - 0.5) + (rnd() - 0.5) * 0.14; }
+                  x = Math.max(0.02, Math.min(0.98, x));
+                  y = Math.max(0.03, Math.min(0.97, y));
+                  const px = p.cx + 8 + x * (W - 14);
+                  const py = p.cy + 5 + (1 - y) * (H - 8);
+                  nodes.push(<circle key={`${p.kind}-p${i}`} cx={px.toFixed(1)} cy={py.toFixed(1)} r={2.4} fill="#0f766e" fillOpacity={0.65} />);
+                }
+              });
+              return (
+                <figure key={key} className="g2-figure">
+                  <svg viewBox="0 0 328 202" role="img" aria-label="相関係数の4パターン：強い正・相関なし・強い負・非線形（U字でr≈0）" className="g2-fig-svg">
+                    {nodes}
+                  </svg>
+                  <figcaption className="g2-fig-cap">
+                    散布図と相関係数 r の対応。点が右上がりに揃うほど r は +1 に、右下がりに揃うほど −1 に近づく。散らばって傾向がなければ r ≈ 0。ただし右下の U 字のように、はっきりした関係があっても r が測るのは<strong>線形</strong>の傾きだけなので r ≈ 0 になる。r=0 は「線形関係がない」であって「無関係」ではない。
                   </figcaption>
                 </figure>
               );
