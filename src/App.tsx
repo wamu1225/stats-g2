@@ -164,7 +164,7 @@ function App() {
 
   const parseInlineContent = useCallback((text: string): React.ReactNode => {
     function parseInline(t: string): React.ReactNode {
-      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[correlation\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
+      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[correlation\]\]|\[\[zscore\]\]|\[\[ppv\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
       const parts = t.split(regex);
       return (
         <>
@@ -309,6 +309,117 @@ function App() {
                   </svg>
                   <figcaption className="g2-fig-cap">
                     散布図と相関係数 r の対応。点が右上がりに揃うほど r は +1 に、右下がりに揃うほど −1 に近づく。散らばって傾向がなければ r ≈ 0。ただし右下の U 字のように、はっきりした関係があっても r が測るのは<strong>線形</strong>の傾きだけなので r ≈ 0 になる。r=0 は「線形関係がない」であって「無関係」ではない。
+                  </figcaption>
+                </figure>
+              );
+            }
+            if (part === '[[zscore]]') {
+              // two normal curves with different mean/sd; same point maps to different z
+              const gauss = (cx: number, hw: number, yb: number, ph: number) => {
+                let pts = '';
+                for (let t = -3; t <= 3.0001; t += 0.25) {
+                  const x = cx + t * (hw / 3);
+                  const y = yb - ph * Math.exp(-(t * t) / 2);
+                  pts += `${x.toFixed(1)},${y.toFixed(1)} `;
+                }
+                return pts.trim();
+              };
+              const yb = 96, ph = 60, hw = 66;
+              const mathCx = 96, engCx = 264;
+              const markX = (cx: number, z: number) => cx + z * (hw / 3);
+              return (
+                <figure key={key} className="g2-figure">
+                  <svg viewBox="0 0 360 232" role="img" aria-label="標準化：平均と散らばりの違う数学と英語の得点を、共通のz尺度に載せて比較する" className="g2-fig-svg">
+                    {/* two distributions */}
+                    <line x1={22} y1={yb} x2={170} y2={yb} stroke="#c9c3ba" strokeWidth={1} />
+                    <line x1={190} y1={yb} x2={338} y2={yb} stroke="#c9c3ba" strokeWidth={1} />
+                    <polyline points={gauss(mathCx, hw, yb, ph)} fill="#0f766e" fillOpacity={0.08} stroke="#0f766e" strokeWidth={1.8} />
+                    <polyline points={gauss(engCx, hw, yb, ph)} fill="#dd5b2a" fillOpacity={0.08} stroke="#dd5b2a" strokeWidth={1.8} />
+                    <text x={mathCx} y={20} textAnchor="middle" fontSize={10.5} fontWeight={700} fill="#0b5a54">数学</text>
+                    <text x={mathCx} y={33} textAnchor="middle" fontSize={9} fill="#615d59">平均60・SD10</text>
+                    <text x={engCx} y={20} textAnchor="middle" fontSize={10.5} fontWeight={700} fill="#b8461c">英語</text>
+                    <text x={engCx} y={33} textAnchor="middle" fontSize={9} fill="#615d59">平均70・SD5</text>
+                    {/* mean ticks */}
+                    <text x={mathCx} y={yb + 12} textAnchor="middle" fontSize={8.5} fill="#8a857e">60</text>
+                    <text x={engCx} y={yb + 12} textAnchor="middle" fontSize={8.5} fill="#8a857e">70</text>
+                    {/* marked scores: math 80 -> z=2, eng 75 -> z=1 */}
+                    <line x1={markX(mathCx, 2)} y1={yb} x2={markX(mathCx, 2)} y2={yb - ph * Math.exp(-2)} stroke="#0b5a54" strokeWidth={1.4} strokeDasharray="3 2" />
+                    <circle cx={markX(mathCx, 2)} cy={yb} r={3.2} fill="#0f766e" />
+                    <text x={markX(mathCx, 2) + 2} y={yb - 6} textAnchor="start" fontSize={9.5} fontWeight={700} fill="#0b5a54">80点</text>
+                    <line x1={markX(engCx, 1)} y1={yb} x2={markX(engCx, 1)} y2={yb - ph * Math.exp(-0.5)} stroke="#b8461c" strokeWidth={1.4} strokeDasharray="3 2" />
+                    <circle cx={markX(engCx, 1)} cy={yb} r={3.2} fill="#dd5b2a" />
+                    <text x={markX(engCx, 1) + 2} y={yb - 6} textAnchor="start" fontSize={9.5} fontWeight={700} fill="#b8461c">75点</text>
+                    {/* arrows down to shared z-axis */}
+                    <text x={180} y={132} textAnchor="middle" fontSize={10} fill="#615d59">↓ z ＝ (得点 − 平均) ÷ SD で同じ物差しに ↓</text>
+                    {/* shared z axis */}
+                    <line x1={40} y1={170} x2={320} y2={170} stroke="#8a857e" strokeWidth={1.4} />
+                    {[-2, -1, 0, 1, 2].map((z) => {
+                      const x = 180 + z * 56;
+                      return (
+                        <g key={`zt${z}`}>
+                          <line x1={x} y1={166} x2={x} y2={174} stroke="#8a857e" strokeWidth={1} />
+                          <text x={x} y={186} textAnchor="middle" fontSize={9} fill="#8a857e">{z > 0 ? `+${z}` : z}</text>
+                        </g>
+                      );
+                    })}
+                    <text x={324} y={173} textAnchor="start" fontSize={9} fill="#8a857e">z</text>
+                    <circle cx={180 + 2 * 56} cy={170} r={4} fill="#0f766e" />
+                    <text x={180 + 2 * 56} y={158} textAnchor="middle" fontSize={9.5} fontWeight={700} fill="#0b5a54">数学 z=2</text>
+                    <circle cx={180 + 1 * 56} cy={170} r={4} fill="#dd5b2a" />
+                    <text x={180 + 1 * 56} y={158} textAnchor="middle" fontSize={9.5} fontWeight={700} fill="#b8461c">英語 z=1</text>
+                    <text x={180} y={210} textAnchor="middle" fontSize={10.5} fontWeight={700} fill="#33302c">同じ土俵なら 数学80(z=2) の方が相対的に上</text>
+                  </svg>
+                  <figcaption className="g2-fig-cap">
+                    平均も散らばりも違う数学（平均60・SD10）と英語（平均70・SD5）は、素点のままでは比べられない。各得点を z ＝ (得点 − 平均) ÷ SD に変換すると、どちらも「平均0・SD1」の共通の物差しに載る。数学80点は平均から2SD上（z=2）、英語75点は1SD上（z=1）なので、相対的には数学の方が上だとわかる。
+                  </figcaption>
+                </figure>
+              );
+            }
+            if (part === '[[ppv]]') {
+              // natural-frequency tree: 1000 people, prevalence 1%, sens 90%, spec 95%
+              const barX = 40, barW = 280, barY = 208, barH = 22;
+              const tp = 9, fp = 50, total = tp + fp; // 59 positives
+              const tpW = (tp / total) * barW;
+              return (
+                <figure key={key} className="g2-figure">
+                  <svg viewBox="0 0 360 276" role="img" aria-label="1000人の自然頻度で見る陽性適中率：陽性59人のうち本当に病気は9人でPPV約15%" className="g2-fig-svg">
+                    <text x={180} y={13} textAnchor="middle" fontSize={11} fontWeight={700} fill="#33302c">有病率1%・感度90%・特異度95% を1000人で考える</text>
+                    {/* root */}
+                    <rect x={150} y={22} width={60} height={22} rx={4} fill="#0f766e" fillOpacity={0.1} stroke="#0f766e" strokeWidth={1.2} />
+                    <text x={180} y={37} textAnchor="middle" fontSize={11} fontWeight={700} fill="#0b5a54">1000人</text>
+                    {/* branches to disease/healthy */}
+                    <line x1={180} y1={44} x2={96} y2={66} stroke="#c9c3ba" strokeWidth={1.2} />
+                    <line x1={180} y1={44} x2={264} y2={66} stroke="#c9c3ba" strokeWidth={1.2} />
+                    <rect x={54} y={66} width={84} height={22} rx={4} fill="#0f766e" fillOpacity={0.1} stroke="#0f766e" strokeWidth={1.2} />
+                    <text x={96} y={81} textAnchor="middle" fontSize={10.5} fontWeight={700} fill="#0b5a54">病気 10人</text>
+                    <rect x={222} y={66} width={84} height={22} rx={4} fill="#efe9e1" stroke="#c9c3ba" strokeWidth={1.2} />
+                    <text x={264} y={81} textAnchor="middle" fontSize={10.5} fontWeight={700} fill="#615d59">健康 990人</text>
+                    {/* leaves */}
+                    <line x1={96} y1={88} x2={70} y2={110} stroke="#c9c3ba" strokeWidth={1} />
+                    <line x1={96} y1={88} x2={122} y2={110} stroke="#c9c3ba" strokeWidth={1} />
+                    <line x1={264} y1={88} x2={238} y2={110} stroke="#c9c3ba" strokeWidth={1} />
+                    <line x1={264} y1={88} x2={290} y2={110} stroke="#c9c3ba" strokeWidth={1} />
+                    <rect x={44} y={110} width={52} height={20} rx={3} fill="#0f766e" stroke="#0b5a54" strokeWidth={1} />
+                    <text x={70} y={124} textAnchor="middle" fontSize={10} fontWeight={700} fill="#ffffff">陽性 9</text>
+                    <text x={122} y={124} textAnchor="middle" fontSize={10} fill="#615d59">陰性 1</text>
+                    <rect x={212} y={110} width={52} height={20} rx={3} fill="#dd5b2a" stroke="#b8461c" strokeWidth={1} />
+                    <text x={238} y={124} textAnchor="middle" fontSize={10} fontWeight={700} fill="#ffffff">陽性 50</text>
+                    <text x={294} y={124} textAnchor="middle" fontSize={10} fill="#615d59">陰性 940</text>
+                    {/* true vs false positive labels */}
+                    <text x={70} y={144} textAnchor="middle" fontSize={9} fill="#0b5a54">真陽性</text>
+                    <text x={238} y={144} textAnchor="middle" fontSize={9} fill="#b8461c">偽陽性</text>
+                    {/* punchline bar */}
+                    <text x={180} y={172} textAnchor="middle" fontSize={11} fontWeight={700} fill="#33302c">陽性は合計 59人。その内訳は？</text>
+                    <rect x={barX} y={barY} width={tpW} height={barH} fill="#0f766e" />
+                    <rect x={barX + tpW} y={barY} width={barW - tpW} height={barH} fill="#dd5b2a" />
+                    <rect x={barX} y={barY} width={barW} height={barH} fill="none" stroke="#8a857e" strokeWidth={1} />
+                    <text x={barX + tpW / 2} y={barY + 15} textAnchor="middle" fontSize={10} fontWeight={700} fill="#ffffff">9</text>
+                    <text x={barX + tpW + (barW - tpW) / 2} y={barY + 15} textAnchor="middle" fontSize={10} fontWeight={700} fill="#ffffff">偽陽性 50</text>
+                    <text x={180} y={252} textAnchor="middle" fontSize={11.5} fontWeight={700} fill="#0b5a54">PPV ＝ 9 / 59 ≈ 15%</text>
+                    <text x={180} y={268} textAnchor="middle" fontSize={9.5} fill="#615d59">陽性でも 85% は病気ではない</text>
+                  </svg>
+                  <figcaption className="g2-fig-cap">
+                    感度・特異度が高くても、有病率が低いと陽性の大半が偽陽性になる（基本率の誤謬）。1000人のうち病気は10人で、その9割＝9人が陽性（真陽性）。一方で健康な990人の5%＝約50人も陽性になる（偽陽性）。陽性は合わせて59人だが、本当に病気なのは9人だけ。だから陽性適中率 PPV は 9/59 ≈ 15% にとどまる。確率でなく「実際の人数」で数えると直感がつかみやすい。
                   </figcaption>
                 </figure>
               );
