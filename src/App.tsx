@@ -11,12 +11,22 @@ import { TermText } from './components/TermGlossary';
 import { DistributionSelector } from './components/DistributionSelector';
 import { ExamGuide } from './components/ExamGuide';
 import { buildUsecaseHtml } from './data/usecaseGuide';
-import { ChevronLeft, Book, LayoutDashboard, ArrowRight, Search as SearchIcon, X, Lightbulb, Target, ArrowDown, Dumbbell, Trash2, FileText, Shuffle, CheckCircle2, XCircle } from 'lucide-react';
+import { ChevronLeft, Book, LayoutDashboard, ArrowRight, Search as SearchIcon, X, Lightbulb, Target, ArrowDown, Dumbbell, Trash2, FileText, Shuffle, CheckCircle2, XCircle, AlertTriangle, BookOpen, ListChecks } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 
 const PROGRESS_KEY = 'stats-g2-progress';
 const COMPREHENSIVE_KEY = '__comprehensive__';
+
+// Pedagogical callout markers used at line-start in module content.
+// 'box' = highlighted key point / note; 'head' = labeled section header (content follows).
+const CALLOUT_MARKERS = [
+  { e: '🎯', type: 'box', cls: 'tip', Icon: Target },
+  { e: '📖', type: 'box', cls: 'note', Icon: BookOpen },
+  { e: '💡', type: 'head', cls: 'intro', Icon: Lightbulb },
+  { e: '⚠️', type: 'head', cls: 'warn', Icon: AlertTriangle },
+  { e: '📌', type: 'head', cls: 'summary', Icon: ListChecks },
+] as const;
 
 interface ProgressEntry { score: number; total: number; completedAt: string; }
 type Progress = Record<string, ProgressEntry>;
@@ -486,6 +496,28 @@ function App() {
       if (trimmedLine.startsWith('---')) { flushList(key); result.push(<hr key={key} className="content-hr" />); return; }
       if (trimmedLine.startsWith('- ')) { currentList.push(<li key={`li-${lineIdx}`}>{parseInlineContent(trimmedLine.slice(2))}</li>); return; }
       if (trimmedLine === '') { flushList(key); return; }
+      // Pedagogical callout markers: render bare emoji as consistent styled callouts/labels
+      const marker = CALLOUT_MARKERS.find(m => trimmedLine.startsWith(m.e));
+      if (marker) {
+        flushList(key);
+        const rest = trimmedLine.slice(marker.e.length).trim();
+        const Icon = marker.Icon;
+        if (marker.type === 'box') {
+          result.push(
+            <div key={key} className={`callout callout-${marker.cls}`}>
+              <Icon className="callout-ic" size={17} />
+              <div className="callout-tx">{parseInlineContent(rest)}</div>
+            </div>
+          );
+        } else {
+          result.push(
+            <h4 key={key} className={`callout-head ch-${marker.cls}`}>
+              <Icon size={16} /> {parseInlineContent(rest)}
+            </h4>
+          );
+        }
+        return;
+      }
       flushList(key);
       result.push(<p key={key} className="content-p">{parseInlineContent(line)}</p>);
     });

@@ -325,6 +325,38 @@
   line-height: 1.7;
 }
 
+/* ── Pedagogical callouts (replaces bare emoji markers) ── */
+.callout {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  margin: 1.1rem 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 10px;
+  border-left: 3px solid;
+  line-height: 1.7;
+}
+.callout .callout-ic { flex-shrink: 0; margin-top: 0.15rem; }
+.callout .callout-tx { color: var(--text-body); }
+.callout-tip { background: var(--primary-light); border-color: var(--primary); }
+.callout-tip .callout-ic { color: var(--primary); }
+.callout-note { background: var(--bg-warm); border-color: var(--border-solid); }
+.callout-note .callout-ic { color: var(--text-muted); }
+
+.callout-head {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+  margin: 1.6rem 0 0.6rem 0;
+  letter-spacing: -0.2px;
+}
+.callout-head svg { flex-shrink: 0; }
+.ch-intro { color: var(--primary-hover); }
+.ch-summary { color: var(--primary-hover); }
+.ch-warn { color: #b8461c; }
+
 .katex-display {
   overflow-x: auto;
   overflow-y: hidden;
