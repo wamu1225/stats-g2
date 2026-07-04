@@ -87,6 +87,124 @@
   padding: 0.22rem 0.72rem;
 }
 
+/* ── 逆引き診断＝ワークブックのインデックス（solid block を廃し軽い索引に） ── */
+.diag-card {
+  background:
+    radial-gradient(rgba(15, 118, 110, 0.06) 1px, transparent 1px) -1px -1px / 16px 16px,
+    var(--card-bg);
+  border: 1px solid var(--border-solid);
+  border-top: 4px solid var(--primary);
+  border-radius: var(--radius-card);
+  padding: 1.25rem 1.35rem 1rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-card);
+}
+.diag-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+.diag-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--primary-light);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.diag-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin: 0;
+  color: var(--text);
+  line-height: 1.1;
+}
+.diag-kicker {
+  font-family: var(--font-display);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+.diag-q {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.35rem;
+}
+.diag-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.diag-list li + li {
+  border-top: 1.5px dotted rgba(15, 118, 110, 0.3);
+}
+.diag-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 0.7rem 0.35rem;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  transition: background 0.14s;
+}
+.diag-row:hover { background: var(--primary-light); }
+.diag-num {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.diag-row:hover .diag-num { background: var(--primary); color: #fff; }
+.diag-label { flex: 1; line-height: 1.4; }
+.diag-chev { flex-shrink: 0; color: var(--primary); }
+.diag-back {
+  margin-top: 0.9rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.3rem 0.35rem;
+  border-radius: var(--radius-sm);
+}
+.diag-back:hover { background: var(--bg-hover); color: var(--text); }
+.diag-foot {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+}
+
 /* ── Navigation Tabs ─────────────────────────────── */
 
 .nav-tab {

@@ -1,7 +1,7 @@
 // stats-app/src/components/DistributionSelector.tsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ArrowRight, HelpCircle } from 'lucide-react';
+import { Compass, ChevronRight, HelpCircle } from 'lucide-react';
 
 interface Question {
   id: string;
@@ -78,60 +78,43 @@ export const DistributionSelector: React.FC<Props> = ({ onSelect }) => {
   const current = flow[currentId];
 
   return (
-    <div className="card" style={{ background: 'var(--primary)', color: 'white', border: 'none' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-        <Search size={20} />
-        <h3 style={{ margin: 0 }}>目的から探す（逆引き診断）</h3>
+    <div className="diag-card">
+      <div className="diag-head">
+        <span className="diag-icon"><Compass size={18} /></span>
+        <div>
+          <h3 className="diag-title">目的から探す</h3>
+          <span className="diag-kicker">逆引き診断</span>
+        </div>
       </div>
-      
+
       <AnimatePresence mode="wait">
         <motion.div
           key={currentId}
-          initial={{ opacity: 0, x: 10 }}
+          initial={{ opacity: 0, x: 8 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -10 }}
+          exit={{ opacity: 0, x: -8 }}
         >
-          <p style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1.5rem' }}>{current.text}</p>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <p className="diag-q">{current.text}</p>
+
+          <ol className="diag-list">
             {current.options.map((opt, i) => (
-              <button
-                key={i}
-                className="btn"
-                style={{ 
-                  background: 'rgba(255,255,255,0.2)', 
-                  justifyContent: 'space-between', 
-                  textAlign: 'left',
-                  border: '1px solid rgba(255,255,255,0.3)'
-                }}
-                onClick={() => handleOption(opt.nextId, opt.result)}
-              >
-                <span>{opt.label}</span>
-                <ArrowRight size={16} />
-              </button>
+              <li key={i}>
+                <button className="diag-row" onClick={() => handleOption(opt.nextId, opt.result)}>
+                  <span className="diag-num">{i + 1}</span>
+                  <span className="diag-label">{opt.label}</span>
+                  <ChevronRight className="diag-chev" size={18} />
+                </button>
+              </li>
             ))}
-          </div>
+          </ol>
         </motion.div>
       </AnimatePresence>
 
       {history.length > 0 && (
-        <button 
-          onClick={handleBack}
-          style={{ 
-            marginTop: '1.5rem', 
-            background: 'none', 
-            border: 'none', 
-            color: 'rgba(255,255,255,0.7)', 
-            fontSize: '0.875rem',
-            cursor: 'pointer',
-            textDecoration: 'underline'
-          }}
-        >
-          前の質問に戻る
-        </button>
+        <button onClick={handleBack} className="diag-back">← 前の質問に戻る</button>
       )}
 
-      <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)', fontSize: '0.75rem', display: 'flex', gap: '0.5rem', color: 'rgba(255,255,255,0.8)' }}>
+      <div className="diag-foot">
         <HelpCircle size={14} />
         <span>知りたい内容を選ぶだけで、適切な学習コンテンツへ導きます。</span>
       </div>
