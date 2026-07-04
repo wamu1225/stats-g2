@@ -1,5 +1,6 @@
-/* stats-g2/src/index.css — 親しみやすい実践入門テーマ (teal × cream) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+/* stats-g2/src/index.css — 統計ワークブック（friendly editorial）テーマ */
+/* 見出し＝Zen Maru Gothic（丸ゴシックで親しみやすさ）／本文＝Zen Kaku Gothic New（可読性の高い角ゴ） */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
 @import 'katex/dist/katex.min.css';
 
 :root {
@@ -41,18 +42,31 @@
 
   /* Semantic */
   --accent: #dd5b2a;
+  --accent-dark: #b8461c;
   --success: #1aae39;
   --success-bg: #f0fdf4;
+
+  /* Typography — 丸ゴ見出し × 角ゴ本文 */
+  --font-display: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Yu Gothic UI', sans-serif;
+  --font-body: 'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo UI', sans-serif;
+
+  /* Signature motif — graph-paper dot grid */
+  --grid-dot: rgba(15, 118, 110, 0.07);
 }
 
 body {
   margin: 0;
-  font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo UI', sans-serif;
-  background-color: var(--bg);
+  font-family: var(--font-body);
   color: var(--text-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  /* 統計ワークブックの署名：ごく淡い方眼ドット */
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--grid-dot) 1.1px, transparent 1.1px);
+  background-size: 22px 22px;
+  background-position: -1px -1px;
+  background-attachment: fixed;
 }
 
 .container {

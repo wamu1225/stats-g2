@@ -549,10 +549,19 @@ function App() {
   return (
     <div className="container" style={{ maxWidth: activeModuleId ? '800px' : view === 'glossary' ? '1000px' : '800px' }}>
       <header className="header">
-        <h1 className="title" onClick={() => updateModuleId(null)} style={{ cursor: 'pointer' }}>統計検定 2級</h1>
-        <p className="subtitle">学習リファレンス</p>
+        <div className="masthead" onClick={() => updateModuleId(null)}>
+          <svg className="masthead-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M4 31 C 12 31, 15 9, 20 9 C 25 9, 28 31, 36 31" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+            <line x1="3" y1="34" x2="37" y2="34" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="20" cy="9" r="1.9" fill="currentColor" />
+          </svg>
+          <div>
+            <h1 className="title">統計検定 <span className="title-lv">2級</span></h1>
+            <p className="subtitle">学習リファレンス</p>
+          </div>
+        </div>
         {!activeModuleId && view === 'dashboard' && (
-          <>
+          <div className="hero-banner">
             <p className="hero-lead">図解と逆引き診断で、2級の全範囲をやさしく攻略。</p>
             <div className="hero-chips">
               <span className="hero-chip">6章 19分野</span>
@@ -560,7 +569,7 @@ function App() {
               <span className="hero-chip">逆引き診断</span>
               <span className="hero-chip">全範囲クイズ</span>
             </div>
-          </>
+          </div>
         )}
       </header>
 
@@ -594,8 +603,13 @@ function App() {
             <motion.div key={activeModuleId} initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }}>
               <button className="btn-back" onClick={() => updateModuleId(null)}><ChevronLeft size={18} /> 一覧に戻る</button>
               <div className="card">
-                <span className="badge-chapter">Chapter {activeModule?.chapter}</span>
-                <h2 style={{ marginTop: '0.5rem' }}>{parseContent(activeModule?.title || '')}</h2>
+                <div className="chapter-head">
+                  <span className="chapter-num">{activeModule?.chapter}</span>
+                  <div>
+                    <span className="chapter-kicker">CHAPTER {activeModule?.chapter}</span>
+                    <h2 className="module-title">{parseContent(activeModule?.title || '')}</h2>
+                  </div>
+                </div>
                 <div className="content-body">{activeModule && parseContent(activeModule.content)}</div>
               </div>
               <div style={{ marginTop: '2rem' }}>

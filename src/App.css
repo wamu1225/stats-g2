@@ -8,54 +8,83 @@
   padding: 1rem;
 }
 
-/* ── Header ──────────────────────────────────────── */
+/* ── Masthead（統計ワークブックの題字） ───────────── */
 
 .header {
-  text-align: center;
   margin-bottom: 1.5rem;
   padding-top: 0.5rem;
 }
 
+/* 題字：ブランドマーク（分布曲線）＋タイトルを横並び・左寄せ */
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+.masthead-mark {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  color: var(--primary);
+}
 .title {
-  font-size: 1.75rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 900;
   color: var(--text);
   margin: 0;
   cursor: pointer;
-  letter-spacing: -0.625px;
-  line-height: 1.23;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+.title .title-lv {
+  color: var(--primary);
 }
 
 .subtitle {
-  font-size: 0.875rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
   color: var(--text-muted);
-  margin-top: 0.25rem;
+  margin: 0.35rem 0 0 0;
 }
 
-/* ホームのヒーロー（価値訴求＋一目チップ） */
+/* ホームのヒーロー：方眼地の題字バナー（価値訴求＋一目チップ） */
+.hero-banner {
+  margin-top: 1rem;
+  padding: 1.15rem 1.25rem;
+  border: 1.5px solid var(--primary);
+  border-radius: var(--radius-card);
+  background:
+    radial-gradient(rgba(15, 118, 110, 0.10) 1.1px, transparent 1.1px) -1px -1px / 18px 18px,
+    linear-gradient(180deg, #ffffff 0%, var(--primary-light) 100%);
+  box-shadow: 4px 4px 0 rgba(15, 118, 110, 0.10);
+}
 .hero-lead {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--primary-text);
-  margin: 0.75rem auto 0;
-  max-width: 30rem;
-  line-height: 1.6;
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--primary-hover);
+  margin: 0;
+  line-height: 1.55;
 }
 .hero-chips {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 0.4rem;
   margin-top: 0.85rem;
 }
 .hero-chip {
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.76rem;
+  font-weight: 700;
   color: var(--primary-text);
-  background: var(--primary-light);
-  border: 1px solid rgba(15, 118, 110, 0.18);
+  background: #ffffff;
+  border: 1px solid rgba(15, 118, 110, 0.28);
   border-radius: var(--radius-pill);
-  padding: 0.2rem 0.7rem;
+  padding: 0.22rem 0.72rem;
 }
 
 /* ── Navigation Tabs ─────────────────────────────── */
@@ -73,7 +102,7 @@
   color: var(--text-muted);
   border-bottom: 2px solid transparent;
   transition: color 0.15s, border-color 0.15s;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
 }
 
 .nav-tab:hover {
@@ -149,7 +178,7 @@
   border-radius: var(--radius-btn);
   font-weight: 600;
   font-size: 0.9375rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   cursor: pointer;
   width: 100%;
   display: flex;
@@ -175,7 +204,7 @@
   border-radius: var(--radius-btn);
   font-size: 0.8125rem;
   font-weight: 500;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   cursor: pointer;
   color: var(--text);
   transition: background 0.15s, transform 0.1s;
@@ -207,7 +236,7 @@
   cursor: pointer;
   padding: 4px 6px;
   border-radius: var(--radius-sm);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   transition: background 0.15s, color 0.15s;
 }
 
@@ -237,6 +266,51 @@
   padding: 2px 8px;
   border-radius: var(--radius-pill);
   letter-spacing: 0.125px;
+}
+
+/* ── Chapter head（ワークボードの章題字：大きな章番号） ── */
+.chapter-head {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.3rem;
+}
+.chapter-num {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--primary);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 3px 3px 0 rgba(15, 118, 110, 0.18);
+}
+.chapter-kicker {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--primary);
+}
+.module-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+  margin: 0.15rem 0 0 0;
+}
+.module-title .content-p {
+  margin: 0;
+  color: var(--text);
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .badge-level {
@@ -293,28 +367,32 @@
 /* ── Content Headings ────────────────────────────── */
 
 .content-h2 {
-  font-size: 1.375rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 900;
   margin: 2rem 0 1rem 0;
   color: var(--text);
   letter-spacing: -0.3px;
-  border-bottom: 1px solid var(--border);
   padding-bottom: 0.5rem;
+  border-bottom: 2px dotted rgba(15, 118, 110, 0.35);
 }
 
+/* 番号つき節（1. 代表値…）＝ワークブックの節見出し */
 .content-h3 {
-  font-size: 1.125rem;
+  font-family: var(--font-display);
+  font-size: 1.18rem;
   font-weight: 700;
-  margin: 1.75rem 0 0.75rem 0;
+  margin: 1.9rem 0 0.8rem 0;
   color: var(--text);
   letter-spacing: -0.2px;
-  border-left: 3px solid var(--primary);
-  padding-left: 0.75rem;
+  border-left: 4px solid var(--primary);
+  padding: 0.1rem 0 0.1rem 0.75rem;
 }
 
 .content-h4 {
-  font-size: 1rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
   margin: 1.5rem 0 0.5rem 0;
   color: var(--text);
 }
@@ -436,7 +514,7 @@
   border-radius: var(--radius-card);
   border: 1px solid var(--border);
   font-size: 0.9rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   outline: none;
   background: var(--card-bg);
   color: var(--text-body);
@@ -682,7 +760,7 @@ input[type="range"] {
   align-items: center;
   gap: 4px;
   color: var(--primary);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   transition: background 0.15s, border-color 0.15s;
 }
 
@@ -866,7 +944,7 @@ input[type="range"] {
   cursor: pointer;
   text-decoration: underline;
   padding: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   transition: color 0.15s;
 }
 
