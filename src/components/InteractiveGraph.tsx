@@ -29,6 +29,7 @@ const typeToTitle: Record<string, string> = {
   update: 'ベイズ更新：確信度の変化',
   overfit: '過学習：モデルの複雑さと汎化性能',
   multico: '多重共線性：不安定な係数',
+  regression: '回帰分析：相関の強さと当てはまり',
   skewkurt: '歪度と尖度：分布の形を読む'
 };
 
@@ -118,9 +119,31 @@ export const InteractiveGraph: React.FC<Props> = ({ type }) => {
         line.push({ x, y });
       }
       return { line, dots: basePoints };
+    } else if (type === 'regression') {
+      // Scatter with target correlation `corr`; fit the REAL OLS line and R² from the points.
+      let seed = 1234;
+      const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+      const r = corr;
+      const dots: { x: number; y: number }[] = [];
+      for (let i = 0; i < 30; i++) {
+        const x = rnd() * 6 - 3;
+        const noise = (rnd() - 0.5) + (rnd() - 0.5) + (rnd() - 0.5); // ~normal
+        const y = r * x + Math.sqrt(Math.max(0, 1 - r * r)) * noise * 1.9;
+        dots.push({ x: +x.toFixed(2), y: +y.toFixed(2) });
+      }
+      const nn = dots.length;
+      const mx = dots.reduce((a, d) => a + d.x, 0) / nn;
+      const my = dots.reduce((a, d) => a + d.y, 0) / nn;
+      let sxy = 0, sxx = 0, syy = 0;
+      for (const d of dots) { sxy += (d.x - mx) * (d.y - my); sxx += (d.x - mx) ** 2; syy += (d.y - my) ** 2; }
+      const slope = sxy / sxx;
+      const intercept = my - slope * mx;
+      const r2 = syy > 0 ? (sxy * sxy) / (sxx * syy) : 0;
+      const line = [{ x: -3.5, y: intercept + slope * -3.5 }, { x: 3.5, y: intercept + slope * 3.5 }];
+      return { dots, line, r2 };
     }
     return data;
-  }, [type, n, df, degree]);
+  }, [type, n, df, degree, corr]);
 
   const renderChart = () => {
     if (type === 'overfit') {
@@ -158,6 +181,29 @@ export const InteractiveGraph: React.FC<Props> = ({ type }) => {
             回帰平面
           </motion.div>
           <div style={{ fontSize: '0.75rem', marginTop: '1rem', color: '#64748b' }}>相関が高いと推定量が不安定になります</div>
+        </div>
+      );
+    }
+
+    if (type === 'regression') {
+      const { dots, line, r2 } = chartData as { dots: { x: number; y: number }[]; line: { x: number; y: number }[]; r2: number };
+      return (
+        <div style={{ position: 'relative' }}>
+          <div className="stat-badge" style={{ position: 'absolute', top: -10, right: 0, zIndex: 10, background: 'var(--primary)', color: 'white' }}>
+            R² = {r2.toFixed(2)}（当てはまり {r2 >= 0.7 ? '良好' : r2 >= 0.3 ? 'ふつう' : '弱い'}）
+          </div>
+          <ResponsiveContainer width="100%" height={200}>
+            <ComposedChart margin={{ top: 20, right: 12, left: -20, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" dataKey="x" domain={[-4, 4]} hide />
+              <YAxis type="number" dataKey="y" domain={[-4, 4]} hide />
+              <Scatter data={dots} fill="var(--primary)" fillOpacity={0.7} />
+              <Line data={line} type="linear" dataKey="y" stroke="var(--accent)" strokeWidth={2.6} dot={false} isAnimationActive={false} />
+            </ComposedChart>
+          </ResponsiveContainer>
+          <div style={{ textAlign: 'center', fontSize: '0.68rem', color: '#94a3b8', marginTop: 2 }}>
+            オレンジ＝最小二乗回帰直線。相関が強いほど点が直線に集まり R²（説明できる割合）が上がります。
+          </div>
         </div>
       );
     }
@@ -292,6 +338,12 @@ export const InteractiveGraph: React.FC<Props> = ({ type }) => {
         {type === 'multico' && (
           <div className="slider-container">
             <div className="slider-label"><span>説明変数間の相関</span> <span>{corr.toFixed(2)}</span></div>
+            <input type="range" min="0" max="0.99" step="0.01" value={corr} onChange={e => setCorr(parseFloat(e.target.value))} />
+          </div>
+        )}
+        {type === 'regression' && (
+          <div className="slider-container">
+            <div className="slider-label"><span>相関の強さ ($r$)</span> <span>{corr.toFixed(2)}</span></div>
             <input type="range" min="0" max="0.99" step="0.01" value={corr} onChange={e => setCorr(parseFloat(e.target.value))} />
           </div>
         )}
