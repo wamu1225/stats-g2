@@ -174,7 +174,7 @@ function App() {
 
   const parseInlineContent = useCallback((text: string): React.ReactNode => {
     function parseInline(t: string): React.ReactNode {
-      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[correlation\]\]|\[\[zscore\]\]|\[\[ppv\]\]|\[\[venn\]\]|\[\[binomial\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
+      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[correlation\]\]|\[\[zscore\]\]|\[\[ppv\]\]|\[\[venn\]\]|\[\[binomial\]\]|\[\[timeseries\]\]|\[\[scaleladder\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
       const parts = t.split(regex);
       return (
         <>
@@ -319,6 +319,70 @@ function App() {
                   </svg>
                   <figcaption className="g2-fig-cap">
                     散布図と相関係数 r の対応。点が右上がりに揃うほど r は +1 に、右下がりに揃うほど −1 に近づく。散らばって傾向がなければ r ≈ 0。ただし右下の U 字のように、はっきりした関係があっても r が測るのは<strong>線形</strong>の傾きだけなので r ≈ 0 になる。r=0 は「線形関係がない」であって「無関係」ではない。
+                  </figcaption>
+                </figure>
+              );
+            }
+            if (part === '[[timeseries]]') {
+              const N = 24, x0 = 30, y0 = 16, plotW = 288, plotH = 116;
+              let seed = 7;
+              const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+              const raw: number[] = [];
+              for (let t = 0; t < N; t++) raw.push(1 + 0.05 * t + 0.6 * Math.sin((2 * Math.PI * t) / 12) + (rnd() - 0.5) * 0.7);
+              const half = 2;
+              const ma = raw.map((_, t) => { let s = 0, c = 0; for (let j = -half; j <= half; j++) { if (t + j >= 0 && t + j < N) { s += raw[t + j]; c++; } } return s / c; });
+              const all = raw.concat(ma), mn = Math.min(...all), mx = Math.max(...all);
+              const sx = (t: number) => x0 + (t / (N - 1)) * plotW;
+              const sy = (v: number) => y0 + plotH - ((v - mn) / (mx - mn)) * plotH;
+              const rawPoly = raw.map((v, t) => `${sx(t).toFixed(1)},${sy(v).toFixed(1)}`).join(' ');
+              const maPoly = ma.map((v, t) => `${sx(t).toFixed(1)},${sy(v).toFixed(1)}`).join(' ');
+              return (
+                <figure key={key} className="g2-figure">
+                  <svg viewBox="0 0 328 182" role="img" aria-label="時系列：ぎざぎざの生データと、なめらかな移動平均のトレンド線" className="g2-fig-svg">
+                    <line x1={x0} y1={y0 + plotH} x2={x0 + plotW} y2={y0 + plotH} stroke="#c9c3ba" strokeWidth={1} />
+                    <polyline points={rawPoly} fill="none" stroke="#b7b1a8" strokeWidth={1.3} />
+                    {raw.map((v, t) => <circle key={t} cx={sx(t)} cy={sy(v)} r={1.7} fill="#8a857e" />)}
+                    <polyline points={maPoly} fill="none" stroke="#0f766e" strokeWidth={2.8} />
+                    <line x1={x0} y1={y0 + plotH + 16} x2={x0 + 18} y2={y0 + plotH + 16} stroke="#b7b1a8" strokeWidth={1.3} />
+                    <text x={x0 + 22} y={y0 + plotH + 19} fontSize={9.5} fill="#615d59">生データ（ノイズ）</text>
+                    <line x1={x0 + 150} y1={y0 + plotH + 16} x2={x0 + 168} y2={y0 + plotH + 16} stroke="#0f766e" strokeWidth={2.8} />
+                    <text x={x0 + 172} y={y0 + plotH + 19} fontSize={9.5} fill="#0b5a54">移動平均＝トレンド</text>
+                  </svg>
+                  <figcaption className="g2-fig-cap">
+                    生データ（灰）は短期のノイズで上下にぎざぎざ揺れて、長期の傾向が見えにくい。各点を「前後数点の平均」に置きかえる移動平均（ティール）を取ると、ノイズが打ち消し合ってなめらかになり、右肩上がりのトレンドがはっきり見える。窓の幅を広げるほど平滑になるが、直近の変化への反応は遅くなる。
+                  </figcaption>
+                </figure>
+              );
+            }
+            if (part === '[[scaleladder]]') {
+              const steps = [
+                { name: '名義尺度', ex: '血液型・都道府県', op: '分類できる' },
+                { name: '順序尺度', ex: '満足度・順位', op: '＋ 大小がわかる' },
+                { name: '間隔尺度', ex: '摂氏温度・西暦', op: '＋ 差を計算できる' },
+                { name: '比例尺度', ex: '身長・体重', op: '＋ 比を計算できる' },
+              ];
+              const sw = 78, gap = 4, baseY = 176, unit = 34, x0 = 6;
+              return (
+                <figure key={key} className="g2-figure">
+                  <svg viewBox="0 0 336 196" role="img" aria-label="尺度の4水準の階段：名義＜順序＜間隔＜比例、上位ほど使える操作が増える" className="g2-fig-svg">
+                    {steps.map((s, i) => {
+                      const h = unit * (i + 1);
+                      const x = x0 + i * (sw + gap);
+                      const y = baseY - h;
+                      const op = 0.35 + i * 0.2;
+                      return (
+                        <g key={s.name}>
+                          <rect x={x} y={y} width={sw} height={h} rx={5} fill="#0f766e" fillOpacity={op} stroke="#0f766e" strokeWidth={1.3} />
+                          <text x={x + sw / 2} y={y + 16} textAnchor="middle" fontSize={11} fontWeight={800} fill={i >= 2 ? '#ffffff' : '#0b5a54'}>{s.name}</text>
+                          <text x={x + sw / 2} y={y + 30} textAnchor="middle" fontSize={8} fill={i >= 2 ? '#e6f5f2' : '#615d59'}>{s.ex}</text>
+                          <text x={x + sw / 2} y={baseY + 13} textAnchor="middle" fontSize={8.5} fontWeight={600} fill="#0b5a54">{s.op}</text>
+                        </g>
+                      );
+                    })}
+                    <line x1={x0} y1={baseY} x2={x0 + 4 * (sw + gap)} y2={baseY} stroke="#c9c3ba" strokeWidth={1} />
+                  </svg>
+                  <figcaption className="g2-fig-cap">
+                    尺度は名義＜順序＜間隔＜比例の順に「できる計算」が増える階段。上位の尺度は下位の操作をすべて含む。名義は分類だけ、順序は大小、間隔はさらに差、比例は差に加えて比まで意味を持つ（「180cmは90cmの2倍」と言えるのは比例尺度だけ）。
                   </figcaption>
                 </figure>
               );
