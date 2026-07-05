@@ -11,7 +11,7 @@ import { TermText } from './components/TermGlossary';
 import { DistributionSelector } from './components/DistributionSelector';
 import { ExamGuide } from './components/ExamGuide';
 import { buildUsecaseHtml } from './data/usecaseGuide';
-import { ChevronLeft, Book, LayoutDashboard, ArrowRight, Search as SearchIcon, X, Lightbulb, Target, ArrowDown, Dumbbell, Trash2, FileText, Shuffle, CheckCircle2, XCircle, AlertTriangle, BookOpen, ListChecks } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Book, LayoutDashboard, ArrowRight, Search as SearchIcon, X, Lightbulb, Target, ArrowDown, Dumbbell, Trash2, FileText, Shuffle, CheckCircle2, XCircle, AlertTriangle, BookOpen, ListChecks } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 
@@ -791,52 +791,55 @@ function App() {
                   {searchQuery && <button onClick={() => setSearchQuery('')} className="search-clear"><X size={16} /></button>}
                 </div>
               </div>
-              <div className="roadmap-grid">
+              <div className="roadmap-index">
                 {filteredModules.reduce<React.ReactNode[]>((acc, m, idx) => {
                   const prev = filteredModules[idx - 1];
                   if (!prev || prev.chapter !== m.chapter) {
                     acc.push(
-                      <div key={`ch-${m.chapter}`} className="chapter-header">
-                        <span className="badge-chapter" style={{ fontSize: '0.7rem' }}>Chapter {m.chapter}</span>
-                        <h3 className="content-h3" style={{ margin: '0.25rem 0 0' }}>{chapterNames[m.chapter]}</h3>
+                      <div key={`ch-${m.chapter}`} className="ch-divider">
+                        <span className="ch-badge">第{m.chapter}章</span>
+                        <h3 className="ch-name">{chapterNames[m.chapter]}</h3>
                       </div>
                     );
                   }
                   const p = progress[m.id];
+                  const no = m.id.split('-')[0];
                   acc.push(
-                    <div key={m.id} className="card-module" onClick={() => updateModuleId(m.id)}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span className="badge-chapter">Chapter {m.chapter}</span>
-                        {p && (
-                          <span className={`progress-badge ${p.score === p.total ? 'perfect' : ''}`}>
-                            {p.score === p.total ? '✓ ' : ''}{p.score}/{p.total}点
-                          </span>
-                        )}
-                      </div>
-                      <h4>{parseContent(m.title)}</h4>
-                      <div className="module-desc">{parseContent(m.description)}</div>
-                    </div>
+                    <button key={m.id} className="mod-row" onClick={() => updateModuleId(m.id)}>
+                      <span className={`mod-no ${p ? 'done' : ''}`}>{no}</span>
+                      <span className="mod-main">
+                        <span className="mod-title">{parseContent(m.title)}</span>
+                        <span className="module-desc">{parseContent(m.description)}</span>
+                      </span>
+                      {p && (
+                        <span className={`progress-badge ${p.score === p.total ? 'perfect' : ''}`}>
+                          {p.score === p.total ? '✓ ' : ''}{p.score}/{p.total}
+                        </span>
+                      )}
+                      <ChevronRight className="mod-chev" size={18} />
+                    </button>
                   );
                   return acc;
                 }, [])}
                 {!searchQuery && (
                   <>
-                    <div className="chapter-header">
-                      <span className="badge-chapter" style={{ fontSize: '0.7rem' }}>全範囲</span>
-                      <h3 className="content-h3" style={{ margin: '0.25rem 0 0' }}>まとめ</h3>
+                    <div className="ch-divider">
+                      <span className="ch-badge alt">総仕上げ</span>
+                      <h3 className="ch-name">全範囲クイズ</h3>
                     </div>
-                    <div className="card-module" style={{ cursor: 'pointer' }} onClick={startRandomQuiz}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span className="badge-chapter" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Shuffle size={12} /> 全範囲</span>
-                        {progress[COMPREHENSIVE_KEY] && (
-                          <span className={`progress-badge ${progress[COMPREHENSIVE_KEY].score === progress[COMPREHENSIVE_KEY].total ? 'perfect' : ''}`}>
-                            {progress[COMPREHENSIVE_KEY].score === progress[COMPREHENSIVE_KEY].total ? '✓ ' : ''}{progress[COMPREHENSIVE_KEY].score}/{progress[COMPREHENSIVE_KEY].total}点
-                          </span>
-                        )}
-                      </div>
-                      <h4>全範囲クイズ</h4>
-                      <div className="module-desc">全モジュールからランダム出題</div>
-                    </div>
+                    <button className="mod-row" onClick={startRandomQuiz}>
+                      <span className="mod-no alt"><Shuffle size={16} /></span>
+                      <span className="mod-main">
+                        <span className="mod-title">全範囲クイズ</span>
+                        <span className="module-desc">全モジュールからランダム出題</span>
+                      </span>
+                      {progress[COMPREHENSIVE_KEY] && (
+                        <span className={`progress-badge ${progress[COMPREHENSIVE_KEY].score === progress[COMPREHENSIVE_KEY].total ? 'perfect' : ''}`}>
+                          {progress[COMPREHENSIVE_KEY].score === progress[COMPREHENSIVE_KEY].total ? '✓ ' : ''}{progress[COMPREHENSIVE_KEY].score}/{progress[COMPREHENSIVE_KEY].total}
+                        </span>
+                      )}
+                      <ChevronRight className="mod-chev" size={18} />
+                    </button>
                   </>
                 )}
               </div>
