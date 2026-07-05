@@ -174,7 +174,7 @@ function App() {
 
   const parseInlineContent = useCallback((text: string): React.ReactNode => {
     function parseInline(t: string): React.ReactNode {
-      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[correlation\]\]|\[\[zscore\]\]|\[\[ppv\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
+      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[correlation\]\]|\[\[zscore\]\]|\[\[ppv\]\]|\[\[venn\]\]|\[\[binomial\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
       const parts = t.split(regex);
       return (
         <>
@@ -319,6 +319,57 @@ function App() {
                   </svg>
                   <figcaption className="g2-fig-cap">
                     散布図と相関係数 r の対応。点が右上がりに揃うほど r は +1 に、右下がりに揃うほど −1 に近づく。散らばって傾向がなければ r ≈ 0。ただし右下の U 字のように、はっきりした関係があっても r が測るのは<strong>線形</strong>の傾きだけなので r ≈ 0 になる。r=0 は「線形関係がない」であって「無関係」ではない。
+                  </figcaption>
+                </figure>
+              );
+            }
+            if (part === '[[venn]]') {
+              return (
+                <figure key={key} className="g2-figure">
+                  <svg viewBox="0 0 320 172" role="img" aria-label="加法定理のベン図：A∪B は A と B を足して重なり A∩B を引く" className="g2-fig-svg">
+                    <circle cx={124} cy={84} r={62} fill="#0f766e" fillOpacity={0.16} stroke="#0f766e" strokeWidth={1.8} />
+                    <circle cx={196} cy={84} r={62} fill="#dd5b2a" fillOpacity={0.14} stroke="#dd5b2a" strokeWidth={1.8} />
+                    <text x={86} y={62} textAnchor="middle" fontSize={17} fontWeight={800} fill="#0b5a54">A</text>
+                    <text x={234} y={62} textAnchor="middle" fontSize={17} fontWeight={800} fill="#b8461c">B</text>
+                    <text x={160} y={80} textAnchor="middle" fontSize={11} fontWeight={700} fill="#33302c">A∩B</text>
+                    <text x={160} y={94} textAnchor="middle" fontSize={8.5} fill="#615d59">（重なり）</text>
+                    <text x={160} y={162} textAnchor="middle" fontSize={11} fontWeight={700} fill="#33302c">P(A∪B) ＝ P(A) ＋ P(B) − P(A∩B)</text>
+                  </svg>
+                  <figcaption className="g2-fig-cap">
+                    「A または B」（A∪B）の確率は、A と B をそのまま足すと重なり A∩B を<strong>二重に数えて</strong>しまう。だから重なりの分 P(A∩B) を1回引く——これが加法定理。A と B が排反（重なりなし＝A∩B が空）なら引く分がゼロなので、単純な足し算になる。
+                  </figcaption>
+                </figure>
+              );
+            }
+            if (part === '[[binomial]]') {
+              // Binomial B(10, 0.3) PMF bars
+              const nB = 10, pB = 0.3;
+              const logFact = (m: number) => { let v = 0; for (let i = 2; i <= m; i++) v += Math.log(i); return v; };
+              const pmf = (k: number) => Math.exp(logFact(nB) - logFact(k) - logFact(nB - k) + k * Math.log(pB) + (nB - k) * Math.log(1 - pB));
+              const bars = Array.from({ length: nB + 1 }, (_, k) => ({ k, p: pmf(k) }));
+              const maxP = Math.max(...bars.map(b => b.p));
+              const x0 = 34, y0 = 12, plotW = 276, plotH = 118, bw = plotW / (nB + 1);
+              const mean = nB * pB;
+              return (
+                <figure key={key} className="g2-figure">
+                  <svg viewBox="0 0 324 176" role="img" aria-label="二項分布 B(10,0.3) の確率分布：k=3付近が最も高い棒グラフ" className="g2-fig-svg">
+                    <text x={162} y={10} textAnchor="middle" fontSize={11} fontWeight={700} fill="#33302c">二項分布 B(n=10, p=0.3)：成功回数 k の確率</text>
+                    {bars.map(b => {
+                      const h = (b.p / maxP) * plotH;
+                      const bx = x0 + b.k * bw + bw * 0.16;
+                      const near = Math.abs(b.k - mean) <= 0.5;
+                      return (
+                        <g key={b.k}>
+                          <rect x={bx} y={y0 + 8 + (plotH - h)} width={bw * 0.68} height={h} rx={2} fill={near ? '#0f766e' : '#0f766e'} fillOpacity={near ? 0.95 : 0.4} />
+                          <text x={bx + bw * 0.34} y={y0 + 8 + plotH + 12} textAnchor="middle" fontSize={9} fill="#615d59">{b.k}</text>
+                        </g>
+                      );
+                    })}
+                    <line x1={x0} y1={y0 + 8 + plotH} x2={x0 + plotW} y2={y0 + 8 + plotH} stroke="#c9c3ba" strokeWidth={1} />
+                    <text x={162} y={168} textAnchor="middle" fontSize={9.5} fill="#615d59">成功回数 k（平均 np ＝ 3 が最も出やすい）</text>
+                  </svg>
+                  <figcaption className="g2-fig-cap">
+                    n＝10 回試して成功確率 p＝0.3 のときの「成功回数 k」の分布。棒の高さが各 k の起こりやすさ P(X＝k)。平均 np＝3 のあたりが最も高く、そこから離れるほど低くなる。左右非対称（p が 0.5 より小さいので右にやや裾を引く）なのが二項分布の特徴。
                   </figcaption>
                 </figure>
               );
