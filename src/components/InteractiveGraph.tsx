@@ -58,12 +58,14 @@ export const InteractiveGraph: React.FC<Props> = ({ type }) => {
         return Math.exp((k - 1) * Math.log(x) - x - logFactKm1);
       };
 
+      // Use the exact standardized-Gamma density for ALL n (log-space is stable to n=50).
+      // Do NOT hard-switch to N(0,1) at a cutoff: that produced a visible discontinuity
+      // (the curve stayed skewed at n=25 then snapped to perfectly symmetric at n=26).
+      // Skewness fades smoothly as 2/√n, so the blue curve approaches — but never perfectly
+      // matches — the dashed N(0,1), which is the honest CLT behavior.
       for (let z = -4; z <= 4; z += 0.05) {
         const s = z * sqrtN + n;
-        // For n>25, Gamma(n,1) standardized is visually indistinguishable from N(0,1)
-        const density = n <= 25
-          ? gammaPDF(s, n) * sqrtN
-          : normalPDF(z, 0, 1);
+        const density = gammaPDF(s, n) * sqrtN;
         data.push({ x: z.toFixed(2), y: Math.max(0, density), ref: normalPDF(z, 0, 1) });
       }
     } else if (type === 't') {
