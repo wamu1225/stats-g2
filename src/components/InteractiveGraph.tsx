@@ -311,19 +311,19 @@ export const InteractiveGraph: React.FC<Props> = ({ type }) => {
       <div className="controls">
         {type === 'normal' && (
           <div className="slider-container">
-            <div className="slider-label"><span>サンプルサイズ ($n$)</span> <span>{n}</span></div>
+            <div className="slider-label"><span>サンプルサイズ (n)</span> <span>{n}</span></div>
             <input type="range" min="1" max="50" step="1" value={n} onChange={e => setN(parseInt(e.target.value))} />
           </div>
         )}
         {(type === 't' || type === 'chi2' || type === 'f') && (
           <div className="slider-container">
-            <div className="slider-label"><span>自由度 ($df$)</span> <span>{df}</span></div>
+            <div className="slider-label"><span>自由度 (df)</span> <span>{df}</span></div>
             <input type="range" min="1" max="50" step="1" value={df} onChange={e => setDf(parseInt(e.target.value))} />
           </div>
         )}
         {type === 'update' && (
           <div className="slider-container">
-            <div className="slider-label"><span>観測データ数 ($n$)</span> <span>{n}</span></div>
+            <div className="slider-label"><span>観測データ数 (n)</span> <span>{n}</span></div>
             <input type="range" min="1" max="50" step="1" value={n} onChange={e => setN(parseInt(e.target.value))} />
           </div>
         )}
@@ -343,7 +343,7 @@ export const InteractiveGraph: React.FC<Props> = ({ type }) => {
         )}
         {type === 'regression' && (
           <div className="slider-container">
-            <div className="slider-label"><span>相関の強さ ($r$)</span> <span>{corr.toFixed(2)}</span></div>
+            <div className="slider-label"><span>相関の強さ (r)</span> <span>{corr.toFixed(2)}</span></div>
             <input type="range" min="0" max="0.99" step="0.01" value={corr} onChange={e => setCorr(parseFloat(e.target.value))} />
           </div>
         )}
