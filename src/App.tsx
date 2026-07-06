@@ -174,7 +174,7 @@ function App() {
 
   const parseInlineContent = useCallback((text: string): React.ReactNode => {
     function parseInline(t: string): React.ReactNode {
-      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[correlation\]\]|\[\[zscore\]\]|\[\[ppv\]\]|\[\[venn\]\]|\[\[binomial\]\]|\[\[timeseries\]\]|\[\[scaleladder\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
+      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[correlation\]\]|\[\[zscore\]\]|\[\[ppv\]\]|\[\[venn\]\]|\[\[binomial\]\]|\[\[timeseries\]\]|\[\[scaleladder\]\]|\[\[twosample\]\]|\[\[sampling\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
       const parts = t.split(regex);
       return (
         <>
@@ -319,6 +319,74 @@ function App() {
                   </svg>
                   <figcaption className="g2-fig-cap">
                     散布図と相関係数 r の対応。点が右上がりに揃うほど r は +1 に、右下がりに揃うほど −1 に近づく。散らばって傾向がなければ r ≈ 0。ただし右下の U 字のように、はっきりした関係があっても r が測るのは<strong>線形</strong>の傾きだけなので r ≈ 0 になる。r=0 は「線形関係がない」であって「無関係」ではない。
+                  </figcaption>
+                </figure>
+              );
+            }
+            if (part === '[[twosample]]') {
+              const yb = 118, ph = 74, hw = 66;
+              const aCx = 108, bCx = 208;
+              const gauss = (cx: number) => { let p = ''; for (let t = -3; t <= 3.001; t += 0.25) { const x = cx + t * (hw / 3); const y = yb - ph * Math.exp(-(t * t) / 2); p += `${x.toFixed(1)},${y.toFixed(1)} `; } return p.trim(); };
+              return (
+                <figure key={key} className="g2-figure">
+                  <svg viewBox="0 0 328 172" role="img" aria-label="2標本の平均の差：A群とB群の分布が重なる中で平均差が偶然より大きいかを検定する" className="g2-fig-svg">
+                    <line x1={20} y1={yb} x2={308} y2={yb} stroke="#c9c3ba" strokeWidth={1} />
+                    <polyline points={gauss(aCx)} fill="#0f766e" fillOpacity={0.12} stroke="#0f766e" strokeWidth={2} />
+                    <polyline points={gauss(bCx)} fill="#dd5b2a" fillOpacity={0.12} stroke="#dd5b2a" strokeWidth={2} />
+                    <line x1={aCx} y1={yb} x2={aCx} y2={yb - ph} stroke="#0b5a54" strokeWidth={1.4} strokeDasharray="3 2" />
+                    <line x1={bCx} y1={yb} x2={bCx} y2={yb - ph} stroke="#b8461c" strokeWidth={1.4} strokeDasharray="3 2" />
+                    <text x={aCx} y={28} textAnchor="middle" fontSize={11} fontWeight={700} fill="#0b5a54">A群</text>
+                    <text x={bCx} y={28} textAnchor="middle" fontSize={11} fontWeight={700} fill="#b8461c">B群</text>
+                    <text x={aCx} y={yb + 13} textAnchor="middle" fontSize={9.5} fill="#0b5a54">x̄_A</text>
+                    <text x={bCx} y={yb + 13} textAnchor="middle" fontSize={9.5} fill="#b8461c">x̄_B</text>
+                    <line x1={aCx} y1={yb + 24} x2={bCx} y2={yb + 24} stroke="#33302c" strokeWidth={1} />
+                    <line x1={aCx} y1={yb + 20} x2={aCx} y2={yb + 28} stroke="#33302c" strokeWidth={1} />
+                    <line x1={bCx} y1={yb + 20} x2={bCx} y2={yb + 28} stroke="#33302c" strokeWidth={1} />
+                    <text x={(aCx + bCx) / 2} y={yb + 38} textAnchor="middle" fontSize={9.5} fontWeight={700} fill="#33302c">平均の差 x̄_B − x̄_A</text>
+                  </svg>
+                  <figcaption className="g2-fig-cap">
+                    2群のデータは分布が重なっているため、平均の差 x̄_B − x̄_A が見かけ上あっても「たまたま」かもしれない。2標本の検定は、この差が<strong>標本のばらつき（標準誤差）から予想される揺らぎより大きいか</strong>を調べ、母平均に本当に差があるか（μ_A ≠ μ_B）を判断する。重なりが大きく差が小さいほど、有意と言いにくくなる。
+                  </figcaption>
+                </figure>
+              );
+            }
+            if (part === '[[sampling]]') {
+              const panels = [
+                { title: '単純無作為', cx: 8 },
+                { title: '層化', cx: 116 },
+                { title: 'クラスター', cx: 224 },
+              ];
+              const pw = 96, py = 24, ph = 96;
+              let seed = 3;
+              const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+              const nodes: React.ReactNode[] = [];
+              panels.forEach((p) => {
+                nodes.push(<text key={p.title + 't'} x={p.cx + pw / 2} y={16} textAnchor="middle" fontSize={10.5} fontWeight={700} fill="#33302c">{p.title}</text>);
+                nodes.push(<rect key={p.title + 'r'} x={p.cx} y={py} width={pw} height={ph} rx={6} fill="none" stroke="#c9c3ba" strokeWidth={1} />);
+                if (p.title === '層化') {
+                  for (let b = 0; b < 3; b++) nodes.push(<rect key={p.title + 'b' + b} x={p.cx} y={py + b * (ph / 3)} width={pw} height={ph / 3} fill={b % 2 ? '#0f766e' : '#dd5b2a'} fillOpacity={0.06} />);
+                }
+                if (p.title === 'クラスター') {
+                  for (let c = 0; c < 4; c++) { const gx = p.cx + 6 + (c % 2) * (pw / 2 - 2); const gy = py + 8 + Math.floor(c / 2) * (ph / 2 - 4); if (c === 1 || c === 2) nodes.push(<rect key={p.title + 'cs' + c} x={gx - 3} y={gy - 3} width={40} height={38} rx={4} fill="#0f766e" fillOpacity={0.14} stroke="#0f766e" strokeWidth={1.2} />); }
+                }
+                for (let i = 0; i < 28; i++) {
+                  const dx = p.cx + 8 + rnd() * (pw - 16);
+                  const dy = py + 8 + rnd() * (ph - 16);
+                  let picked = false;
+                  if (p.title === '単純無作為') picked = rnd() < 0.28;
+                  else if (p.title === '層化') picked = rnd() < 0.28;
+                  else picked = dx > p.cx + 6 && dx < p.cx + 6 + 40 && dy > py + 8 && dy < py + 8 + 38 || (dx > p.cx + pw / 2 + 2 && dy > py + ph / 2 - 1);
+                  nodes.push(<circle key={p.title + 'd' + i} cx={dx.toFixed(1)} cy={dy.toFixed(1)} r={2.4} fill={picked ? '#0f766e' : '#c9c3ba'} />);
+                }
+              });
+              return (
+                <figure key={key} className="g2-figure">
+                  <svg viewBox="0 0 328 138" role="img" aria-label="標本抽出法：単純無作為・層化・クラスターの違い" className="g2-fig-svg">
+                    {nodes}
+                    <text x={164} y={132} textAnchor="middle" fontSize={9} fill="#615d59">濃い点＝標本に選ばれた個体</text>
+                  </svg>
+                  <figcaption className="g2-fig-cap">
+                    <strong>単純無作為抽出</strong>は母集団全体から等確率でばらばらに選ぶ。<strong>層化抽出</strong>は母集団を似た者どうしの層（例：年代）に分け、各層から選ぶことで偏りを抑える。<strong>クラスター抽出</strong>は母集団を集団（例：学校・地区）に分け、選ばれた集団を丸ごと調べる（コストは低いが精度は下がりやすい）。
                   </figcaption>
                 </figure>
               );
