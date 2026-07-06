@@ -174,7 +174,7 @@ function App() {
 
   const parseInlineContent = useCallback((text: string): React.ReactNode => {
     function parseInline(t: string): React.ReactNode {
-      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[correlation\]\]|\[\[zscore\]\]|\[\[ppv\]\]|\[\[venn\]\]|\[\[binomial\]\]|\[\[timeseries\]\]|\[\[scaleladder\]\]|\[\[twosample\]\]|\[\[sampling\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
+      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[correlation\]\]|\[\[zscore\]\]|\[\[ppv\]\]|\[\[venn\]\]|\[\[binomial\]\]|\[\[timeseries\]\]|\[\[scaleladder\]\]|\[\[twosample\]\]|\[\[sampling\]\]|\[\[vartransform\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
       const parts = t.split(regex);
       return (
         <>
@@ -319,6 +319,37 @@ function App() {
                   </svg>
                   <figcaption className="g2-fig-cap">
                     散布図と相関係数 r の対応。点が右上がりに揃うほど r は +1 に、右下がりに揃うほど −1 に近づく。散らばって傾向がなければ r ≈ 0。ただし右下の U 字のように、はっきりした関係があっても r が測るのは<strong>線形</strong>の傾きだけなので r ≈ 0 になる。r=0 は「線形関係がない」であって「無関係」ではない。
+                  </figcaption>
+                </figure>
+              );
+            }
+            if (part === '[[vartransform]]') {
+              const yb = 120;
+              const gauss = (cx: number, hw: number, ph: number) => { let p = ''; for (let t = -3; t <= 3.001; t += 0.2) { const x = cx + t * (hw / 3); const y = yb - ph * Math.exp(-(t * t) / 2); p += `${x.toFixed(1)},${y.toFixed(1)} `; } return p.trim(); };
+              return (
+                <figure key={key} className="g2-figure">
+                  <svg viewBox="0 0 336 184" role="img" aria-label="分散の変換：定数の加算は分散を変えず、係数倍は分散をa2乗倍にする" className="g2-fig-svg">
+                    {/* left: +b shift */}
+                    <text x={84} y={14} textAnchor="middle" fontSize={10.5} fontWeight={700} fill="#33302c">＋b（平行移動）</text>
+                    <line x1={12} y1={yb} x2={156} y2={yb} stroke="#c9c3ba" strokeWidth={1} />
+                    <polyline points={gauss(58, 30, 66)} fill="#0f766e" fillOpacity={0.12} stroke="#0f766e" strokeWidth={2} />
+                    <polyline points={gauss(112, 30, 66)} fill="#dd5b2a" fillOpacity={0.1} stroke="#dd5b2a" strokeWidth={2} strokeDasharray="4 3" />
+                    <line x1={58} y1={40} x2={112} y2={40} stroke="#8a857e" strokeWidth={1} markerEnd="" />
+                    <text x={85} y={35} textAnchor="middle" fontSize={9} fill="#615d59">＋b →</text>
+                    <text x={84} y={yb + 16} textAnchor="middle" fontSize={9.5} fontWeight={700} fill="#0b5a54">分散は変わらない</text>
+                    <text x={84} y={yb + 29} textAnchor="middle" fontSize={8.5} fill="#615d59">同じ幅のまま位置だけ動く</text>
+                    {/* divider */}
+                    <line x1={168} y1={20} x2={168} y2={yb + 30} stroke="#e8e7e5" strokeWidth={1} />
+                    {/* right: xa scale */}
+                    <text x={252} y={14} textAnchor="middle" fontSize={10.5} fontWeight={700} fill="#33302c">×a（a倍・例 a=2）</text>
+                    <line x1={182} y1={yb} x2={326} y2={yb} stroke="#c9c3ba" strokeWidth={1} />
+                    <polyline points={gauss(252, 18, 70)} fill="#0f766e" fillOpacity={0.14} stroke="#0f766e" strokeWidth={2} />
+                    <polyline points={gauss(252, 40, 35)} fill="#dd5b2a" fillOpacity={0.1} stroke="#dd5b2a" strokeWidth={2} />
+                    <text x={252} y={yb + 16} textAnchor="middle" fontSize={9.5} fontWeight={700} fill="#b8461c">分散は a²＝4倍</text>
+                    <text x={252} y={yb + 29} textAnchor="middle" fontSize={8.5} fill="#615d59">幅が a 倍に広がる（低く平たく）</text>
+                  </svg>
+                  <figcaption className="g2-fig-cap">
+                    定数を足す（＋b）と分布は<strong>位置だけ</strong>動き、散らばり＝分散は変わらない（全員同じだけずらしても相対的な広がりは同じ）。一方 a 倍すると幅が a 倍に広がり、面積は一定なので低く平たくなる。散らばりは a 倍でも、<strong>分散は a² 倍</strong>（例：2倍で4倍）。だから V[aX+b] ＝ a²V[X]。
                   </figcaption>
                 </figure>
               );
