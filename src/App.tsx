@@ -1237,6 +1237,7 @@ function App() {
         <div className="footer-links">
           <button className="footer-link" onClick={() => switchView('about')}>サイトについて</button>
           <button className="footer-link" onClick={() => switchView('privacy')}>プライバシーポリシー</button>
+          <a className="footer-link" href="https://study-apps.com/editorial-policy/">編集方針</a>
           <a className="footer-link" href="https://forms.gle/ccMv7oKwz6ysDHBe6" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
         </div>
         <p className="footer-copy">© {new Date().getFullYear()} 統計検定 2級 学習リファレンス</p>
