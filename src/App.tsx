@@ -174,7 +174,7 @@ function App() {
 
   const parseInlineContent = useCallback((text: string): React.ReactNode => {
     function parseInline(t: string): React.ReactNode {
-      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[correlation\]\]|\[\[zscore\]\]|\[\[ppv\]\]|\[\[venn\]\]|\[\[binomial\]\]|\[\[timeseries\]\]|\[\[scaleladder\]\]|\[\[twosample\]\]|\[\[sampling\]\]|\[\[vartransform\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\])/g;
+      const regex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\*\*[\s\S]*?\*\*|\[\[term:.*?\]\][\s\S]*?\[\[\/term\]\]|\[\[translate:.*?\]\][\s\S]*?\[\[\/translate\]\]|\[\[darts\]\]|\[\[practical:.*?\]\][\s\S]*?\[\[\/practical\]\]|\[\[conjugate\]\]|\[\[hierarchy\]\]|\[\[boxplot\]\]|\[\[lorenz\]\]|\[\[correlation\]\]|\[\[zscore\]\]|\[\[ppv\]\]|\[\[venn\]\]|\[\[binomial\]\]|\[\[timeseries\]\]|\[\[scaleladder\]\]|\[\[twosample\]\]|\[\[sampling\]\]|\[\[vartransform\]\]|\[\[interactive:.*?\]\]|\[\[regularization-card\]\]|\[[^\]\n]+\]\([^)\n]+\))/g;
       const parts = t.split(regex);
       return (
         <>
@@ -184,6 +184,17 @@ function App() {
             if (part.startsWith('$$') && part.endsWith('$$')) return <MathDisplay key={key} formula={part.slice(2, -2)} block={true} />;
             if (part.startsWith('$') && part.endsWith('$')) return <MathDisplay key={key} formula={part.slice(1, -1)} />;
             if (part.startsWith('**') && part.endsWith('**')) return <strong key={key}>{parseInline(part.slice(2, -2))}</strong>;
+            // [ラベル](URL) — 主に study-apps.com 内の姉妹サイトへ渡すための記法。
+            // サイト内の移動は [[term:]] とモジュールナビが担うため、ここでは
+            // preventDefault せずブラウザに通常遷移させる（SPA ルータに渡さない）。
+            {
+              const link = part.match(/^\[([^\]\n]+)\]\(([^)\n]+)\)$/);
+              if (link) {
+                const [, label, url] = link;
+                const external = /^https?:\/\//.test(url);
+                return <a key={key} href={url} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{parseInline(label)}</a>;
+              }
+            }
             if (part.startsWith('[[term:')) {
               const idMatch = part.match(/\[\[term:(.*?)\]\]/);
               const contentMatch = part.match(/\]\]([\s\S]*?)\[\[\/term\]\]/);
