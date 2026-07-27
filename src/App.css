@@ -602,22 +602,23 @@
   line-height: 1.7;
 }
 
-/* ── Pedagogical callouts (replaces bare emoji markers) ── */
+/* ── Pedagogical callouts（塗り・角丸のカード風は使わず、細い罫のみ） ── */
 .callout {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
   align-items: flex-start;
   margin: 1.1rem 0;
-  padding: 0.7rem 0.85rem;
-  border-radius: 10px;
-  border-left: 3px solid;
+  padding: 0.15rem 0 0.15rem 0.85rem;
+  border-radius: 0;
+  border-left: 2px solid;
   line-height: 1.7;
+  background: none;
 }
 .callout .callout-ic { flex-shrink: 0; margin-top: 0.15rem; }
 .callout .callout-tx { color: var(--text-body); }
-.callout-tip { background: var(--primary-light); border-color: var(--primary); }
+.callout-tip { border-color: var(--primary); }
 .callout-tip .callout-ic { color: var(--primary); }
-.callout-note { background: var(--bg-warm); border-color: var(--border-solid); }
+.callout-note { border-color: var(--border-solid); }
 .callout-note .callout-ic { color: var(--text-muted); }
 
 .callout-head {
