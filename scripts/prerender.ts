@@ -87,7 +87,7 @@ for (const mod of modules) {
     fs.mkdirSync(modDir, { recursive: true });
   }
 
-  const seoText = stripMarkdown(mod.content).slice(0, 2000);
+  const seoText = stripMarkdown(mod.content).slice(0, 8000);
   const pageUrl = `${BASE_URL}/${mod.id}/`;
   const pageTitle = `${mod.title} | 統計検定 2級 学習リファレンス`;
 
