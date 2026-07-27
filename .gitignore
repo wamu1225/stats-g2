@@ -81,3 +81,7 @@ src/data/*_rebuilt.ts
 # Vite template default assets (replace with site logo if needed)
 src/assets/react.svg
 src/assets/vite.svg
+
+# 内部ドキュメントはディレクトリごと除外（2026-07-27）
+# 個別ファイル列挙だと docs/ROADMAP.md 等の新規ファイルが素通りする＝絶対NG2 のリスク
+docs/
