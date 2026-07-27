@@ -91,6 +91,20 @@ for (const mod of modules) {
   const pageUrl = `${BASE_URL}/${mod.id}/`;
   const pageTitle = `${mod.title} | 統計検定 2級 学習リファレンス`;
 
+  // クイズスニペット（最初の3問・静的HTMLにも本文として出す）
+  const quizSnippet = mod.quiz.slice(0, 3).map((q, qi) => {
+    const correctAnswer = q.options[q.correctAnswer];
+    return `<div style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:6px;border-left:3px solid #2563eb">
+  <p style="margin:0 0 6px;font-weight:600;color:#1e3a5f">Q${qi + 1}. ${q.question.replace(/\*\*(.*?)\*\*/g, '$1')}</p>
+  <p style="margin:0;color:#444;font-size:0.92rem">A. ${correctAnswer.replace(/\*\*(.*?)\*\*/g, '$1')}</p>
+</div>`;
+  }).join('\n');
+  const quizSnippetHtml = `<section style="margin-top:28px">
+  <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:#1e3a5f">確認クイズ（抜粋）</h2>
+  ${quizSnippet}
+  <p style="margin-top:12px;font-size:0.9rem;color:#555">全10問のクイズはサイトのインタラクティブ版でお試しください。</p>
+</section>`;
+
   let modHtml = subDirTemplateHtml
     .replace('<title>統計検定 2級 学習リファレンス</title>', `<title>${pageTitle}</title>`)
     .replace('<meta name="description" content="統計検定2級の合格を目指す学習リファレンス。確率・確率分布・推定・検定・回帰分析をインタラクティブな図と数式で解説。" />', `<meta name="description" content="${mod.description}" />`)
@@ -106,6 +120,7 @@ for (const mod of modules) {
   <h1 style="font-size:1.6rem;font-weight:700;border-bottom:2px solid #2563eb;padding-bottom:8px;margin-bottom:12px">${mod.title}</h1>
   <p style="color:#555;margin-bottom:20px;font-size:1.05rem">${mod.description}</p>
   <div style="white-space:pre-line;color:#333">${seoText}</div>
+  ${quizSnippetHtml}
   <nav style="margin-top:32px;border-top:1px solid #ddd;padding-top:16px">
     <a href="/stats-g2/" style="color:#2563eb;text-decoration:none">← ホームへ戻る</a>
   </nav>
