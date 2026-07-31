@@ -72,6 +72,22 @@
 
  2標本z検定の分母 = （独立なら分散は加算）。
 
+<figure class="g2-figure"><svg viewBox="0 0 328 172" role="img" aria-label="2標本の平均の差：A群とB群の分布が重なる中で平均差が偶然より大きいかを検定する" class="g2-fig-svg">
+    <line x1="20" y1="118" x2="308" y2="118" stroke="#c9c3ba" stroke-width="1" />
+    <polyline points="42.0,117.2 47.5,116.3 53.0,114.7 58.5,112.1 64.0,108.0 69.5,102.0 75.0,94.0 80.5,84.1 86.0,73.1 91.5,62.1 97.0,52.7 102.5,46.3 108.0,44.0 113.5,46.3 119.0,52.7 124.5,62.1 130.0,73.1 135.5,84.1 141.0,94.0 146.5,102.0 152.0,108.0 157.5,112.1 163.0,114.7 168.5,116.3 174.0,117.2" fill="#0f766e" fill-opacity="0.12" stroke="#0f766e" stroke-width="2" />
+    <polyline points="142.0,117.2 147.5,116.3 153.0,114.7 158.5,112.1 164.0,108.0 169.5,102.0 175.0,94.0 180.5,84.1 186.0,73.1 191.5,62.1 197.0,52.7 202.5,46.3 208.0,44.0 213.5,46.3 219.0,52.7 224.5,62.1 230.0,73.1 235.5,84.1 241.0,94.0 246.5,102.0 252.0,108.0 257.5,112.1 263.0,114.7 268.5,116.3 274.0,117.2" fill="#dd5b2a" fill-opacity="0.12" stroke="#dd5b2a" stroke-width="2" />
+    <line x1="108" y1="118" x2="108" y2="44" stroke="#0b5a54" stroke-width="1.4" stroke-dasharray="3 2" />
+    <line x1="208" y1="118" x2="208" y2="44" stroke="#b8461c" stroke-width="1.4" stroke-dasharray="3 2" />
+    <text x="108" y="28" text-anchor="middle" font-size="11" font-weight="700" fill="#0b5a54">A群</text>
+    <text x="208" y="28" text-anchor="middle" font-size="11" font-weight="700" fill="#b8461c">B群</text>
+    <text x="108" y="131" text-anchor="middle" font-size="9.5" fill="#0b5a54">x̄_A</text>
+    <text x="208" y="131" text-anchor="middle" font-size="9.5" fill="#b8461c">x̄_B</text>
+    <line x1="108" y1="142" x2="208" y2="142" stroke="#33302c" stroke-width="1" />
+    <line x1="108" y1="138" x2="108" y2="146" stroke="#33302c" stroke-width="1" />
+    <line x1="208" y1="138" x2="208" y2="146" stroke="#33302c" stroke-width="1" />
+    <text x="158" y="156" text-anchor="middle" font-size="9.5" font-weight="700" fill="#33302c">平均の差 x̄_B − x̄_A</text>
+  </svg><figcaption class="g2-fig-cap">2群のデータは分布が重なっているため、平均の差 x̄_B − x̄_A が見かけ上あっても「たまたま」かもしれない。2標本の検定は、この差が<strong>標本のばらつき（標準誤差）から予想される揺らぎより大きいか</strong>を調べ、母平均に本当に差があるか（μ_A ≠ μ_B）を判断する。重なりが大きく差が小さいほど、有意と言いにくくなる。</figcaption></figure>
+
 2母平均の差の検定：母分散未知の場合
 
 現実には母分散が既知なことは稀です。この場合、不偏分散 ・ を使いますが、等分散を仮定するかどうかで手法が異なります。

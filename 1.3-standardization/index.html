@@ -68,6 +68,25 @@ z得点：「何標準偏差分離れているか」
 
  なら平均より上、 なら平均より下。先ほどの例では生徒A（数学）の 、生徒B（英語）の  なので、生徒Aの方が相対的に優秀です。z得点に変換したデータ全体の平均は0、標準偏差は1になります。
 
+<figure class="g2-figure"><svg viewBox="0 0 360 232" role="img" aria-label="標準化：平均と散らばりの違う数学と英語の得点を、共通のz尺度に載せて比較する" class="g2-fig-svg">
+    <line x1="22" y1="96" x2="170" y2="96" stroke="#c9c3ba" stroke-width="1" /><line x1="190" y1="96" x2="338" y2="96" stroke="#c9c3ba" stroke-width="1" />
+    <polyline points="30.0,95.3 35.5,94.6 41.0,93.4 46.5,91.2 52.0,87.9 57.5,83.0 63.0,76.5 68.5,68.5 74.0,59.6 79.5,50.7 85.0,43.1 90.5,37.8 96.0,36.0 101.5,37.8 107.0,43.1 112.5,50.7 118.0,59.6 123.5,68.5 129.0,76.5 134.5,83.0 140.0,87.9 145.5,91.2 151.0,93.4 156.5,94.6 162.0,95.3" fill="#0f766e" fill-opacity="0.08" stroke="#0f766e" stroke-width="1.8" />
+    <polyline points="198.0,95.3 203.5,94.6 209.0,93.4 214.5,91.2 220.0,87.9 225.5,83.0 231.0,76.5 236.5,68.5 242.0,59.6 247.5,50.7 253.0,43.1 258.5,37.8 264.0,36.0 269.5,37.8 275.0,43.1 280.5,50.7 286.0,59.6 291.5,68.5 297.0,76.5 302.5,83.0 308.0,87.9 313.5,91.2 319.0,93.4 324.5,94.6 330.0,95.3" fill="#dd5b2a" fill-opacity="0.08" stroke="#dd5b2a" stroke-width="1.8" />
+    <text x="96" y="20" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0b5a54">数学</text><text x="96" y="33" text-anchor="middle" font-size="9" fill="#615d59">平均60・SD10</text>
+    <text x="264" y="20" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b8461c">英語</text><text x="264" y="33" text-anchor="middle" font-size="9" fill="#615d59">平均70・SD5</text>
+    <text x="96" y="108" text-anchor="middle" font-size="8.5" fill="#8a857e">60</text><text x="264" y="108" text-anchor="middle" font-size="8.5" fill="#8a857e">70</text>
+    <line x1="140" y1="96" x2="140" y2="87.87988300580324" stroke="#0b5a54" stroke-width="1.4" stroke-dasharray="3 2" />
+    <circle cx="140" cy="96" r="3.2" fill="#0f766e" /><text x="142" y="90" text-anchor="start" font-size="9.5" font-weight="700" fill="#0b5a54">80点</text>
+    <line x1="286" y1="96" x2="286" y2="59.608160417242" stroke="#b8461c" stroke-width="1.4" stroke-dasharray="3 2" />
+    <circle cx="286" cy="96" r="3.2" fill="#dd5b2a" /><text x="288" y="90" text-anchor="start" font-size="9.5" font-weight="700" fill="#b8461c">75点</text>
+    <text x="180" y="132" text-anchor="middle" font-size="10" fill="#615d59">↓ z ＝ (得点 − 平均) ÷ SD で同じ物差しに ↓</text>
+    <line x1="40" y1="170" x2="320" y2="170" stroke="#8a857e" stroke-width="1.4" /><line x1="68" y1="166" x2="68" y2="174" stroke="#8a857e" stroke-width="1" /><text x="68" y="186" text-anchor="middle" font-size="9" fill="#8a857e">-2</text><line x1="124" y1="166" x2="124" y2="174" stroke="#8a857e" stroke-width="1" /><text x="124" y="186" text-anchor="middle" font-size="9" fill="#8a857e">-1</text><line x1="180" y1="166" x2="180" y2="174" stroke="#8a857e" stroke-width="1" /><text x="180" y="186" text-anchor="middle" font-size="9" fill="#8a857e">0</text><line x1="236" y1="166" x2="236" y2="174" stroke="#8a857e" stroke-width="1" /><text x="236" y="186" text-anchor="middle" font-size="9" fill="#8a857e">+1</text><line x1="292" y1="166" x2="292" y2="174" stroke="#8a857e" stroke-width="1" /><text x="292" y="186" text-anchor="middle" font-size="9" fill="#8a857e">+2</text>
+    <text x="324" y="173" text-anchor="start" font-size="9" fill="#8a857e">z</text>
+    <circle cx="292" cy="170" r="4" fill="#0f766e" /><text x="292" y="158" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0b5a54">数学 z=2</text>
+    <circle cx="236" cy="170" r="4" fill="#dd5b2a" /><text x="236" y="158" text-anchor="middle" font-size="9.5" font-weight="700" fill="#b8461c">英語 z=1</text>
+    <text x="180" y="210" text-anchor="middle" font-size="10.5" font-weight="700" fill="#33302c">同じ土俵なら 数学80(z=2) の方が相対的に上</text>
+  </svg><figcaption class="g2-fig-cap">平均も散らばりも違う数学（平均60・SD10）と英語（平均70・SD5）は、素点のままでは比べられない。各得点を z ＝ (得点 − 平均) ÷ SD に変換すると、どちらも「平均0・SD1」の共通の物差しに載る。数学80点は平均から2SD上（z=2）、英語75点は1SD上（z=1）なので、相対的には数学の方が上だとわかる。</figcaption></figure>
+
  z得点 = 偏差 ÷ 標準偏差。単位の異なるデータや、平均の異なるデータを同じ土台で比較するときに使います。
 
 変動係数：規模の違うデータの「相対的な散らばり」を比べる

@@ -99,6 +99,18 @@ Q3（第3四分位数）：75番目付近の値——下から75%の境界
 
 四分位範囲（IQR） は  で求めます。中央50%のデータの散らばりを表すため、上下各25%の外れ値の影響を受けません。箱ひげ図はQ1・Q2・Q3・最小値・最大値を一図に表し、分布の形状を視覚的に把握できます。 より小さい値、または  より大きい値が「外れ値候補」として識別されます。
 
+<figure class="g2-figure"><svg viewBox="0 0 360 112" role="img" aria-label="箱ひげ図：最小値・Q1・中央値・Q3・最大値と外れ値。箱の長さがIQR" class="g2-fig-svg">
+    <line x1="60" y1="60" x2="110" y2="60" stroke="#475569" stroke-width="1.5" /><line x1="200" y1="60" x2="250" y2="60" stroke="#475569" stroke-width="1.5" />
+    <line x1="60" y1="47" x2="60" y2="73" stroke="#475569" stroke-width="1.5" /><line x1="250" y1="47" x2="250" y2="73" stroke="#475569" stroke-width="1.5" />
+    <rect x="110" y="40" width="90" height="40" fill="#0f766e" fill-opacity="0.14" stroke="#0f766e" stroke-width="1.6" />
+    <line x1="150" y1="40" x2="150" y2="80" stroke="#0b5a54" stroke-width="2.6" />
+    <circle cx="300" cy="60" r="4" fill="none" stroke="#dc2626" stroke-width="1.6" />
+    <line x1="110" y1="30" x2="200" y2="30" stroke="#94a3b8" stroke-width="1" /><line x1="110" y1="30" x2="110" y2="36" stroke="#94a3b8" stroke-width="1" /><line x1="200" y1="30" x2="200" y2="36" stroke="#94a3b8" stroke-width="1" />
+    <text x="155" y="23" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">IQR = Q₃ − Q₁</text>
+    <line x1="60" y1="75" x2="60" y2="90" stroke="#cbd5e1" stroke-width="1" /><line x1="110" y1="82" x2="110" y2="90" stroke="#cbd5e1" stroke-width="1" /><line x1="150" y1="82" x2="150" y2="90" stroke="#cbd5e1" stroke-width="1" /><line x1="200" y1="82" x2="200" y2="90" stroke="#cbd5e1" stroke-width="1" /><line x1="250" y1="75" x2="250" y2="90" stroke="#cbd5e1" stroke-width="1" /><line x1="300" y1="66" x2="300" y2="90" stroke="#cbd5e1" stroke-width="1" />
+    <text x="60" y="101" text-anchor="middle" font-size="10" fill="#64748b">最小値</text><text x="110" y="101" text-anchor="middle" font-size="11" font-weight="700" fill="#0b5a54">Q₁</text><text x="150" y="101" text-anchor="middle" font-size="10" font-weight="700" fill="#0b5a54">中央値</text><text x="200" y="101" text-anchor="middle" font-size="11" font-weight="700" fill="#0b5a54">Q₃</text><text x="250" y="101" text-anchor="middle" font-size="10" fill="#64748b">最大値</text><text x="300" y="101" text-anchor="middle" font-size="10" fill="#b91c1c">外れ値</text>
+  </svg><figcaption class="g2-fig-cap">箱ひげ図の読み方。箱の左端が Q₁、右端が Q₃ で、箱の長さが四分位範囲 IQR ＝ Q₃−Q₁（中央50%の散らばり）。箱の中の線が中央値。ひげは Q₁−1.5×IQR ／ Q₃+1.5×IQR のフェンス内にある最小値・最大値まで伸び、その外側の点（赤）が外れ値候補として識別される。</figcaption></figure>
+
  IQR = Q3 − Q1。外れ値に頑健な散らばりの指標として試験頻出です。
 
 分布の形を表す：歪度と尖度
@@ -123,6 +135,15 @@ Q3（第3四分位数）：75番目付近の値——下から75%の境界
 ジニ係数（Gini coefficient）はローレンツ曲線と完全平等線の間の面積  を使って格差を 0〜1 で表した指標です（完全平等線以下の三角形の面積は常に 0.5）：
 
  は完全平等（全員同じ所得）、 は完全不平等（1人がすべての所得を占める）を表します。日本のジニ係数は再分配後でおよそ0.37程度です。
+
+<figure class="g2-figure"><svg viewBox="0 0 300 262" role="img" aria-label="ローレンツ曲線とジニ係数：完全平等線と曲線の間の面積が格差" class="g2-fig-svg">
+    <text x="44" y="14" text-anchor="start" font-size="10" fill="#615d59">所得（累積 %）</text>
+    <line x1="44" y1="22" x2="44" y2="228" stroke="#9ca3af" stroke-width="1" /><line x1="44" y1="228" x2="272" y2="228" stroke="#9ca3af" stroke-width="1" />
+    <polygon points="44,228 272,22 272.0,22.0 257.8,49.3 243.5,74.4 229.3,97.5 215.0,118.6 200.8,137.7 186.5,154.8 172.3,169.9 158.0,183.2 143.8,194.6 129.5,204.2 115.3,212.1 101.0,218.2 86.8,222.8 72.5,225.9 58.3,227.5 44.0,228.0" fill="#0f766e" fill-opacity="0.14" />
+    <line x1="44" y1="228" x2="272" y2="22" stroke="#9ca3af" stroke-width="1.2" stroke-dasharray="4 3" />
+    <polyline points="44.0,228.0 58.3,227.5 72.5,225.9 86.8,222.8 101.0,218.2 115.3,212.1 129.5,204.2 143.8,194.6 158.0,183.2 172.3,169.9 186.5,154.8 200.8,137.7 215.0,118.6 229.3,97.5 243.5,74.4 257.8,49.3 272.0,22.0" fill="none" stroke="#0f766e" stroke-width="2.4" />
+    <text x="198" y="44" text-anchor="middle" font-size="10" fill="#615d59">完全平等線</text><text x="152" y="164" text-anchor="middle" font-size="13" font-weight="700" fill="#0f766e">S</text><text x="210" y="190" text-anchor="middle" font-size="10" font-weight="700" fill="#0f766e">ローレンツ曲線</text><text x="158" y="252" text-anchor="middle" font-size="10" fill="#615d59">人口（累積 %）</text>
+  </svg><figcaption class="g2-fig-cap">ローレンツ曲線は「累積人口比率（横）」に対する「累積所得比率（縦）」を描く。全員が同じ所得なら対角線（完全平等線）と一致し、格差があるほど曲線は下へ垂れ下がる。ジニ係数はこのすき間の面積 S の2倍（G ＝ 2S）で、0 に近いほど平等・1 に近いほど不平等を表す。</figcaption></figure>
 
  ジニ係数：0に近いほど平等、1に近いほど不平等。ローレンツ曲線が対角線に近いほどジニ係数が小さい。試験ではローレンツ曲線の形状とジニ係数の大小関係が問われます。
 
