@@ -576,6 +576,17 @@ for (const [page, config] of Object.entries(staticPageContents)) {
 
   pageHtml = pageHtml.replace('<div id="root"></div>', `<div id="root">${config.bodyHtml}</div>`);
 
+  const pageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: config.title,
+    description: config.description,
+    url: pageUrl,
+    inLanguage: 'ja',
+    isPartOf: { '@type': 'WebSite', name: '統計検定 2級 学習リファレンス', url: `${BASE_URL}/` },
+  };
+  pageHtml = pageHtml.replace('</head>', `<script type="application/ld+json">${JSON.stringify(pageJsonLd)}</script>\n  </head>`);
+
   fs.writeFileSync(path.join(pageDir, 'index.html'), pageHtml);
   generatedCount++;
 }
