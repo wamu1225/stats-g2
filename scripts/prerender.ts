@@ -21,6 +21,18 @@ function renderMath(formula: string, block: boolean): string {
   }
 }
 
+// クイズ問題文/選択肢内の$...$を実描画（2026-08-04・O-2-6再監査：クイズ抜粋だけ数式が未対応だった）。
+function renderInlineMath(text: string): string {
+  const tokens = text.split(/(\$\$[\s\S]+?\$\$|\$[^$\n]+\$)/g);
+  return tokens
+    .map((t) => {
+      if (t.startsWith('$$') && t.endsWith('$$') && t.length >= 4) return renderMath(t.slice(2, -2), true);
+      if (t.startsWith('$') && t.endsWith('$') && t.length >= 2) return renderMath(t.slice(1, -1), false);
+      return t;
+    })
+    .join('');
+}
+
 // App.tsx内のJSX図（[[key]]でReact専用に描画されるSVG）を静的HTMLでも表示する（2026-07-30・O-2-6続報）。
 // 固定座標・固定数式（seeded PRNGを含め props/state非依存）のもののみ複製。
 // [[interactive:TYPE]]（真の動的スライダー）は対象外のまま（下のFIGURESに無いキーは従来どおり除去）。
@@ -371,9 +383,11 @@ for (const mod of modules) {
   // クイズスニペット（最初の3問・静的HTMLにも本文として出す）
   const quizSnippet = mod.quiz.slice(0, 3).map((q, qi) => {
     const correctAnswer = q.options[q.correctAnswer];
+    const qText = renderInlineMath(q.question).replace(/\*\*(.*?)\*\*/g, '$1');
+    const aText = renderInlineMath(correctAnswer).replace(/\*\*(.*?)\*\*/g, '$1');
     return `<div style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:6px;border-left:3px solid #2563eb">
-  <p style="margin:0 0 6px;font-weight:600;color:#1e3a5f">Q${qi + 1}. ${q.question.replace(/\*\*(.*?)\*\*/g, '$1')}</p>
-  <p style="margin:0;color:#444;font-size:0.92rem">A. ${correctAnswer.replace(/\*\*(.*?)\*\*/g, '$1')}</p>
+  <p style="margin:0 0 6px;font-weight:600;color:#1e3a5f">Q${qi + 1}. ${qText}</p>
+  <p style="margin:0;color:#444;font-size:0.92rem">A. ${aText}</p>
 </div>`;
   }).join('\n');
   const quizSnippetHtml = `<section style="margin-top:28px">
