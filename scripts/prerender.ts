@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import sharp from 'sharp';
+import katex from 'katex';
 import { modules } from '../src/data/modules';
 import { glossary } from '../src/data/glossary';
 import { buildUsecaseHtml } from '../src/data/usecaseGuide';
@@ -8,6 +9,17 @@ import { buildUsecaseHtml } from '../src/data/usecaseGuide';
 const DIST_DIR = path.resolve(process.cwd(), 'dist');
 const INDEX_HTML_PATH = path.join(DIST_DIR, 'index.html');
 const BASE_URL = 'https://study-apps.com/stats-g2';
+
+// KaTeXでサーバーサイド描画（2026-08-04・O-2-6再監査：本サイトだけ$...$を削除する旧実装が残っていた）。
+// stats-pre1/stats-g3と同じオプション・クラス名を使い、ハイドレーション後との見た目の一致を狙う。
+function renderMath(formula: string, block: boolean): string {
+  try {
+    const html = katex.renderToString(formula, { displayMode: block, throwOnError: false, output: 'html' });
+    return block ? `<div class="math-block-container" style="margin:1rem 0"><div class="katex-display">${html}</div></div>` : `<span class="katex-inline">${html}</span>`;
+  } catch {
+    return formula;
+  }
+}
 
 // App.tsx内のJSX図（[[key]]でReact専用に描画されるSVG）を静的HTMLでも表示する（2026-07-30・O-2-6続報）。
 // 固定座標・固定数式（seeded PRNGを含め props/state非依存）のもののみ複製。
@@ -265,12 +277,10 @@ const FIGURES: Record<string, string> = {
   'ppv': `<figure class="g2-figure">${ppvSvgG2()}<figcaption class="g2-fig-cap">感度・特異度が高くても、有病率が低いと陽性の大半が偽陽性になる（基本率の誤謬）。1000人のうち病気は10人で、その9割＝9人が陽性（真陽性）。一方で健康な990人の5%＝約50人も陽性になる（偽陽性）。陽性は合わせて59人だが、本当に病気なのは9人だけ。だから陽性適中率 PPV は 9/59 ≈ 15% にとどまる。確率でなく「実際の人数」で数えると直感がつかみやすい。</figcaption></figure>`,
 };
 
-function stripMarkdown(text: string): string {
+function stripMarkdownSegment(text: string): string {
   return text
     .replace(/\[\[([a-z0-9-]+)\]\]/g, (_m, k) => FIGURES[k] || '')
     .replace(/\[([^\]\n]+)\]\([^)\n]+\)/g, '$1') // [ラベル](URL) → ラベルだけ残す
-    .replace(/\$\$[\s\S]*?\$\$/g, '')
-    .replace(/\$[^$]+\$/g, '')
     .replace(/^#{1,6}\s+/gm, '')
     .replace(/\*\*(.*?)\*\*/g, '$1')
     .replace(/\*(.*?)\*/g, '$1')
@@ -280,9 +290,20 @@ function stripMarkdown(text: string): string {
     .replace(/^[-|:\s]+$/gm, '')
     .replace(/^---+$/gm, '')
     .replace(/[\u{1F300}-\u{1FFFF}]/gu, '')
-    .replace(/[💡🎯⚠️✅❌🔴🟡🟢]/g, '')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
+    .replace(/[💡🎯⚠️✅❌🔴🟡🟢]/g, '');
+}
+
+// $...$/$$...$$は削除でなくrenderMathで実HTML化（2026-08-04・O-2-6再監査で発見・是正）。
+function stripMarkdown(text: string): string {
+  const tokens = text.split(/(\$\$[\s\S]+?\$\$|\$[^$\n]+\$)/g);
+  const joined = tokens
+    .map((t) => {
+      if (t.startsWith('$$') && t.endsWith('$$') && t.length >= 4) return renderMath(t.slice(2, -2), true);
+      if (t.startsWith('$') && t.endsWith('$') && t.length >= 2) return renderMath(t.slice(1, -1), false);
+      return stripMarkdownSegment(t);
+    })
+    .join('');
+  return joined.replace(/\n{3,}/g, '\n\n').trim();
 }
 
 console.log('--- Starting Static Site Generation (SSG) Pre-rendering ---');
