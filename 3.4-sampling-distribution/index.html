@@ -62,65 +62,19 @@
 
 標本平均は確率変数：毎回違う値が出る
 
-クラス30人の中から5人を無作為に選んで身長を測る、という調査を10回繰り返すと、毎回違う5人が選ばれ、毎回違う平均身長が計算されます。つまり標本平均  自体がランダムに変わる確率変数です——毎回固定の数ではありません。
+クラス30人の中から5人を無作為に選んで身長を測る、という調査を10回繰り返すと、毎回違う5人が選ばれ、毎回違う平均身長が計算されます。つまり標本平均 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8201em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8201em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">ˉ</span></span></span></span></span></span></span></span></span></span></span> 自体がランダムに変わる確率変数です——毎回固定の数ではありません。
 
 この「標本平均という確率変数がどの値をとりやすいか」を表す分布が標本分布です。標本分布の形がわかれば「今回得られた標本平均がどれほど信頼できるか」を評価できます。まず、分布の形を問わず成り立つ保証から始めましょう。
 
 チェビシェフの不等式はどんな分布にも適用できる普遍的な限界です：
-
- なら「平均から2標準偏差以上外れる確率は高々25%」が保証されます。正規分布では実際は約4.6%ですが、分布の形が未知でもこの上限が成り立ちます。
+<div class="math-block-container" style="margin:1rem 0"><div class="katex-display"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">μ</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></div></div><span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span></span> なら「平均から2標準偏差以上外れる確率は高々25%」が保証されます。正規分布では実際は約4.6%ですが、分布の形が未知でもこの上限が成り立ちます。
 
 大数の法則と中心極限定理：標本を増やせば何が起きるか
 
-標本の数  を増やすと、標本平均はどうなるでしょうか？大数の法則は「 を無限に増やせば標本平均が必ず母平均に収束する」と保証します。「無限に」というのが重要で、有限の  では多少のブレは残ります。
+標本の数 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span> を増やすと、標本平均はどうなるでしょうか？大数の法則は「<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span> を無限に増やせば標本平均が必ず母平均に収束する」と保証します。「無限に」というのが重要で、有限の <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span> では多少のブレは残ります。
 
-より実用的なのが中心極限定理（CLT: Central Limit Theorem）です。「母集団の分布がどんな形でも——一様分布でも指数分布でも——標本サイズ  が十分大きければ標本平均の分布は正規分布に近づく」というものです：
-
- 程度で近似精度が十分になることが多いです。自由度スライダーを動かして、t分布が  の増加とともに正規分布にどう近づくかを確認しましょう。
-
-[[interactive:t]]
-
- 中心極限定理：母集団の形によらず、n大のとき  は正規分布に近づく。推定・検定理論の根幹です。
-
-標準誤差：「標本平均のブレ幅」を測る
-
-中心極限定理より  は平均 ・分散  の正規分布に近似されます。この ——標本平均の標準偏差——を標準誤差（SE: Standard Error）といいます：
-
- を4倍にすると SE は半分になります（）。これは「標本を2倍集めても精度は  倍にしかならない」ことを示しており、大規模調査のコストと精度のトレードオフを理解するうえで重要です。
-
- 標準誤差 = 。n を4倍にすると SE は半分。推定精度の向上は標本コストの増加より遅い。
-
-t 分布・カイ二乗分布・F 分布：現実の検定で使う分布
-
-正規母集団  から標本を取るとき、実用上は母分散  が未知であることがほとんどです。そのため不偏分散  で代用しますが、この置き換えによって分布の「裾が重くなる」——それがt 分布です：
-
-自由度（）が小さいほど裾が重く（外れ値が出やすく）、自由度が大きくなるにつれて標準正規分布  に近づきます。次のグラフで確認してください。
-
-分散の推定・検定にはカイ二乗分布（）が使われます：。2グループの分散を比較する等分散検定や分散分析にはF 分布が使われます：。
-
- 母分散未知のとき → t 分布（自由度 ）。t 分布は自由度  で正規分布に収束。
-
-二項分布の正規近似：離散分布を連続分布で近似する
-
-中心極限定理の応用として、二項分布を正規分布で近似する方法があります。 回のベルヌーイ試行で成功確率  のとき、成功回数  の平均は 、分散は  です。 が十分大きければ中心極限定理により：
-
-つまり  は近似的に  に従います。「十分大きい」の目安は  かつ  です。例えば  では 、 なので  で近似できます——平均30・分散  です。
-
- 二項分布の正規近似： かつ  のとき 。平均と分散を正確に計算することが重要です。
-
- よくある誤解・つまずき
-
-CLT の  は「1つの標本のデータ数（標本サイズ）」。標本を取った回数ではありません。
-母集団は正規分布でなくてよい。 どんな形でも、 が大きければ標本平均が正規分布に近づきます。
-標準誤差  は「標本平均のばらつき」。母集団の標準偏差  とは別物。
-
- ここまでのまとめ
-
-中心極限定理： が大きければ 。
-標準誤差 。精度2倍には  を4倍。
-二項分布の正規近似： かつ  で 。
-
- 2級では「 が大きければ正規分布に近づく」ところまでを使えれば十分です。この収束をどういう意味での収束として定義し、変換したり組み合わせたりした統計量にどこまで持ち越せるのかを扱うのが、統計検定準1級の「大数の法則と中心極限定理」 です。</div>
+より実用的なのが中心極限定理（CLT: Central Limit Theorem）です。「母集団の分布がどんな形でも——一様分布でも指数分布でも——標本サイズ <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span> が十分大きければ標本平均の分布は正規分布に近づく」というものです：
+<div class="math-block-container" style="margin:1rem 0"><div class="katex-display"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8201em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8201em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4411em;vertical-align:-0.95em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord mathnormal">μ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><spa</div>
   <section style="margin-top:28px">
   <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:#1e3a5f">確認クイズ（抜粋）</h2>
   <div style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:6px;border-left:3px solid #2563eb">

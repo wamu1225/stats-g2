@@ -62,56 +62,16 @@
 
 確率密度関数：「確率 = 面積」
 
-身長データのヒストグラムを想像してください。縦軸を「度数÷区間幅」（密度）にして、区間幅を限りなく細かくしていくと、なめらかな曲線が得られます。この曲線が確率密度関数（PDF: Probability Density Function）  です。
+身長データのヒストグラムを想像してください。縦軸を「度数÷区間幅」（密度）にして、区間幅を限りなく細かくしていくと、なめらかな曲線が得られます。この曲線が確率密度関数（PDF: Probability Density Function） <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span> です。
+<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span> の値そのものは確率ではありません——確率は「曲線の下の面積」です。<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1111em;vertical-align:-0.3061em;"></span><span class="mop op-symbol small-op" style="margin-right:0.19445em;position:relative;top:-0.0006em;">∫</span></span></span></span></span>（インテグラル）は「面積を求める操作」を表す記号で、<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span></span> から <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span></span> までの区間の確率は：
+<div class="math-block-container" style="margin:1rem 0"><div class="katex-display"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8193em;vertical-align:-0.136em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">b</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.511em;vertical-align:-0.9119em;"></span><span class="mop"><span class="mop op-symbol large-op" style="margin-right:0.44445em;position:relative;top:-0.0011em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.599em;"><span style="top:-1.7881em;margin-left:-0.4445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span><span style="top:-3.8129em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9119em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">x</span></span></span></span></span></div></div>
+全区間の面積は必ず1（すべての確率の合計）です。また「<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span></span></span></span> が <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span></span> 以下になる確率」を表す関数を累積分布関数（CDF） <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span> といい、PDFを積分した値に対応します。
 
- の値そのものは確率ではありません——確率は「曲線の下の面積」です。（インテグラル）は「面積を求める操作」を表す記号で、 から  までの区間の確率は：
-
-全区間の面積は必ず1（すべての確率の合計）です。また「 が  以下になる確率」を表す関数を累積分布関数（CDF）  といい、PDFを積分した値に対応します。
-
- 連続分布では「確率 = 面積（積分）」。（1点の確率は常にゼロ）。
+ 連続分布では「確率 = 面積（積分）」。<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span>（1点の確率は常にゼロ）。
 
 正規分布：自然界で最も多く現れる分布
 
-人の身長・テストの得点・測定誤差——これらは「平均付近に最も多く、離れるほど少ない」という釣鐘型の形をします。この形を表す分布が正規分布 （ミュー・シグマ二乗）です。（ミュー）は平均、（シグマの2乗）は分散です。
-
-正規分布の最重要特性は「経験則（68-95-99.7則）」です。身長（平均170cm・標準偏差6cm）で具体的に確認しましょう：
-平均 （164〜176cm）：全体の約 68%——だいたいの人はここに収まる
-平均 （158〜182cm）：全体の約 95%——ほぼ全員。これより外れると「珍しい」
-平均 （152〜188cm）：全体の約 99.7%——この外は0.3%のレアケース
-
- と  のスライダーを動かすと、分布の位置と広がりがどう変わるか確認できます。
-
-[[interactive:normal]]
-
-正規分布の確率を計算するときは  で標準化して、平均0・標準偏差1の標準正規分布  に変換します。標準正規分布表は （左側の面積）の値を与えます。例えば  なので、両側5%の臨界値が  となります。
-
- 68-95-99.7則（）は丸暗記必須。 標準化の手順：。なお  は「95%信頼区間の臨界値」（ より）であり、68-95-99.7則の「」とは別の数値——混同しないこと。
-
-一様分布：「どこでも同じ確率」
-
-「1から10の間の乱数を発生させる」——区間のどこにも等しい確率で値をとる分布が一様分布  です。確率密度は区間の全幅に均等に分配されます：
-
-この  という値は「全面積 = 幅 × 高さ = 」を確保するためです。平均は区間の中央点 、分散は  です。
-
-指数分布：「次のイベントまでの待ち時間」
-
-コールセンターに平均2分に1件の電話がかかってきます——では「次の電話まで3分以上待つ確率」はどう求めるでしょうか？ポアソン分布が「一定時間内の件数」を表すのに対し、指数分布  は「次のイベントまでの待ち時間」を表します：
-
-平均待ち時間は （2分に1件なら平均2分）、分散は  です。指数分布も幾何分布と同じ無記憶性を持ちます——「すでに2分待っていても、これからさらに1分以上待つ確率は最初から待つ場合と同じ」という性質です。
-
- 指数分布の平均 = 。ポアソン分布（件数）と指数分布（間隔）はセットで理解する。
-
- よくある誤解・つまずき
-
-連続型では「ちょうどある1点の値になる確率」は0。 区間で確率を考えます。
-確率密度  は確率そのものではありません（1を超えることもある）。確率は曲線の下の面積（積分）。
-正規分布の確率は標準化してから表を引く。  は「1−表の値」、区間は差。
-
- ここまでのまとめ
-
-連続型は面積（積分）で確率。PDF 、CDF 。
-正規分布と標準化  で標準正規分布表に集約。
-指数分布（事象の間隔、）はポアソン分布（件数）と対で理解。</div>
+人の身長・テストの得点・測定誤差——これらは「平均付近に最も多く、離れるほど少ない」という釣鐘型の形をします。この形を表す分布が正規分布 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord mathnormal">μ</span><span class="mpunct">,</span><spa</div>
   <section style="margin-top:28px">
   <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:#1e3a5f">確認クイズ（抜粋）</h2>
   <div style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:6px;border-left:3px solid #2563eb">

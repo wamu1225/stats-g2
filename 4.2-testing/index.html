@@ -64,71 +64,20 @@
 
 仮説検定は「悪魔の証明を避ける」戦略です。「薬に効果がある」を直接証明するのは難しい——代わりに「効果がない（帰無仮説）」と仮定して、その仮定と矛盾するほど極端なデータが出たら「やっぱり効果はある（対立仮説）」と結論づけます。
 
-帰無仮説 ：「効果なし」「変化なし」など、棄却したい（否定したい）主張
-対立仮説 ：「効果あり」「変化あり」など、証明したい主張
+帰無仮説 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>：「効果なし」「変化なし」など、棄却したい（否定したい）主張
+対立仮説 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>：「効果あり」「変化あり」など、証明したい主張
 
-有意水準 （通常5%）：「このくらい低い確率でしか起きないなら偶然ではない」という閾値です。p値は「 が真であるとしたとき、今回以上に極端なデータが得られる確率」です。 なら  を棄却します。
+有意水準 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span></span>（通常5%）：「このくらい低い確率でしか起きないなら偶然ではない」という閾値です。p値は「<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> が真であるとしたとき、今回以上に極端なデータが得られる確率」です。<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8304em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span></span> なら <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> を棄却します。
 
- p値の正しい意味： のもとで今回以上に極端な結果が起きる確率。「 が真である確率」ではない。
+ p値の正しい意味：<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> のもとで今回以上に極端な結果が起きる確率。「<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> が真である確率」ではない。
 
 第1種・第2種の誤りと検出力
 
 仮説検定は確率的な判断なので、2種類の間違いがあります。薬の試験で考えると：
-第1種の誤り（偽陽性）：効果がない薬を「効果あり」と判定——確率は有意水準  以下に制御
-第2種の誤り（偽陰性）：効果がある薬を「効果なし」と判定——確率 
-検出力 ：効果が本当にあるときに「効果あり」と正しく検出できる確率
-
- を小さくすれば偽陽性は減りますが、棄却域が狭くなって偽陰性  が増えるというトレードオフがあります。このトレードオフを解消する唯一の方法が標本サイズを増やすことです—— を増やすと  を変えずに  を減らせます（検出力向上）。
-
-検定の手順：工場製品の重量例で学ぶ
-
-例題：ある工場の製品の平均重量は100gと言われている。16個を抽出して計測したところ g、g だった。有意水準5%で、母平均は100gから変化したといえるか？
-
-ステップ①：仮説設定
-
-（変化なし）、（変化あり、両側検定）
-
-ステップ②：検定統計量の計算（母分散未知なのでt検定）
-
-「観測された差 」を標準誤差  で割って「何標準誤差分離れているか」を計算しています。
-
-ステップ③：棄却域の確認
-
-自由度  の t 分布で、両側5%の臨界値は 。 なので棄却域に入らない。
-
-ステップ④：結論
-
-有意水準5%で帰無仮説を棄却できない。母平均が100gから変化したとは統計的に言えない。
-
-t分布の棄却域がどこに来るかをスライダーで確認しましょう。
-
-[[interactive:t]]
-
- 「棄却できない ≠ 帰無仮説が正しい」。あくまで「差があるとは言い切れない」という消極的な結論です。
-
-各種検定の統計量
-
-場面に応じて使う検定統計量が変わります：
-
-母平均のt検定（母分散未知）：
-母比率の検定（n大）：
-母分散の検定：（カイ二乗分布は右裾が長い非対称分布）
-
-両側検定か片側検定かで棄却域の位置が変わります。「方向に理論的根拠がある場合のみ片側検定を使う」ことも重要なルールです。
-
- 母分散未知のt検定：自由度は 。母比率の検定はn大のとき正規近似。母分散の検定はカイ二乗分布。
-
- よくある誤解・つまずき
-
-p値は「帰無仮説が正しい確率」ではありません。 「 が正しいと仮定したとき、今回以上に極端な結果が出る確率」です。
-「有意でなかった＝差がない」ではありません。 証拠不足の可能性（第2種の誤り）。
-有意水準5%は「5%の確率で間違える」ではありません。  が正しいのに棄却する確率（第1種の誤り）の上限。
-
- ここまでのまとめ
-
-仮説検定は「差はない（）」を仮定し、極端なら棄却する背理法的手続き。
-p値  有意水準  で有意。第1種（）・第2種（）はトレードオフ。
-母分散未知の平均は t検定（自由度 ）。</div>
+第1種の誤り（偽陽性）：効果がない薬を「効果あり」と判定——確率は有意水準 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span></span> 以下に制御
+第2種の誤り（偽陰性）：効果がある薬を「効果なし」と判定——確率 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span></span></span></span></span>
+検出力 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span></span></span></span></span>：効果が本当にあるときに「効果あり」と正しく検出できる確率
+<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span></span> を小さくすれば偽陽性は減りますが、棄却域が狭くなって偽陰性 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin</div>
   <section style="margin-top:28px">
   <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:#1e3a5f">確認クイズ（抜粋）</h2>
   <div style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:6px;border-left:3px solid #2563eb">

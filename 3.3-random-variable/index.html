@@ -62,67 +62,11 @@
 
 期待値と分散の変換規則
 
-あるクラスの数学テスト（平均60点・分散100）の点数を全員に  点し、さらに  倍にすると、平均と分散はどうなるでしょうか？
+あるクラスの数学テスト（平均60点・分散100）の点数を全員に <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">+</span><span class="mord">10</span></span></span></span></span> 点し、さらに <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">×</span><span class="mord">2</span></span></span></span></span> 倍にすると、平均と分散はどうなるでしょうか？
 
-定数  を使った変換  に対して：
-
-この例では  なので 、 です。重要なのは「定数の加算（）は期待値だけを動かし、分散には影響しない」という点です。散らばりは全員同じだけずらしても変わりません。一方、係数倍（ 倍）は期待値を  倍、分散を  倍にします（標準偏差は  倍）。
-
-<figure class="g2-figure"><svg viewBox="0 0 336 184" role="img" aria-label="分散の変換：定数の加算は分散を変えず、係数倍は分散をa2乗倍にする" class="g2-fig-svg">
-    <text x="84" y="14" text-anchor="middle" font-size="10.5" font-weight="700" fill="#33302c">＋b（平行移動）</text>
-    <line x1="12" y1="120" x2="156" y2="120" stroke="#c9c3ba" stroke-width="1" />
-    <polyline points="28.0,119.3 30.0,118.7 32.0,117.8 34.0,116.3 36.0,114.1 38.0,111.1 40.0,106.9 42.0,101.6 44.0,95.2 46.0,87.9 48.0,80.0 50.0,72.1 52.0,64.9 54.0,59.1 56.0,55.3 58.0,54.0 60.0,55.3 62.0,59.1 64.0,64.9 66.0,72.1 68.0,80.0 70.0,87.9 72.0,95.2 74.0,101.6 76.0,106.9 78.0,111.1 80.0,114.1 82.0,116.3 84.0,117.8 86.0,118.7 88.0,119.3" fill="#0f766e" fill-opacity="0.12" stroke="#0f766e" stroke-width="2" />
-    <polyline points="82.0,119.3 84.0,118.7 86.0,117.8 88.0,116.3 90.0,114.1 92.0,111.1 94.0,106.9 96.0,101.6 98.0,95.2 100.0,87.9 102.0,80.0 104.0,72.1 106.0,64.9 108.0,59.1 110.0,55.3 112.0,54.0 114.0,55.3 116.0,59.1 118.0,64.9 120.0,72.1 122.0,80.0 124.0,87.9 126.0,95.2 128.0,101.6 130.0,106.9 132.0,111.1 134.0,114.1 136.0,116.3 138.0,117.8 140.0,118.7 142.0,119.3" fill="#dd5b2a" fill-opacity="0.1" stroke="#dd5b2a" stroke-width="2" stroke-dasharray="4 3" />
-    <line x1="58" y1="40" x2="112" y2="40" stroke="#8a857e" stroke-width="1" />
-    <text x="85" y="35" text-anchor="middle" font-size="9" fill="#615d59">＋b →</text>
-    <text x="84" y="136" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0b5a54">分散は変わらない</text>
-    <text x="84" y="149" text-anchor="middle" font-size="8.5" fill="#615d59">同じ幅のまま位置だけ動く</text>
-    <line x1="168" y1="20" x2="168" y2="150" stroke="#e8e7e5" stroke-width="1" />
-    <text x="252" y="14" text-anchor="middle" font-size="10.5" font-weight="700" fill="#33302c">×a（a倍・例 a=2）</text>
-    <line x1="182" y1="120" x2="326" y2="120" stroke="#c9c3ba" stroke-width="1" />
-    <polyline points="234.0,119.2 235.2,118.6 236.4,117.6 237.6,116.1 238.8,113.8 240.0,110.5 241.2,106.1 242.4,100.5 243.6,93.7 244.8,85.9 246.0,77.5 247.2,69.2 248.4,61.5 249.6,55.4 250.8,51.4 252.0,50.0 253.2,51.4 254.4,55.4 255.6,61.5 256.8,69.2 258.0,77.5 259.2,85.9 260.4,93.7 261.6,100.5 262.8,106.1 264.0,110.5 265.2,113.8 266.4,116.1 267.6,117.6 268.8,118.6 270.0,119.2" fill="#0f766e" fill-opacity="0.14" stroke="#0f766e" stroke-width="2" />
-    <polyline points="212.0,119.6 214.7,119.3 217.3,118.8 220.0,118.0 222.7,116.9 225.3,115.3 228.0,113.1 230.7,110.3 233.3,106.9 236.0,103.0 238.7,98.8 241.3,94.6 244.0,90.8 246.7,87.7 249.3,85.7 252.0,85.0 254.7,85.7 257.3,87.7 260.0,90.8 262.7,94.6 265.3,98.8 268.0,103.0 270.7,106.9 273.3,110.3 276.0,113.1 278.7,115.3 281.3,116.9 284.0,118.0 286.7,118.8 289.3,119.3 292.0,119.6" fill="#dd5b2a" fill-opacity="0.1" stroke="#dd5b2a" stroke-width="2" />
-    <text x="252" y="136" text-anchor="middle" font-size="9.5" font-weight="700" fill="#b8461c">分散は a²＝4倍</text>
-    <text x="252" y="149" text-anchor="middle" font-size="8.5" fill="#615d59">幅が a 倍に広がる（低く平たく）</text>
-  </svg><figcaption class="g2-fig-cap">定数を足す（＋b）と分布は<strong>位置だけ</strong>動き、散らばり＝分散は変わらない（全員同じだけずらしても相対的な広がりは同じ）。一方 a 倍すると幅が a 倍に広がり、面積は一定なので低く平たくなる。散らばりは a 倍でも、<strong>分散は a² 倍</strong>（例：2倍で4倍）。だから V[aX+b] ＝ a²V[X]。</figcaption></figure>
-
- ：定数の加減算は分散に影響しない。係数は分散に2乗で効く。
-
-共分散と相関係数：2変数の「関係」を数値化する
-
-前のモジュールまでは単一の確率変数を扱ってきました。では2つの確率変数 （身長）と （体重）が同時に変動する場合、その「関係の強さ」はどう測るでしょうか？
-
- が平均より高いとき  も平均より高くなりやすい——この「一緒に動く傾向」を数値にしたものが共分散です：
-
-正の共分散は「同じ方向に動く傾向」、負は「逆方向」、ゼロは「線形の関係なし」を意味します。ただし共分散は単位（cm×kg など）を持つため、-1〜1 に標準化した相関係数で比較するのが一般的です：
-
- は  で、 が1に近いほど線形の関係が強いことを表します。
-
- 共分散の計算式：。期待値の公式から導ける実用的な形です。
-
-確率変数の和の期待値と分散
-
-「男性の身長  と女性の身長  を足した  の期待値・分散は？」このような確率変数の和の統計量も、公式で求められます。
-
-まず期待値について。これは独立性に関わらず常に成り立ちます：
-
-分散については共分散が関係します：
-
- と  が独立な場合は  となり、分散は単純に足し算できます。直感的には「互いに無関係なばらつきを合算すると、それぞれのばらつきが積み上がる」という意味です。差の分散  は共分散項の符号が逆になり  となります。
-
- 独立な確率変数の和の分散：。差  の分散でも符号に注意して同様に計算。
-
- よくある誤解・つまずき
-
-和（差）の分散を足せるのは「独立」のときだけ。 独立でなければ共分散の項が加わります。
-差でも分散は足します。 独立なら （引き算ではない）。
-定数倍と定数加算の効き方が違う。 ——定数  は分散に影響しません。
-
- ここまでのまとめ
-
-期待値の線形性：。
-分散：（定数加算は分散に効かない）。
-独立なら和・差の分散は （共分散0）。</div>
+定数 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span></span></span></span></span> を使った変換 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span></span> に対して：
+<div class="math-block-container" style="margin:1rem 0"><div class="katex-display"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mopen">[</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">b</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span></span></div></div><div class="math-block-container" style="margin:1rem 0"><div class="katex-display"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">[</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">b</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1141em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">]</span></span></span></span></span></div></div>
+この例では <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">10</span></span></span></span></span> なので <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">60</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">10</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">130</span></span></span></span></span>、<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="mclose">]</span><span class="mspace" style="margin-</div>
   <section style="margin-top:28px">
   <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:#1e3a5f">確認クイズ（抜粋）</h2>
   <div style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:6px;border-left:3px solid #2563eb">

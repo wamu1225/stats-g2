@@ -62,57 +62,8 @@
 
 単回帰モデル：直線で関係を表す
 
-勉強時間  とテスト点数  の散布図を描いたとき、点が概ね右上がりに並んでいれば「直線的な関係がありそうだ」と判断できます。この関係を数式で表したのが単回帰モデルです：
-
-（切片）は「 のときの  の予測値」、（回帰係数）は「 が1単位増えたときの  の平均的変化量」です。（イプシロン）は誤差項——測定のばらつきや、直線で表しきれない部分を表します。（ベータハット）のように推定値にはハット記号をつけます。
-
- 回帰係数  = 「 が1単位増えると  が平均的にどれだけ変わるか」。
-
-最小二乗法：「最もよくフィットする直線」の求め方
-
-実際の点数  と直線による予測値  のズレを残差（）といいます。残差が小さいほど直線のあてはまりが良いのですが、プラスとマイナスが打ち消し合うので「残差の2乗の合計」を最小化します——これが最小二乗法（OLS: Ordinary Least Squares）です。
-
-数学的に最小化を解くと：
-
-OLS直線は必ずデータの重心  を通るという性質があります。散布図上の点を動かして最小二乗直線がどう変わるかを確認しましょう。
-
-[[interactive:regression]]
-
-決定係数 ：「どれだけ説明できているか」
-
-直線のあてはまりの良さを数値化したのが決定係数  です。「 の総変動のうち、回帰直線で説明できる割合」を表します：
-
- なら「 の変動の81%は  との線形関係で説明できる」という意味です。 は 0〜1 の値をとり、1に近いほどあてはまりが良いです。
-
-ただし  は説明変数を増やすだけで必ず増加するという欠点があります。無意味な変数を追加してもモデルの「見かけ」が改善してしまいます。そのため変数が複数あるモデルの比較には自由度調整済み （：説明変数の数）を使います：
-
- モデル比較には 。説明変数を増やすと  は上がるが、 は無意味な変数を加えると下がることがある。
-
-重回帰と多重共線性
-
-現実のデータでは「体重は身長だけでなく年齢・運動量・食事量にも依存する」のように複数の要因が絡みます。複数の説明変数  を使うのが重回帰です：
-
-各  を偏回帰係数といいます。「他のすべての変数を一定に保ったまま  だけが1単位増えたときの  の平均的変化量」という意味です——単回帰の係数とは異なる値になることに注意が必要です。
-
-説明変数間に強い相関がある場合、推定が不安定になる多重共線性の問題が生じます。係数の標準誤差が膨らみ「どの変数がどれだけ効いているか」が判断しにくくなります。残差プロットでU字型やファンネル型のパターンが見られる場合は線形性・等分散の仮定が疑われます。
-
-回帰モデルの予測には重要な制約があります。観測データの範囲内での予測（内挿）は比較的信頼できますが、観測範囲の外側へ予測を伸ばす外挿（extrapolation）は信頼性が低いです。「身長150〜180cmのデータで作ったモデルで身長120cmの人の体重を予測する」場合、その範囲では線形関係が成立しない可能性があり、予測は非常に不確かになります。
-
- 外挿（観測範囲外への予測）は信頼性が低い。内挿（範囲内）は比較的安全。外挿は実務では避けるか、慎重に扱う必要があります。
-
- よくある誤解・つまずき
-
-回帰は因果関係を保証しません。 「 で  を予測できる」と「 を変えれば  が変わる」は別。
-観測範囲外の予測（外挿）は危険。 範囲内（内挿）が比較的安全。
-が高い＝正しいモデル・因果がある、ではありません。
-
- ここまでのまとめ
-
-単回帰 。 は「 が1増えたときの  の期待変化量」。
-最小二乗法：残差二乗和を最小化。回帰直線は平均点  を通る。
-決定係数 ： の変動のうちモデルが説明する割合。単回帰では 。
-
- 説明変数が2つ以上になると、変数どうしの相関が係数の解釈を狂わせる多重共線性や、変数を増やすほど  が上がってしまう問題が出てきます。説明変数を複数にしたときのモデルの組み立てと評価は、統計検定準1級の「重回帰分析とモデル評価」 で扱います。</div>
+勉強時間 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span></span></span></span> とテスト点数 <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span></span></span></span></span> の散布図を描いたとき、点が概ね右上がりに並んでいれば「直線的な関係がありそうだ」と判断できます。この関係を数式で表したのが単回帰モデルです：
+<div class="math-block-container" style="margin:1rem 0"><div class="katex-display"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0528em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0528em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1141em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></div></div><span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0528em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>（切片）は「<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span> のときの <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span></span></span></span></span> の予測値」、<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" sty</div>
   <section style="margin-top:28px">
   <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:#1e3a5f">確認クイズ（抜粋）</h2>
   <div style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:6px;border-left:3px solid #2563eb">

@@ -65,7 +65,7 @@
 分析の目的と習熟度に応じてツールを選びましょう。
 R：統計分析・データ可視化に特化した無料の言語。ggplot2（グラフ）・lme4（混合モデル）など統計専用パッケージが豊富で、学術研究・統計分析全般に向いています。
 Python：汎用プログラミング言語。機械学習（scikit-learn）・ディープラーニング（PyTorch）にも強く、データサイエンス・自動化に向いています。
-Excel：最も普及しており操作が直感的で、簡易集計・グラフ作成に向いています。ただしSTDEV関数は  割り（不偏標準偏差）、STDEVPは  割り（母標準偏差）と挙動が異なるため注意が必要です。
+Excel：最も普及しており操作が直感的で、簡易集計・グラフ作成に向いています。ただしSTDEV関数は <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span> 割り（不偏標準偏差）、STDEVPは <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span> 割り（母標準偏差）と挙動が異なるため注意が必要です。
 SPSS・JMP：GUI操作で、医学・社会科学系の研究に多く使われます。
 
 分析の基本フロー：5ステップ
@@ -84,29 +84,28 @@ SPSS・JMP：GUI操作で、医学・社会科学系の研究に多く使われ�
 Estimate（係数推定値）：変数の効果の大きさ。例えば「勉強時間が1時間増えるとテストが3.2点上がる」という値です。
 Std. Error（標準誤差）：推定値の精度（ばらつき）を表します。
 t value ／ p-value：t value（係数 ÷ 標準誤差）と p-value は「この係数が0でないか」の検定結果です。
-（決定係数）：モデルの当てはまりの良さを示します。
+<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>（決定係数）：モデルの当てはまりの良さを示します。
 
-p値が小さいことは「統計的有意」を意味しますが、効果量（係数の大きさ）と合わせて判断することが重要です。大標本では些細な差でもp<0.05になり得ます。逆に小標本では実用的に重要な効果でも有意にならないことがあります。現代の統計報告の標準では、p値に加えて効果量（Cohenのd・など）と信頼区間を必ず報告します。
+p値が小さいことは「統計的有意」を意味しますが、効果量（係数の大きさ）と合わせて判断することが重要です。大標本では些細な差でもp<0.05になり得ます。逆に小標本では実用的に重要な効果でも有意にならないことがあります。現代の統計報告の標準では、p値に加えて効果量（Cohenのd・<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>など）と信頼区間を必ず報告します。
 
  統計的有意（p値が小さい）≠ 実用的に重要（効果量が大きい）。この区別が現代統計学の重要なポイントです。
 
 モデル比較：AIC
 
 複数のモデルを比較する際によく使われる指標がAIC（赤池情報量規準）です：
-
-（対数尤度の  倍）はモデルの「当てはまりの悪さ」を表し、小さいほど良いあてはまりです。（：推定したパラメータ数）は「複雑さへのペナルティ」で、変数を増やしすぎる過学習を抑制します。AICが小さいモデルほど「適切な複雑さでデータをよく説明できる」と評価されます。重回帰で変数を増やすとあてはまりは上がりますが、ペナルティ項も増えるため、AICは無意味な変数の追加を自動的に抑えます。
+<div class="math-block-container" style="margin:1rem 0"><div class="katex-display"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord">AIC</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">2</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span></div></div><span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">2</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">L</span></span></span></span></span>（対数尤度の <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">2</span></span></span></span></span> 倍）はモデルの「当てはまりの悪さ」を表し、小さいほど良いあてはまりです。<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>（<span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>：推定したパラメータ数）は「複雑さへのペナルティ」で、変数を増やしすぎる過学習を抑制します。AICが小さいモデルほど「適切な複雑さでデータをよく説明できる」と評価されます。重回帰で変数を増やすとあてはまりは上がりますが、ペナルティ項も増えるため、AICは無意味な変数の追加を自動的に抑えます。
 
  よくある誤解・つまずき
 
 AICは「小さいほど良い」（大きいほど良いではない）。複数モデルの相対比較に使います。
-変数を増やすほど見かけの  は上がります（過学習）。 自由度調整済み  や AIC で「増やしすぎ」を抑えます。
+変数を増やすほど見かけの <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span> は上がります（過学習）。 自由度調整済み <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span> や AIC で「増やしすぎ」を抑えます。
 ソフトの出力を鵜呑みにしない。 前提（正規性・独立性など）の確認は人間の役割。
 
  ここまでのまとめ
 
 統計ソフトは計算を自動化する道具（解釈と前提確認は利用者の責任）。
 AIC ＝ あてはまりの悪さ ＋ 複雑さのペナルティ。小さいモデルほど良い。
-過学習（変数の入れすぎ）に注意し、AIC・調整済み  で適切な複雑さを選ぶ。</div>
+過学習（変数の入れすぎ）に注意し、AIC・調整済み <span class="katex-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</s</div>
   <section style="margin-top:28px">
   <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:12px;color:#1e3a5f">確認クイズ（抜粋）</h2>
   <div style="margin-bottom:12px;padding:12px;background:#f8fafc;border-radius:6px;border-left:3px solid #2563eb">
