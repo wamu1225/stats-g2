@@ -53,6 +53,58 @@ function boxplotSvg(): string {
     <text x="60" y="101" text-anchor="middle" font-size="10" fill="#64748b">最小値</text><text x="110" y="101" text-anchor="middle" font-size="11" font-weight="700" fill="#0b5a54">Q₁</text><text x="150" y="101" text-anchor="middle" font-size="10" font-weight="700" fill="#0b5a54">中央値</text><text x="200" y="101" text-anchor="middle" font-size="11" font-weight="700" fill="#0b5a54">Q₃</text><text x="250" y="101" text-anchor="middle" font-size="10" fill="#64748b">最大値</text><text x="300" y="101" text-anchor="middle" font-size="10" fill="#b91c1c">外れ値</text>
   </svg>`;
 }
+// App.tsxの[[skewshape]]と同一の計算（2026-08-04・実欠落を読み取り調査で発見し新設）。
+// 正/負の歪度で最頻値・中央値・平均の並び順が逆転することを2パネルで見せる。
+function skewshapeSvg(): string {
+  const tmax = 7, LAMBDA = 1.3;
+  const shape = (t: number) => (t <= 0 ? 0 : t * t * Math.exp(-LAMBDA * t));
+  const tMode = 2 / LAMBDA; // t^2 e^{-λt} の極大点は解析的に 2/λ
+  // 積分は精度優先で細かく（NINT）、描画点は軽量優先で粗く（NDRAW）と分離。
+  const NINT = 200, dtInt = tmax / NINT;
+  let area = 0, weighted = 0;
+  const cumAt: number[] = [];
+  let cum = 0;
+  for (let i = 0; i <= NINT; i++) {
+    const t = i * dtInt;
+    const f = shape(t);
+    area += f * dtInt;
+    weighted += t * f * dtInt;
+    cum += f * dtInt;
+    cumAt.push(cum);
+  }
+  const tMean = weighted / area;
+  let tMedian = tmax;
+  for (let i = 0; i <= NINT; i++) {
+    if (cumAt[i] >= area / 2) { tMedian = i * dtInt; break; }
+  }
+  const fmax = shape(tMode);
+  const NDRAW = 28, dt = tmax / NDRAW;
+  const pw = 148, ph = 78, baseY = 118, topPad = 14;
+  const panel = (mirror: boolean, originX: number) => {
+    const px = (t: number) => originX + (mirror ? (tmax - t) / tmax : t / tmax) * pw;
+    const py = (f: number) => baseY - (f / fmax) * ph;
+    let curve = '';
+    for (let i = 0; i <= NDRAW; i++) { const t = i * dt; curve += `${px(t).toFixed(1)},${py(shape(t)).toFixed(1)} `; }
+    const area2 = `${px(0).toFixed(1)},${baseY} ` + curve + `${px(tmax).toFixed(1)},${baseY}`;
+    const marks = [
+      { t: tMode, label: '最頻値', color: '#0f766e', dy: 0 },
+      { t: tMedian, label: '中央値', color: '#334155', dy: 12 },
+      { t: tMean, label: '平均', color: '#b91c1c', dy: 24 },
+    ];
+    let out = `<polygon points="${area2}" fill="#0f766e" fill-opacity="0.12" /><polyline points="${curve.trim()}" fill="none" stroke="#0f766e" stroke-width="2.2" /><line x1="${originX}" y1="${baseY}" x2="${originX + pw}" y2="${baseY}" stroke="#94a3b8" stroke-width="1" />`;
+    marks.forEach((m) => {
+      const topY = py(shape(m.t)) < baseY - 4 ? py(shape(m.t)) : baseY - 4;
+      out += `<line x1="${px(m.t).toFixed(1)}" y1="${topY.toFixed(1)}" x2="${px(m.t).toFixed(1)}" y2="${baseY}" stroke="${m.color}" stroke-width="1.4" stroke-dasharray="3 2" /><text x="${px(m.t).toFixed(1)}" y="${baseY + 14 + m.dy}" text-anchor="middle" font-size="9.5" font-weight="700" fill="${m.color}">${m.label}</text>`;
+    });
+    return out;
+  };
+  return `<svg viewBox="0 0 360 168" role="img" aria-label="正の歪度と負の歪度：最頻値・中央値・平均の並び順が逆転する" class="g2-fig-svg">
+    ${panel(false, 8)}
+    <text x="82" y="${topPad}" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">正の歪度（右に裾）</text>
+    ${panel(true, 204)}
+    <text x="278" y="${topPad}" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">負の歪度（左に裾）</text>
+  </svg>`;
+}
 function lorenzSvg(): string {
   const x0 = 44, x1 = 272, yBot = 228, yTop = 22;
   const px = (p: number) => x0 + p * (x1 - x0);
@@ -271,6 +323,7 @@ function ppvSvgG2(): string {
 
 const FIGURES: Record<string, string> = {
   'boxplot': `<figure class="g2-figure">${boxplotSvg()}<figcaption class="g2-fig-cap">箱ひげ図の読み方。箱の左端が Q₁、右端が Q₃ で、箱の長さが四分位範囲 IQR ＝ Q₃−Q₁（中央50%の散らばり）。箱の中の線が中央値。ひげは Q₁−1.5×IQR ／ Q₃+1.5×IQR のフェンス内にある最小値・最大値まで伸び、その外側の点（赤）が外れ値候補として識別される。</figcaption></figure>`,
+  'skewshape': `<figure class="g2-figure">${skewshapeSvg()}<figcaption class="g2-fig-cap">正の歪度（右に長い裾）では、裾に引っ張られる平均が最も右へ動き、最頻値＜中央値＜平均の順に並ぶ。負の歪度ではこの並びが左右反転し、平均＜中央値＜最頻値になる。「歪度の符号＝平均が引っ張られる方向」と覚えると迷わない。</figcaption></figure>`,
   'lorenz': `<figure class="g2-figure">${lorenzSvg()}<figcaption class="g2-fig-cap">ローレンツ曲線は「累積人口比率（横）」に対する「累積所得比率（縦）」を描く。全員が同じ所得なら対角線（完全平等線）と一致し、格差があるほど曲線は下へ垂れ下がる。ジニ係数はこのすき間の面積 S の2倍（G ＝ 2S）で、0 に近いほど平等・1 に近いほど不平等を表す。</figcaption></figure>`,
   'correlation': `<figure class="g2-figure">${correlationSvg()}<figcaption class="g2-fig-cap">散布図と相関係数 r の対応。点が右上がりに揃うほど r は +1 に、右下がりに揃うほど −1 に近づく。散らばって傾向がなければ r ≈ 0。ただし右下の U 字のように、はっきりした関係があっても r が測るのは<strong>線形</strong>の傾きだけなので r ≈ 0 になる。r=0 は「線形関係がない」であって「無関係」ではない。</figcaption></figure>`,
   'vartransform': `<figure class="g2-figure">${vartransformSvg()}<figcaption class="g2-fig-cap">定数を足す（＋b）と分布は<strong>位置だけ</strong>動き、散らばり＝分散は変わらない（全員同じだけずらしても相対的な広がりは同じ）。一方 a 倍すると幅が a 倍に広がり、面積は一定なので低く平たくなる。散らばりは a 倍でも、<strong>分散は a² 倍</strong>（例：2倍で4倍）。だから V[aX+b] ＝ a²V[X]。</figcaption></figure>`,
@@ -376,7 +429,10 @@ for (const mod of modules) {
     fs.mkdirSync(modDir, { recursive: true });
   }
 
-  const seoText = stripMarkdown(mod.content).slice(0, 8000);
+  // 08-04・KaTeX SSR導入後はKaTeXのHTML出力が非常に冗長（1数式で数百字）なため、
+  // 数式が多いモジュールでは旧来の8000字上限で本文後半が切り捨てられる実害が判明。
+  // stats-pre1/stats-g3は同種の本文（mdToHtml）に上限を設けていない＝それに合わせて撤廃。
+  const seoText = stripMarkdown(mod.content);
   const pageUrl = `${BASE_URL}/${mod.id}/`;
   const pageTitle = `${mod.title} | 統計検定 2級 学習リファレンス`;
 

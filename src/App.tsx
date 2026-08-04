@@ -290,6 +290,73 @@ function App() {
                 </figure>
               );
             }
+            if (part === '[[skewshape]]') {
+              // 正負の歪度で「最頻値・中央値・平均」の並び順が逆転することを2パネルで見せる。
+              // f(t)=t^k・exp(-λt) は最頻値付近にピークを持ち右に長い裾を引く標準的な形（正の歪度）。
+              // 左の歪度パネルは t を反転して鏡像にする。
+              const tmax = 7, LAMBDA = 1.3;
+              const shape = (t: number) => (t <= 0 ? 0 : t * t * Math.exp(-LAMBDA * t));
+              const tMode = 2 / LAMBDA; // t^2 e^{-λt} の極大点は解析的に 2/λ
+              // 積分は精度優先で細かく（NINT）、描画点は軽量優先で粗く（NDRAW）と分離。
+              const NINT = 200, dtInt = tmax / NINT;
+              let area = 0, weighted = 0;
+              const cumAt: number[] = [];
+              let cum = 0;
+              for (let i = 0; i <= NINT; i++) {
+                const t = i * dtInt;
+                const f = shape(t);
+                area += f * dtInt;
+                weighted += t * f * dtInt;
+                cum += f * dtInt;
+                cumAt.push(cum);
+              }
+              const tMean = weighted / area;
+              let tMedian = tmax;
+              for (let i = 0; i <= NINT; i++) {
+                if (cumAt[i] >= area / 2) { tMedian = i * dtInt; break; }
+              }
+              const fmax = shape(tMode);
+              const NDRAW = 28, dt = tmax / NDRAW;
+              const pw = 148, ph = 78, baseY = 118, topPad = 14;
+              const panel = (mirror: boolean, originX: number) => {
+                const px = (t: number) => originX + (mirror ? (tmax - t) / tmax : t / tmax) * pw;
+                const py = (f: number) => baseY - (f / fmax) * ph;
+                let curve = '';
+                for (let i = 0; i <= NDRAW; i++) { const t = i * dt; curve += `${px(t).toFixed(1)},${py(shape(t)).toFixed(1)} `; }
+                const area2 = `${px(0).toFixed(1)},${baseY} ` + curve + `${px(tmax).toFixed(1)},${baseY}`;
+                const marks = [
+                  { t: tMode, label: '最頻値', color: '#0f766e', dy: 0 },
+                  { t: tMedian, label: '中央値', color: '#334155', dy: 12 },
+                  { t: tMean, label: '平均', color: '#b91c1c', dy: 24 },
+                ];
+                return (
+                  <g key={mirror ? 'neg' : 'pos'}>
+                    <polygon points={area2} fill="#0f766e" fillOpacity={0.12} />
+                    <polyline points={curve.trim()} fill="none" stroke="#0f766e" strokeWidth={2.2} />
+                    <line x1={originX} y1={baseY} x2={originX + pw} y2={baseY} stroke="#94a3b8" strokeWidth={1} />
+                    {marks.map((m) => (
+                      <g key={m.label}>
+                        <line x1={px(m.t)} y1={py(shape(m.t)) < baseY - 4 ? py(shape(m.t)) : baseY - 4} x2={px(m.t)} y2={baseY} stroke={m.color} strokeWidth={1.4} strokeDasharray="3 2" />
+                        <text x={px(m.t)} y={baseY + 14 + m.dy} textAnchor="middle" fontSize={9.5} fontWeight={700} fill={m.color}>{m.label}</text>
+                      </g>
+                    ))}
+                  </g>
+                );
+              };
+              return (
+                <figure key={key} className="g2-figure">
+                  <svg viewBox="0 0 360 168" role="img" aria-label="正の歪度と負の歪度：最頻値・中央値・平均の並び順が逆転する" className="g2-fig-svg">
+                    {panel(false, 8)}
+                    <text x={82} y={topPad} textAnchor="middle" fontSize={11} fontWeight={700} fill="#334155">正の歪度（右に裾）</text>
+                    {panel(true, 204)}
+                    <text x={278} y={topPad} textAnchor="middle" fontSize={11} fontWeight={700} fill="#334155">負の歪度（左に裾）</text>
+                  </svg>
+                  <figcaption className="g2-fig-cap">
+                    正の歪度（右に長い裾）では、裾に引っ張られる平均が最も右へ動き、最頻値＜中央値＜平均の順に並ぶ。負の歪度ではこの並びが左右反転し、平均＜中央値＜最頻値になる。「歪度の符号＝平均が引っ張られる方向」と覚えると迷わない。
+                  </figcaption>
+                </figure>
+              );
+            }
             if (part === '[[correlation]]') {
               const panels = [
                 { cx: 30, cy: 30, label: '強い正の相関', r: 'r ≈ +0.9', kind: 'pos' as const },
