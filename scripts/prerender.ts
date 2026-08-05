@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import sharp from 'sharp';
 import katex from 'katex';
-import { modules } from '../src/data/modules';
+import { modules, chapterNames } from '../src/data/modules';
 import { glossary } from '../src/data/glossary';
 import { buildUsecaseHtml } from '../src/data/usecaseGuide';
 
@@ -475,16 +475,29 @@ for (const mod of modules) {
 </article>`;
 
   modHtml = modHtml.replace('<div id="root"></div>', `<div id="root">${seoContentHtml}</div>`);
-  const modJsonLd = JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'LearningResource',
-    'name': mod.title,
-    'description': mod.description,
-    'url': pageUrl,
-    'inLanguage': 'ja',
-    'learningResourceType': 'Article',
-    'provider': { '@type': 'Organization', 'name': 'study-apps.com', 'url': 'https://study-apps.com' }
-  });
+  // O-2-10（2026-08-05）：下層ページにBreadcrumbListが欠落していた（LearningResourceのみ）。
+  // stats-pre1の実装パターンに合わせ、ホーム→章→モジュールの3階層を追加。
+  const modJsonLd = JSON.stringify([
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      'itemListElement': [
+        { '@type': 'ListItem', 'position': 1, 'name': 'ホーム', 'item': `${BASE_URL}/` },
+        { '@type': 'ListItem', 'position': 2, 'name': chapterNames[mod.chapter] ?? `第${mod.chapter}章`, 'item': `${BASE_URL}/` },
+        { '@type': 'ListItem', 'position': 3, 'name': mod.title, 'item': pageUrl }
+      ]
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'LearningResource',
+      'name': mod.title,
+      'description': mod.description,
+      'url': pageUrl,
+      'inLanguage': 'ja',
+      'learningResourceType': 'Article',
+      'provider': { '@type': 'Organization', 'name': 'study-apps.com', 'url': 'https://study-apps.com' }
+    }
+  ]);
   modHtml = modHtml.replace('</head>', `<script type="application/ld+json">${modJsonLd}</script>\n  </head>`);
 
   fs.writeFileSync(path.join(modDir, 'index.html'), modHtml);
