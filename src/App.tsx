@@ -577,7 +577,7 @@ function App() {
                     <text x={160} y={162} textAnchor="middle" fontSize={11} fontWeight={700} fill="#33302c">P(A∪B) ＝ P(A) ＋ P(B) − P(A∩B)</text>
                   </svg>
                   <figcaption className="g2-fig-cap">
-                    「A または B」（A∪B）の確率は、A と B をそのまま足すと重なり A∩B を<strong>二重に数えて</strong>しまう。だから重なりの分 P(A∩B) を1回引く——これが加法定理。A と B が排反（重なりなし＝A∩B が空）なら引く分がゼロなので、単純な足し算になる。
+                    「A または B」（A∪B）の確率は、A と B をそのまま足すと重なり A∩B を<strong>二重に数えて</strong>しまう。だから重なりの分 P(A∩B) を1回引く。これが加法定理。A と B が排反（重なりなし＝A∩B が空）なら引く分がゼロなので、単純な足し算になる。
                   </figcaption>
                 </figure>
               );
