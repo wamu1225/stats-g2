@@ -752,10 +752,11 @@ for (const [page, config] of Object.entries(staticPageContents)) {
 }
 
 // ── sitemap.xml ──────────────────────────────────
+// lastmod はページ単位の実更新日（O-2-27）。モジュールは既存の m.updatedAt をそのまま使う。
 const today = new Date().toISOString().split('T')[0];
 
 const moduleUrls = modules.map(m =>
-  `  <url>\n    <loc>${BASE_URL}/${m.id}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`
+  `  <url>\n    <loc>${BASE_URL}/${m.id}/</loc>\n    <lastmod>${m.updatedAt}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`
 ).join('\n');
 
 const staticUrls = ['glossary', 'cheatsheet', 'guide', 'usecase', 'about', 'privacy'].map(p =>
