@@ -18,15 +18,22 @@ export function tPDF(x: number, df: number): number {
 }
 
 /**
- * Upper-tail area of the t-distribution beyond x (numerical integration).
+ * Upper-tail area of the t-distribution beyond x: integral_x^Infinity tPDF(t,df) dt.
+ * Uses the substitution v = 1/(1+t) to map an unbounded domain to a finite one
+ * (midpoint rule), so accuracy does not degrade for large |x| (needed for small df,
+ * where two-sided critical values can be far outside a fixed plotting range).
  */
 export function tUpperTailArea(x: number, df: number): number {
-  const upper = 50;
-  if (x >= upper) return 0;
-  const steps = 800;
-  const h = (upper - x) / steps;
-  let sum = 0.5 * (tPDF(x, df) + tPDF(upper, df));
-  for (let i = 1; i < steps; i++) sum += tPDF(x + i * h, df);
+  if (x < 0) return 1 - tUpperTailArea(-x, df);
+  const b = 1 / (1 + x);
+  const steps = 2000;
+  const h = b / steps;
+  let sum = 0;
+  for (let i = 0; i < steps; i++) {
+    const v = (i + 0.5) * h;
+    const t = 1 / v - 1;
+    sum += tPDF(t, df) / (v * v);
+  }
   return sum * h;
 }
 
@@ -35,9 +42,9 @@ export function tUpperTailArea(x: number, df: number): number {
  */
 export function tCriticalValue(df: number, alpha: number): number {
   let lo = 0;
-  let hi = 30;
+  let hi = 1000;
   const target = alpha / 2;
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 60; i++) {
     const mid = (lo + hi) / 2;
     if (tUpperTailArea(mid, df) > target) lo = mid; else hi = mid;
   }
