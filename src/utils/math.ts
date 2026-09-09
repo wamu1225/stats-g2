@@ -18,6 +18,33 @@ export function tPDF(x: number, df: number): number {
 }
 
 /**
+ * Upper-tail area of the t-distribution beyond x (numerical integration).
+ */
+export function tUpperTailArea(x: number, df: number): number {
+  const upper = 50;
+  if (x >= upper) return 0;
+  const steps = 800;
+  const h = (upper - x) / steps;
+  let sum = 0.5 * (tPDF(x, df) + tPDF(upper, df));
+  for (let i = 1; i < steps; i++) sum += tPDF(x + i * h, df);
+  return sum * h;
+}
+
+/**
+ * Two-sided critical value t such that the upper-tail area beyond t equals alpha/2.
+ */
+export function tCriticalValue(df: number, alpha: number): number {
+  let lo = 0;
+  let hi = 30;
+  const target = alpha / 2;
+  for (let i = 0; i < 40; i++) {
+    const mid = (lo + hi) / 2;
+    if (tUpperTailArea(mid, df) > target) lo = mid; else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+
+/**
  * Chi-Square PDF
  */
 export function chi2PDF(x: number, df: number): number {

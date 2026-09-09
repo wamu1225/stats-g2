@@ -10,9 +10,10 @@ import {
   Line,
   ComposedChart,
   Area,
+  ReferenceLine,
 } from 'recharts';
 import { motion } from 'framer-motion';
-import { normalPDF, tPDF, chi2PDF, fPDF } from '../utils/math';
+import { normalPDF, tPDF, chi2PDF, fPDF, tCriticalValue } from '../utils/math';
 import { BarChart3 } from 'lucide-react';
 
 interface Props {
@@ -39,6 +40,9 @@ export const InteractiveGraph: React.FC<Props> = ({ type }) => {
   const [df, setDf] = useState(5);
   const [degree, setDegree] = useState(1);
   const [corr, setCorr] = useState(0.9);
+  const [alpha, setAlpha] = useState(0.05);
+
+  const tCrit = useMemo(() => tCriticalValue(df, alpha), [df, alpha]);
 
   // Data generation for charts
   const chartData = useMemo(() => {
@@ -71,7 +75,9 @@ export const InteractiveGraph: React.FC<Props> = ({ type }) => {
       }
     } else if (type === 't') {
       for (let x = -4; x <= 4; x += 0.1) {
-        data.push({ x: x.toFixed(1), y: tPDF(x, df), normal: normalPDF(x, 0, 1) });
+        const xr = parseFloat(x.toFixed(1));
+        const dens = tPDF(xr, df);
+        data.push({ x: xr, y: dens, normal: normalPDF(xr, 0, 1), reject: Math.abs(xr) >= tCrit ? dens : 0 });
       }
     } else if (type === 'chi2') {
       for (let x = 0; x <= 20; x += 0.2) {
@@ -143,7 +149,7 @@ export const InteractiveGraph: React.FC<Props> = ({ type }) => {
       return { dots, line, r2 };
     }
     return data;
-  }, [type, n, df, degree, corr]);
+  }, [type, n, df, degree, corr, tCrit]);
 
   const renderChart = () => {
     if (type === 'overfit') {
@@ -275,10 +281,15 @@ export const InteractiveGraph: React.FC<Props> = ({ type }) => {
 
     const data = chartData as { x: string | number; [key: string]: unknown }[];
     return (
+      <div>
       <ResponsiveContainer width="100%" height={200}>
-        <ComposedChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+        <ComposedChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: type === 't' ? 4 : 0 }}>
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis dataKey="x" hide />
+          {type === 't' ? (
+            <XAxis dataKey="x" type="number" domain={[-4, 4]} ticks={[-4, -2, 0, 2, 4]} tick={{ fontSize: 9, fill: '#94a3b8' }} axisLine={{ stroke: '#cbd5e1' }} tickLine={false} />
+          ) : (
+            <XAxis dataKey="x" hide />
+          )}
           <YAxis hide />
           <Tooltip />
           {type === 'update' ? (
@@ -289,13 +300,22 @@ export const InteractiveGraph: React.FC<Props> = ({ type }) => {
           ) : type === 't' ? (
             <>
               <Line type="monotone" dataKey="normal" stroke="#94a3b8" strokeDasharray="5 5" dot={false} name="正規分布" />
+              <Area type="monotone" dataKey="reject" stroke="none" fill="#ef4444" fillOpacity={0.35} isAnimationActive={false} name="棄却域" />
               <Line type="monotone" dataKey="y" stroke="var(--primary)" strokeWidth={2} dot={false} name="t分布" />
+              <ReferenceLine x={-tCrit} stroke="#ef4444" strokeDasharray="4 2" label={{ value: `-${tCrit.toFixed(2)}`, position: 'insideBottomLeft', fontSize: 10, fill: '#ef4444' }} />
+              <ReferenceLine x={tCrit} stroke="#ef4444" strokeDasharray="4 2" label={{ value: `+${tCrit.toFixed(2)}`, position: 'insideBottomRight', fontSize: 10, fill: '#ef4444' }} />
             </>
           ) : (
             <Area type="monotone" dataKey="y" fill="var(--primary)" stroke="var(--primary)" fillOpacity={0.3} dot={false} />
           )}
         </ComposedChart>
       </ResponsiveContainer>
+      {type === 't' && (
+        <div style={{ textAlign: 'center', fontSize: '0.68rem', color: '#94a3b8', marginTop: 2 }}>
+          赤＝棄却域（両側 α={(alpha * 100).toFixed(0)}%）。臨界値 ±{tCrit.toFixed(2)} の外側に統計量が出れば有意。
+        </div>
+      )}
+      </div>
     );
   };
 
@@ -319,6 +339,16 @@ export const InteractiveGraph: React.FC<Props> = ({ type }) => {
           <div className="slider-container">
             <div className="slider-label"><span>自由度 (df)</span> <span>{df}</span></div>
             <input type="range" min="1" max="50" step="1" value={df} onChange={e => setDf(parseInt(e.target.value))} />
+          </div>
+        )}
+        {type === 't' && (
+          <div className="slider-container">
+            <div className="slider-label"><span>有意水準 (α・両側)</span></div>
+            <div className="btn-group">
+              {[0.01, 0.05, 0.10].map(a => (
+                <button key={a} className={`btn-sm ${alpha === a ? 'active' : ''}`} onClick={() => setAlpha(a)}>{(a * 100).toFixed(0)}%</button>
+              ))}
+            </div>
           </div>
         )}
         {type === 'update' && (
